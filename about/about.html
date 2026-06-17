@@ -43,6 +43,15 @@
         #navbar.scrolled .logo-text { color: #800020; }
         #navbar.scrolled .logo-sub { color: #A04050; }
 
+.logo-image {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+}
+@media (max-width: 768px) {
+    .logo-image { height: 35px; }
+}
+
         .hamburger span { background: white; transition: all 0.3s; }
         #navbar.scrolled .hamburger span { background: #800020; }
 
@@ -58,17 +67,13 @@
     <nav id="navbar" class="fixed top-0 left-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-3 md:py-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden bg-white/20 flex-shrink-0">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                            <source src="/logo-video/logo-animation.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div>
-                        <h1 class="logo-text text-lg md:text-xl font-bold leading-tight">Lord's ARMY</h1>
-                        <p class="logo-sub text-[10px] md:text-xs tracking-wider">Pathfinder Club</p>
-                    </div>
-                </div>
+<div class="flex items-center gap-3">
+    <img src="..//logo/LA_logo.png" alt="Lord's ARMY Logo" class="logo-image">
+    <div>
+        <h1 class="logo-text text-lg md:text-xl font-bold leading-tight">Lord's ARMY</h1>
+        <p class="logo-sub text-[10px] md:text-xs tracking-wider">Pathfinder Club</p>
+    </div>
+</div>
                 <ul class="hidden md:flex gap-6 lg:gap-8">
                     <li><a href="../index.html" class="nav-link font-medium">Home</a></li>
                     <li><a href="../about/about.html" class="nav-link active font-medium">About</a></li>
