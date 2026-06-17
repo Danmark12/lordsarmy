@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Lord's ARMY Pathfinder Club | SDA Young People Serving God</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, .scripture-text, .stat-number { font-family: 'Playfair Display', serif; }
+        
+        /* Color Palette */
+        :root {
+            --red-primary: #8B1A1A;
+            --red-dark: #5C0015;
+            --red-light: #A04050;
+            --gold: #C9A03D;
+            --cream: #FDF6F3;
+        }
+        
+        .bg-red-primary { background: #8B1A1A; }
+        .bg-red-dark { background: #5C0015; }
+        .bg-red-light { background: #A04050; }
+        .text-red-primary { color: #8B1A1A; }
+        .text-red-dark { color: #5C0015; }
+        .border-red-primary { border-color: #8B1A1A; }
+        .bg-gold { background: #C9A03D; }
+        .text-gold { color: #C9A03D; }
+        .bg-cream { background: #FDF6F3; }
+        
+        /* Hero - Video Background */
+        .hero-section {
+            position: relative;
+            min-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #8B1A1A;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        
+        /* Fallback image if video doesn't load */
+        .hero-fallback {
+            position: absolute;
+            inset: 0;
+            background: url('https://i.pinimg.com/originals/cb/5e/e0/cb5ee0f1adb0cb162dc95f2d43c3af73.gif') center/cover no-repeat;
+            z-index: 0;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            max-width: 4xl;
+        }
+        
+        .scripture-bg {
+            background: linear-gradient(135deg, #5C0015 0%, #8B1A1A 100%);
+            background-attachment: fixed;
+        }
+        
+        .stats-bg {
+            background: linear-gradient(135deg, #5C0015 0%, #8B1A1A 100%);
+        }
+        
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes scrollAnim {
+            0% { opacity: 1; top: 10px; }
+            100% { opacity: 0; top: 30px; }
+        }
+        
+        .animate-fade-up { animation: fadeUp 0.8s ease forwards; }
+        .animate-fade-up-delay { animation: fadeUp 0.8s ease 0.2s forwards; opacity: 0; }
+        .animate-fade-up-delay2 { animation: fadeUp 0.8s ease 0.4s forwards; opacity: 0; }
+        .animate-fade-up-delay3 { animation: fadeUp 0.8s ease 0.6s forwards; opacity: 0; }
+        .animate-fade-up-delay4 { animation: fadeUp 0.8s ease 0.8s forwards; opacity: 0; }
+        
+        .scroll-indicator span {
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 30px;
+            position: relative;
+        }
+        
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 10px;
+            background: white;
+            border-radius: 2px;
+            animation: scrollAnim 2s infinite;
+        }
+        
+        /* Activity Cards */
+        .activity-card {
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139,26,26,0.15);
+        }
+        .activity-card img {
+            transition: transform 0.5s ease;
+        }
+        .activity-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Partner Section */
+        .partner-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .partner-tab {
+            padding: 16px 24px;
+            border-radius: 50px;
+            background: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #333;
+            border: 2px solid transparent;
+        }
+        .partner-tab:hover {
+            background: #e8d4d0;
+        }
+        .partner-tab.active {
+            background: #8B1A1A;
+            color: white;
+            border-color: #8B1A1A;
+            box-shadow: 0 4px 15px rgba(139,26,26,0.3);
+        }
+        .partner-content {
+            display: none;
+            animation: fadeUp 0.5s ease forwards;
+        }
+        .partner-content.active {
+            display: block;
+        }
+        
+        /* Stats Counter */
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #C9A03D;
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.05); }
+        @media (max-width: 768px) {
+            .whatsapp-float span { display: none; }
+            .whatsapp-float { padding: 12px; }
+        }
+
+        /* ===== TRANSPARENT NAVBAR ===== */
+        #navbar {
+            background: transparent !important;
+            box-shadow: none !important;
+            transition: all 0.4s ease;
+            padding: 0;
+        }
+        #navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 2px 20px rgba(139,26,26,0.10) !important;
+        }
+        .nav-link {
+            color: white !important;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link:hover { color: #C9A03D !important; }
+        .nav-link.active { color: #C9A03D !important; border-bottom: 2px solid #C9A03D; }
+        #navbar.scrolled .nav-link { color: #2c2c2c !important; }
+        #navbar.scrolled .nav-link:hover { color: #8B1A1A !important; }
+        #navbar.scrolled .nav-link.active { color: #8B1A1A !important; border-bottom-color: #8B1A1A; }
+        .logo-text { color: white; transition: color 0.3s; }
+        .logo-sub { color: rgba(255,255,255,0.8); transition: color 0.3s; }
+        #navbar.scrolled .logo-text { color: #8B1A1A; }
+        #navbar.scrolled .logo-sub { color: #A04050; }
+        .hamburger span {
+            background: white;
+            transition: all 0.3s;
+        }
+        #navbar.scrolled .hamburger span { background: #8B1A1A; }
+        #mobile-menu { background: white !important; }
+        #mobile-menu a { color: #2c2c2c !important; }
+        #mobile-menu a:hover { color: #8B1A1A !important; background: #FDF6F3 !important; }
+        #mobile-menu a.active { color: #8B1A1A !important; background: #FDF6F3 !important; font-weight: 600; }
+
+        .logo-image {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+        @media (max-width: 768px) {
+            .logo-image { height: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-3 md:py-4">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <img src="logo/LA_logo.png" alt="Lord's ARMY Logo" class="logo-image">
+                    <div>
+                        <h1 class="logo-text text-lg md:text-xl font-bold leading-tight">Lord's ARMY</h1>
+                        <p class="logo-sub text-[10px] md:text-xs tracking-wider">Pathfinder Club</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex gap-6 lg:gap-8">
+                    <li><a href="index.html" class="nav-link active font-medium">Home</a></li>
+                    <li><a href="about/about.html" class="nav-link font-medium">About</a></li>
+                    <li><a href="activities/activities.html" class="nav-link font-medium">Activities</a></li>
+                    <li><a href="services/services.html" class="nav-link font-medium">Services</a></li>
+                    <li><a href="contact/contact.html" class="nav-link font-medium">Contact</a></li>
+                </ul>
+                
+                <!-- Mobile Hamburger -->
+                <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1 hamburger">
+                    <span class="w-6 h-0.5 transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 transition-all duration-300"></span>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4 rounded-b-2xl shadow-lg">
+                <ul class="flex flex-col gap-2 pt-4 px-2">
+                    <li><a href="index.html" class="block py-2.5 px-3 rounded-lg font-semibold active">Home</a></li>
+                    <li><a href="about/about.html" class="block py-2.5 px-3 rounded-lg transition">About</a></li>
+                    <li><a href="activities/activities.html" class="block py-2.5 px-3 rounded-lg transition">Activities</a></li>
+                    <li><a href="services/services.html" class="block py-2.5 px-3 rounded-lg transition">Services</a></li>
+                    <li><a href="contact/contact.html" class="block py-2.5 px-3 rounded-lg transition">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION WITH VIDEO ===== -->
+    <section class="hero-section">
+        <!-- Fallback image if video doesn't load -->
+        <div class="hero-fallback"></div>
+        
+        <!-- Video -->
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="video/hero-bg.mp4" type="video/mp4">
+            <!-- If video doesn't load, the fallback image shows -->
+        </video>
+        
+        <div class="hero-overlay"></div>
+        <div class="hero-content max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold animate-fade-up">Lord's ARMY</h1>
+            <p class="text-xl sm:text-2xl md:text-3xl mt-3 opacity-90 animate-fade-up-delay">Pathfinder Club</p>
+            <div class="w-20 h-1 bg-[#C9A03D] mx-auto my-4 md:my-6 animate-fade-up-delay2"></div>
+            <p class="text-base sm:text-lg md:text-xl max-w-2xl mx-auto animate-fade-up-delay3">
+                Seventh-day Adventist young people serving God through camping, feeding, and sharing His love.
+            </p>
+            <a href="contact/contact.html" class="inline-block mt-6 md:mt-8 bg-[#C9A03D] text-[#8B1A1A] px-8 py-3 rounded-full font-semibold hover:bg-[#D4B050] transition transform hover:-translate-y-1 hover:shadow-lg animate-fade-up-delay4">
+                Join Our Army →
+            </a>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator z-10">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- ===== MISSION SECTION ===== -->
+    <section class="py-16 md:py-20 bg-[#FDF6F3]">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-[#8B1A1A] mb-4">Our Mission</h2>
+            <div class="w-16 h-1 bg-[#C9A03D] mx-auto mb-12"></div>
+            
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <div class="bg-white rounded-2xl p-8 text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                    <div class="text-5xl mb-4">✝️</div>
+                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Serve God</h3>
+                    <p class="text-gray-600">Leading young people to Christ through Pathfinder ministry and outdoor adventure.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Serve People</h3>
+                    <p class="text-gray-600">Reaching our community through feeding programs and acts of kindness.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                    <div class="text-5xl mb-4">📖</div>
+                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Share Hope</h3>
+                    <p class="text-gray-600">Giving books and sharing God's word to bring light to others.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SCRIPTURE SECTION ===== -->
+    <section class="scripture-bg py-16 md:py-20 text-center text-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-2xl md:text-4xl font-serif italic">"Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go."</p>
+            <p class="text-sm md:text-base mt-4 tracking-widest opacity-80">Joshua 1:9</p>
+        </div>
+    </section>
+
+    <!-- ===== ACTIVITIES SECTION ===== -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-[#8B1A1A] mb-4">Our Activities</h2>
+            <div class="w-16 h-1 bg-[#C9A03D] mx-auto mb-6"></div>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">We engage in various activities that build character, strengthen faith, and serve our community.</p>
+            
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Activity 1 -->
+                <div class="activity-card bg-[#FDF6F3] rounded-2xl overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600" alt="Camping" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#8B1A1A] mb-2">🏕️ Camping & Outdoor</h3>
+                        <p class="text-gray-600 text-sm mb-3">We organize weekend campouts, summer camps, and nature hikes that combine adventure with spiritual growth and leadership training.</p>
+                        <a href="activities/activities.html" class="text-[#C9A03D] font-semibold hover:text-[#D4B050] transition text-sm">Learn More →</a>
+                    </div>
+                </div>
+                
+                <!-- Activity 2 -->
+                <div class="activity-card bg-[#FDF6F3] rounded-2xl overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600" alt="Feeding Program" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#8B1A1A] mb-2">🍲 Community Feeding</h3>
+                        <p class="text-gray-600 text-sm mb-3">We serve hot meals to homeless individuals, low-income families, and children in our community every Saturday and during holidays.</p>
+                        <a href="activities/activities.html" class="text-[#C9A03D] font-semibold hover:text-[#D4B050] transition text-sm">Learn More →</a>
+                    </div>
+                </div>
+                
+                <!-- Activity 3 -->
+                <div class="activity-card bg-[#FDF6F3] rounded-2xl overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600" alt="Book Ministry" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#8B1A1A] mb-2">📚 Book & Bible Ministry</h3>
+                        <p class="text-gray-600 text-sm mb-3">We give Bibles, Christian books, and educational materials to schools, prisons, and communities in need of hope and knowledge.</p>
+                        <a href="activities/activities.html" class="text-[#C9A03D] font-semibold hover:text-[#D4B050] transition text-sm">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="activities/activities.html" class="inline-block border-2 border-[#8B1A1A] text-[#8B1A1A] px-8 py-3 rounded-full font-semibold hover:bg-[#8B1A1A] hover:text-white transition">
+                    View All Activities →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES SECTION ===== -->
+    <section class="py-16 md:py-20 bg-[#FDF6F3]">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-[#8B1A1A] mb-4">Our Services</h2>
+            <div class="w-16 h-1 bg-[#C9A03D] mx-auto mb-6"></div>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">We offer these services to our community and church family.</p>
+            
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <div class="bg-white rounded-2xl p-8 text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Church Support</h3>
+                    <p class="text-gray-600">We serve our church through ushering, children's ministry, and special event support.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                    <div class="text-5xl mb-4">❤️</div>
+                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Visitation Ministry</h3>
+                    <p class="text-gray-600">We visit the sick, elderly, and those who are lonely or in need of encouragement.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 text-center shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                    <div class="text-5xl mb-4">🌍</div>
+                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Community Cleanup</h3>
+                    <p class="text-gray-600">We organize community service projects to keep our neighborhood clean and beautiful.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="services/services.html" class="inline-block border-2 border-[#8B1A1A] text-[#8B1A1A] px-8 py-3 rounded-full font-semibold hover:bg-[#8B1A1A] hover:text-white transition">
+                    View All Services →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PARTNERS SECTION ===== -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-[#8B1A1A] mb-4">Our Partners</h2>
+            <div class="w-16 h-1 bg-[#C9A03D] mx-auto mb-6"></div>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">We are blessed to partner with these organizations in serving our community.</p>
+            
+            <div class="grid md:grid-cols-12 gap-8 items-start">
+                <!-- Left Side - Tabs -->
+                <div class="md:col-span-4">
+                    <div class="partner-tabs">
+                        <div class="partner-tab active" data-partner="1">
+                            🏥 Adventist Health
+                        </div>
+                        <div class="partner-tab" data-partner="2">
+                            📚 ADRA Philippines
+                        </div>
+                        <div class="partner-tab" data-partner="3">
+                            🏕️ Pathfinder International
+                        </div>
+                        <div class="partner-tab" data-partner="4">
+                            🤝 Local Church Council
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Content -->
+                <div class="md:col-span-8">
+                    <!-- Partner 1 -->
+                    <div class="partner-content active" id="partner-1">
+                        <div class="flex flex-col md:flex-row gap-6 bg-[#FDF6F3] rounded-2xl p-6 md:p-8 shadow-md">
+                            <img src="https://via.placeholder.com/200x200/8B1A1A/FFFFFF?text=AH" alt="Adventist Health" class="w-full md:w-48 h-48 object-cover rounded-xl">
+                            <div>
+                                <h3 class="text-2xl font-bold text-[#8B1A1A] mb-2">Adventist Health</h3>
+                                <p class="text-gray-600 mb-3">A faith-based health system dedicated to providing compassionate care and promoting wellness in our community. We partner with them for health education and medical missions.</p>
+                                <a href="#" class="text-[#C9A03D] font-semibold hover:text-[#D4B050] transition">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Partner 2 -->
+                    <div class="partner-content" id="partner-2">
+                        <div class="flex flex-col md:flex-row gap-6 bg-[#FDF6F3] rounded-2xl p-6 md:p-8 shadow-md">
+                            <img src="https://via.placeholder.com/200x200/8B1A1A/FFFFFF?text=ADRA" alt="ADRA" class="w-full md:w-48 h-48 object-cover rounded-xl">
+                            <div>
+                                <h3 class="text-2xl font-bold text-[#8B1A1A] mb-2">ADRA Philippines</h3>
+                                <p class="text-gray-600 mb-3">The Adventist Development and Relief Agency. We collaborate with ADRA for feeding programs, book distributions, and community development projects.</p>
+                                <a href="#" class="text-[#C9A03D] font-semibold hover:text-[#D4B050] transition">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Partner 3 -->
+                    <div class="partner-content" id="partner-3">
+                        <div class="flex flex-col md:flex-row gap-6 bg-[#FDF6F3] rounded-2xl p-6 md:p-8 shadow-md">
+                            <img src="https://via.placeholder.com/200x200/8B1A1A/FFFFFF?text=PI" alt="Pathfinder International" class="w-full md:w-48 h-48 object-cover rounded-xl">
+                            <div>
+                                <h3 class="text-2xl font-bold text-[#8B1A1A] mb-2">Pathfinder International</h3>
+                                <p class="text-gray-600 mb-3">The global Pathfinder organization that connects youth worldwide. We participate in international camporees and share best practices with other clubs.</p>
+                                <a href="#" class="text-[#C9A03D] font-semibold hover:text-[#D4B050] transition">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Partner 4 -->
+                    <div class="partner-content" id="partner-4">
+                        <div class="flex flex-col md:flex-row gap-6 bg-[#FDF6F3] rounded-2xl p-6 md:p-8 shadow-md">
+                            <img src="https://via.placeholder.com/200x200/8B1A1A/FFFFFF?text=LC" alt="Local Church" class="w-full md:w-48 h-48 object-cover rounded-xl">
+                            <div>
+                                <h3 class="text-2xl font-bold text-[#8B1A1A] mb-2">Local Church Council</h3>
+                                <p class="text-gray-600 mb-3">Our local Seventh-day Adventist church supports us with resources, facilities, and spiritual guidance. We serve together in various ministries.</p>
+                                <a href="#" class="text-[#C9A03D] font-semibold hover:text-[#D4B050] transition">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS SECTION ===== -->
+    <section class="stats-bg py-12 md:py-16 text-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+                <div>
+                    <div class="stat-number text-3xl md:text-5xl font-bold text-[#C9A03D]" data-target="28">0</div>
+                    <p class="text-sm md:text-base mt-2 opacity-90">Active Members</p>
+                </div>
+                <div>
+                    <div class="stat-number text-3xl md:text-5xl font-bold text-[#C9A03D]" data-target="20">0</div>
+                    <p class="text-sm md:text-base mt-2 opacity-90">Community Services</p>
+                </div>
+                <div>
+                    <div class="stat-number text-3xl md:text-5xl font-bold text-[#C9A03D]" data-target="500">0</div>
+                    <p class="text-sm md:text-base mt-2 opacity-90">Books Given</p>
+                </div>
+                <div>
+                    <div class="stat-number text-3xl md:text-5xl font-bold text-[#C9A03D]" data-target="28">0</div>
+                    <p class="text-sm md:text-base mt-2 opacity-90">Camping Trips</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHATSAPP FLOAT ===== -->
+    <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-float bg-[#25D366] hover:bg-[#1DA851] text-white rounded-full p-3 md:p-4 shadow-lg flex items-center gap-2">
+        <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span class="hidden sm:inline text-sm font-medium">Chat with us</span>
+    </a>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-[#1A1A1A] text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-white text-xl font-bold mb-3">Lord's ARMY</h3>
+                    <p>Pathfinder Club<br>Seventh-day Adventist</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-[#C9A03D] transition">Home</a></li>
+                        <li><a href="about/about.html" class="hover:text-[#C9A03D] transition">About</a></li>
+                        <li><a href="activities/activities.html" class="hover:text-[#C9A03D] transition">Activities</a></li>
+                        <li><a href="services/services.html" class="hover:text-[#C9A03D] transition">Services</a></li>
+                        <li><a href="contact/contact.html" class="hover:text-[#C9A03D] transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Connect</h4>
+                    <p class="mb-2">📱 WhatsApp: <a href="https://wa.me/1234567890" class="hover:text-[#C9A03D] transition">+1234567890</a></p>
+                    <p>✉️ Email: <a href="mailto:lordsarmy@example.com" class="hover:text-[#C9A03D] transition">lordsarmy@example.com</a></p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Partner Tabs Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.partner-tab');
+            const contents = document.querySelectorAll('.partner-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    contents.forEach(c => c.classList.remove('active'));
+                    const partnerId = this.getAttribute('data-partner');
+                    document.getElementById('partner-' + partnerId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
