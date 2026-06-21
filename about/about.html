@@ -1,230 +1,1267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>About Us | Lord's ARMY Pathfinder Club</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-        
-        .page-header { background: linear-gradient(135deg, #5C0015 0%, #800020 100%); }
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; z-index: 100; transition: all 0.3s; }
-        .whatsapp-float:hover { transform: scale(1.05); }
-        @media (max-width: 768px) { .whatsapp-float span { display: none; } .whatsapp-float { padding: 12px; } }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Lord's ARMY Pathfinder Club</title>
+  <!-- fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Transparent Navbar */
-        #navbar {
-            background: transparent !important;
-            box-shadow: none !important;
-            transition: all 0.4s ease;
-        }
-        #navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98) !important;
-            box-shadow: 0 2px 20px rgba(128,0,32,0.12) !important;
-        }
+    :root {
+      --crimson: #8B1A1A;
+      --crimson-deep: #5C0F0F;
+      --crimson-glow: #C0362C;
+      --gold: #C9A03D;
+      --gold-light: #EDD98A;
+      --ivory: #FDFAF4;
+      --ink: #1A1208;
+      --muted: #7A6A55;
+      --border: #E8E0D0;
+      --surface: #FFFFFF;
+      --surface-warm: #FDF8F2;
+    }
 
-        .nav-link {
-            color: white !important;
-            transition: all 0.3s;
-            padding-bottom: 4px;
-        }
-        .nav-link:hover { color: #C9A03D !important; }
-        .nav-link.active { color: #C9A03D !important; border-bottom: 2px solid #C9A03D; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        #navbar.scrolled .nav-link { color: #2c2c2c !important; }
-        #navbar.scrolled .nav-link:hover { color: #800020 !important; }
-        #navbar.scrolled .nav-link.active { color: #800020 !important; border-bottom-color: #800020; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
 
-        .logo-text { color: white; transition: color 0.3s; }
-        .logo-sub { color: rgba(255,255,255,0.8); transition: color 0.3s; }
-        #navbar.scrolled .logo-text { color: #800020; }
-        #navbar.scrolled .logo-sub { color: #A04050; }
+    /* progress */
+    #progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold));
+      z-index: 9999;
+      width: 0%;
+      transition: width 0.1s;
+    }
 
-.logo-image {
-    height: 45px;
-    width: auto;
-    object-fit: contain;
-}
-@media (max-width: 768px) {
-    .logo-image { height: 35px; }
-}
+    /* navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 0 40px;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(253, 250, 244, 0.97);
+      box-shadow: 0 1px 0 var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-emblem {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--crimson);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(201, 160, 61, 0.3);
+      transition: box-shadow 0.3s;
+      overflow: hidden;
+    }
+    .brand-emblem img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+    .nav-brand:hover .brand-emblem {
+      box-shadow: 0 0 0 3px var(--gold);
+    }
+    .brand-text-top {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      transition: color 0.3s;
+      letter-spacing: 0.5px;
+    }
+    .brand-text-sub {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    nav.scrolled .brand-text-top {
+      color: var(--crimson);
+    }
+    nav.scrolled .brand-text-sub {
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.85);
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    nav.scrolled .nav-links a {
+      color: var(--muted);
+    }
+    nav.scrolled .nav-links a:hover,
+    nav.scrolled .nav-links a.active {
+      color: var(--crimson);
+    }
+    nav.scrolled .nav-links a::after {
+      background: var(--crimson);
+    }
 
-        .hamburger span { background: white; transition: all 0.3s; }
-        #navbar.scrolled .hamburger span { background: #800020; }
+    /* hamburger */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: #fff;
+      transition: all 0.3s;
+    }
+    nav.scrolled .hamburger span {
+      background: var(--crimson);
+    }
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--surface-warm);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      z-index: 99;
+    }
+    #mobile-menu.open {
+      display: block;
+    }
+    #mobile-menu ul {
+      list-style: none;
+    }
+    #mobile-menu li a {
+      display: block;
+      padding: 12px 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.3s;
+    }
+    #mobile-menu li:last-child a {
+      border-bottom: none;
+    }
+    #mobile-menu li a:hover,
+    #mobile-menu li a.active {
+      color: var(--crimson);
+    }
 
-        #mobile-menu { background: white !important; }
-        #mobile-menu a { color: #2c2c2c !important; }
-        #mobile-menu a:hover { color: #800020 !important; background: #FDF5F0 !important; }
-        #mobile-menu a.active { color: #800020 !important; background: #FDF5F0 !important; font-weight: 600; }
-    </style>
+    /* hero */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      background: #0A0605;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.38) saturate(0.7);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10, 6, 5, 0.7) 0%, rgba(10, 6, 5, 0.1) 65%);
+    }
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 80px;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      color: #fff;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.45);
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.85;
+      max-width: 500px;
+      margin-bottom: 36px;
+    }
+    .hero-scroll {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+    }
+    .hero-scroll i {
+      font-size: 0.8rem;
+      animation: scrollBounce 1.8s ease infinite;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    /* tape */
+    .tape {
+      background: var(--crimson-deep);
+      padding: 16px 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(201, 160, 61, 0.25);
+      border-bottom: 1px solid rgba(201, 160, 61, 0.25);
+    }
+    .tape-inner {
+      display: flex;
+      animation: tape 25s linear infinite;
+      white-space: nowrap;
+    }
+    .tape-inner:hover {
+      animation-play-state: paused;
+    }
+    @keyframes tape {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .tape-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 36px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+    }
+    .tape-item span {
+      color: var(--gold);
+    }
+    .tape-dot {
+      width: 3px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* split */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+    }
+    .split-text {
+      background: var(--surface);
+      padding: 100px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .split-image {
+      position: relative;
+      overflow: hidden;
+      background: #0A0605;
+    }
+    .split-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.75) saturate(0.85);
+      transition: transform 8s ease, filter 0.6s;
+    }
+    .split-image:hover img {
+      transform: scale(1.04);
+      filter: brightness(0.85) saturate(1);
+    }
+    .split-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 6, 5, 0.6) 0%, transparent 50%);
+    }
+    .split-image-label {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      right: 32px;
+    }
+    .split-image-label blockquote {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      color: #fff;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .split-image-label cite {
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 16px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--crimson);
+    }
+    .section-heading {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .section-heading em {
+      font-style: normal;
+      color: var(--crimson);
+    }
+    .body-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+    .body-text strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .scripture-block {
+      margin-top: 28px;
+      border-left: 2px solid var(--gold);
+      padding: 20px 24px;
+      background: var(--surface-warm);
+    }
+    .scripture-block p {
+      font-size: 1rem;
+      color: var(--ink);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+    .scripture-ref {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    /* stat bar */
+    .stat-bar {
+      background: var(--crimson-deep);
+      display: flex;
+      justify-content: center;
+    }
+    .stat-bar-inner {
+      max-width: 1280px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-item {
+      padding: 36px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .stat-item:last-child {
+      border-right: none;
+    }
+    .stat-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+    }
+    .stat-num sup {
+      color: var(--gold);
+      font-size: 1.3rem;
+      vertical-align: super;
+    }
+    .stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 6px;
+    }
+
+    /* mission dark */
+    .mission-section {
+      background: var(--ink);
+      padding: 100px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mission-section::before {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -60px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(139, 26, 26, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .mission-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .mission-header {
+      margin-bottom: 60px;
+    }
+    .mission-header .section-eyebrow {
+      color: var(--gold);
+    }
+    .mission-header .section-eyebrow::before {
+      background: var(--gold);
+    }
+    .mission-header .section-heading {
+      color: #fff;
+    }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .mission-card {
+      background: var(--ink);
+      padding: 48px 36px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: border-color 0.3s, transform 0.4s;
+    }
+    .mission-card:hover {
+      border-color: rgba(201, 160, 61, 0.25);
+      transform: translateY(-4px);
+    }
+    .mission-icon {
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(139, 26, 26, 0.4);
+      background: rgba(139, 26, 26, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+    }
+    .mission-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .mission-title span {
+      color: var(--gold);
+    }
+    .mission-desc {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 1.85;
+    }
+
+    /* timeline */
+    .timeline-section {
+      padding: 100px 40px;
+      background: var(--surface-warm);
+      border-top: 1px solid var(--border);
+    }
+    .timeline-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .timeline-header {
+      margin-bottom: 60px;
+    }
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .timeline-card {
+      padding: 36px 28px;
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+      position: relative;
+      transition: background 0.3s;
+    }
+    .timeline-card:last-child {
+      border-right: none;
+    }
+    .timeline-card:hover {
+      background: var(--surface-warm);
+    }
+    .timeline-year {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 20px;
+      transition: color 0.3s;
+    }
+    .timeline-card:hover .timeline-year {
+      color: var(--crimson);
+    }
+    .timeline-entry {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-entry:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .timeline-date {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .timeline-text {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .timeline-text strong {
+      color: var(--ink);
+    }
+    .timeline-corner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 28px 28px 0;
+      border-color: transparent var(--crimson) transparent transparent;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .timeline-card:hover .timeline-corner {
+      opacity: 1;
+    }
+
+    /* director section — with the actual director image */
+    .director-section {
+      background: var(--surface);
+      padding: 100px 40px;
+      border-top: 1px solid var(--border);
+    }
+    .director-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .director-visual {
+      position: relative;
+    }
+    .director-img-frame {
+      position: relative;
+      overflow: hidden;
+    }
+    .director-img-frame img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform 0.6s ease;
+      filter: saturate(0.85);
+    }
+    .director-img-frame:hover img {
+      transform: scale(1.03);
+      filter: saturate(1);
+    }
+    .director-img-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(to top, rgba(10, 6, 5, 0.7) 0%, transparent 100%);
+    }
+    .director-badge {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+    }
+    .director-badge-inner {
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      display: inline-block;
+    }
+    .director-badge-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-top: 6px;
+    }
+    .director-accent {
+      position: absolute;
+      top: -16px;
+      left: -16px;
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--gold);
+      pointer-events: none;
+      opacity: 0.3;
+    }
+    .director-accent-br {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--crimson);
+      pointer-events: none;
+      opacity: 0.2;
+    }
+    .director-text .role {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .director-text .role::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--crimson);
+    }
+    .director-quote {
+      margin-top: 32px;
+      padding: 24px 28px;
+      border-left: 2px solid var(--gold);
+      background: var(--surface-warm);
+    }
+    .director-quote p {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .director-quote cite {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* legacy */
+    .legacy-section {
+      background: var(--ivory);
+      padding: 100px 40px;
+      border-top: 1px solid var(--border);
+    }
+    .legacy-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .legacy-header {
+      margin-bottom: 60px;
+    }
+    .legacy-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .legacy-card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 28px 24px;
+      transition: transform 0.4s, border-color 0.3s, box-shadow 0.4s;
+    }
+    .legacy-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--crimson);
+      box-shadow: 0 20px 50px rgba(139, 26, 26, 0.07);
+    }
+    .legacy-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 16px;
+      transition: color 0.3s;
+    }
+    .legacy-card:hover .legacy-num {
+      color: var(--gold);
+    }
+    .legacy-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .legacy-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* fb float */
+    .fb-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 500;
+      background: #1877F2;
+      color: #fff;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .fb-float:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 8px 30px rgba(24, 119, 242, 0.5);
+    }
+
+    /* back to top */
+    #btt {
+      position: fixed;
+      bottom: 96px;
+      right: 30px;
+      z-index: 500;
+      width: 40px;
+      height: 40px;
+      background: var(--crimson);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.4s;
+      pointer-events: none;
+    }
+    #btt.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    #btt:hover {
+      background: var(--crimson-deep);
+    }
+
+    /* footer */
+    footer {
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.4);
+      padding: 60px 40px 30px;
+      border-top: 1px solid rgba(201, 160, 61, 0.2);
+    }
+    footer .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    footer .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 50px;
+    }
+    footer h3 {
+      font-family: 'Cinzel', serif;
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+    footer .footer-sub {
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    footer .footer-desc {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      max-width: 300px;
+    }
+    footer h4 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      margin-bottom: 16px;
+    }
+    footer ul {
+      list-style: none;
+    }
+    footer ul li {
+      margin-bottom: 10px;
+    }
+    footer ul li a {
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer ul li a:hover {
+      color: var(--gold);
+    }
+    footer .footer-contact p {
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+    }
+    footer .footer-contact a {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer .footer-contact a:hover {
+      color: var(--gold);
+    }
+    footer .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 24px;
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* responsive */
+    @media (max-width: 1024px) {
+      .split-section { grid-template-columns: 1fr; }
+      .split-image { height: 400px; }
+      .mission-grid { grid-template-columns: 1fr; }
+      .timeline-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-card:nth-child(2) { border-right: none; }
+      .timeline-card:nth-child(3) { border-top: 1px solid var(--border); }
+      .director-inner { grid-template-columns: 1fr; gap: 48px; }
+      .director-img-frame img { height: 380px; }
+      .legacy-grid { grid-template-columns: repeat(2, 1fr); }
+      footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .stat-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 40px 24px 60px; }
+      .split-text { padding: 60px 24px; }
+      .mission-section { padding: 60px 20px; }
+      .timeline-section { padding: 60px 20px; }
+      .timeline-grid { grid-template-columns: 1fr; }
+      .timeline-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .timeline-card:last-child { border-bottom: none; }
+      .director-section { padding: 60px 20px; }
+      .legacy-section { padding: 60px 20px; }
+      .legacy-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 40px 20px 24px; }
+      footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .tape { display: none; }
+    }
+    @media (max-width: 480px) {
+      .legacy-grid { grid-template-columns: 1fr; }
+      .stat-bar-inner { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-3 md:py-4">
-<div class="flex items-center gap-3">
-    <img src="..//logo/LA_logo.png" alt="Lord's ARMY Logo" class="logo-image">
-    <div>
-        <h1 class="logo-text text-lg md:text-xl font-bold leading-tight">Lord's ARMY</h1>
-        <p class="logo-sub text-[10px] md:text-xs tracking-wider">Pathfinder Club</p>
-    </div>
-</div>
-                <ul class="hidden md:flex gap-6 lg:gap-8">
-                    <li><a href="../index.html" class="nav-link font-medium">Home</a></li>
-                    <li><a href="../about/about.html" class="nav-link active font-medium">About</a></li>
-                    <li><a href="../activities/activities.html" class="nav-link font-medium">Activities</a></li>
-                    <li><a href="../services/services.html" class="nav-link font-medium">Services</a></li>
-                    <li><a href="../contact/contact.html" class="nav-link font-medium">Contact</a></li>
-                </ul>
-                <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1 hamburger">
-                    <span class="w-6 h-0.5 transition-all duration-300"></span>
-                    <span class="w-6 h-0.5 transition-all duration-300"></span>
-                    <span class="w-6 h-0.5 transition-all duration-300"></span>
-                </button>
-            </div>
-            <div id="mobile-menu" class="hidden md:hidden pb-4 rounded-b-2xl shadow-lg">
-                <ul class="flex flex-col gap-2 pt-4 px-2">
-                    <li><a href="../index.html" class="block py-2.5 px-3 rounded-lg transition">Home</a></li>
-                    <li><a href="../about/about.html" class="block py-2.5 px-3 rounded-lg font-semibold active">About</a></li>
-                    <li><a href="../activities/activities.html" class="block py-2.5 px-3 rounded-lg transition">Activities</a></li>
-                    <li><a href="../services/services.html" class="block py-2.5 px-3 rounded-lg transition">Services</a></li>
-                    <li><a href="../contact/contact.html" class="block py-2.5 px-3 rounded-lg transition">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<div id="progress"></div>
 
-    <!-- Page Header -->
-    <section class="page-header py-20 md:py-28 text-center text-white">
-        <div class="max-w-4xl mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-bold">About Us</h1>
-            <p class="text-lg md:text-xl mt-3 opacity-90">Who we are and what we stand for</p>
-        </div>
-    </section>
-
-    <!-- Who We Are -->
-    <section class="py-16 md:py-20 bg-[#FDF5F0]">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-8 md:gap-12 items-center">
-                <div class="md:col-span-2">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[#800020] mb-4">Who Is Lord's ARMY?</h2>
-                    <p class="text-gray-600 mb-4 text-lg">Lord's ARMY Pathfinder Club is a group of Seventh-day Adventist young people committed to serving God and serving people. Led by a Master Guide, we combine outdoor adventure with Christian ministry.</p>
-                    <p class="text-gray-600 mb-4">We believe that young people can make a difference in their communities through camping, feeding programs, and sharing God's love through books and acts of service.</p>
-                    <p class="text-gray-600">Our name "Lord's ARMY" reflects our commitment to be soldiers for Christ — serving faithfully, standing strong, and spreading hope wherever we go.</p>
-                </div>
-                <div class="bg-gradient-to-br from-[#5C0015] to-[#800020] rounded-2xl p-8 text-center text-white shadow-xl">
-                    <div class="text-6xl mb-3">🌟</div>
-                    <h3 class="text-2xl font-bold">Master Guide</h3>
-                    <p class="opacity-90">Leadership</p>
-                    <div class="w-12 h-0.5 bg-[#C9A03D] mx-auto my-4"></div>
-                    <p class="text-sm opacity-80">"By the grace of God, I will be pure and kind and true."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pathfinder Pledge -->
-    <section class="py-16 md:py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-[#800020] mb-4">Pathfinder Pledge</h2>
-            <div class="w-16 h-1 bg-[#C9A03D] mx-auto mb-8"></div>
-            <div class="bg-[#FDF5F0] rounded-2xl p-8 md:p-12 shadow-lg">
-                <p class="text-xl md:text-2xl font-serif italic text-[#800020]">"By the grace of God, I will be pure and kind and true. I will keep the Pathfinder Law. I will be a servant of God and a friend to man."</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pathfinder Law -->
-    <section class="py-16 md:py-20 bg-[#FDF5F0]">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-[#800020] mb-4">Pathfinder Law</h2>
-            <div class="w-16 h-1 bg-[#C9A03D] mx-auto mb-12"></div>
-            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-white rounded-xl p-4 text-center font-medium shadow-sm">Keep the morning watch</div>
-                <div class="bg-white rounded-xl p-4 text-center font-medium shadow-sm">Do my honest part</div>
-                <div class="bg-white rounded-xl p-4 text-center font-medium shadow-sm">Care for my body</div>
-                <div class="bg-white rounded-xl p-4 text-center font-medium shadow-sm">Keep a level eye</div>
-                <div class="bg-white rounded-xl p-4 text-center font-medium shadow-sm">Be courteous and obedient</div>
-                <div class="bg-white rounded-xl p-4 text-center font-medium shadow-sm">Walk softly in the sanctuary</div>
-                <div class="bg-white rounded-xl p-4 text-center font-medium shadow-sm">Keep a song in my heart</div>
-                <div class="bg-white rounded-xl p-4 text-center font-medium shadow-sm">Go on God's errands</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What is a Pathfinder -->
-    <section class="bg-gradient-to-br from-[#5C0015] to-[#800020] py-16 md:py-20 text-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">What is a Pathfinder?</h2>
-            <div class="w-16 h-1 bg-[#C9A03D] mx-auto mb-12"></div>
-            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
-                    <div class="text-4xl mb-3">🌍</div>
-                    <h3 class="text-xl font-bold mb-2">Adventure</h3>
-                    <p class="opacity-90">Camping, hiking, and outdoor skills that build character.</p>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
-                    <div class="text-4xl mb-3">🙏</div>
-                    <h3 class="text-xl font-bold mb-2">Faith</h3>
-                    <p class="opacity-90">Growing in relationship with God through worship and Bible study.</p>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
-                    <div class="text-4xl mb-3">🤝</div>
-                    <h3 class="text-xl font-bold mb-2">Service</h3>
-                    <p class="opacity-90">Helping others and serving the community.</p>
-                </div>
-                <div class="bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
-                    <div class="text-4xl mb-3">🏅</div>
-                    <h3 class="text-xl font-bold mb-2">Excellence</h3>
-                    <p class="opacity-90">Earning honors and developing life skills.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-float bg-[#25D366] hover:bg-[#1DA851] text-white rounded-full p-3 md:p-4 shadow-lg flex items-center gap-2">
-        <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="white">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        <span class="hidden sm:inline text-sm font-medium">Chat with us</span>
+<!-- navigation -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="brand-emblem">
+        <!-- logo placeholder (LA logo) -->
+        <img src="../logo/LA_logo.png" alt="Lord's ARMY Pathfinder Club Logo" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+      </div>
+      <div>
+        <div class="brand-text-top">Lord's ARMY</div>
+        <div class="brand-text-sub">Pathfinder Club</div>
+      </div>
     </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="../activities/activities.html">Activities</a></li>
+      <li><a href="../services/services.html">Services</a></li>
+      <li><a href="../contact/contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <!-- Footer -->
-    <footer class="bg-[#1A1A1A] text-gray-400 py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-white text-xl font-bold mb-3">Lord's ARMY</h3>
-                    <p>Pathfinder Club<br>Seventh-day Adventist</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-3">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="../index.html" class="hover:text-[#C9A03D] transition">Home</a></li>
-                        <li><a href="../about/about.html" class="hover:text-[#C9A03D] transition">About</a></li>
-                        <li><a href="../activities/activities.html" class="hover:text-[#C9A03D] transition">Activities</a></li>
-                        <li><a href="../services/services.html" class="hover:text-[#C9A03D] transition">Services</a></li>
-                        <li><a href="../contact/contact.html" class="hover:text-[#C9A03D] transition">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-3">Connect</h4>
-                    <p class="mb-2">📱 WhatsApp: <a href="https://wa.me/1234567890" class="hover:text-[#C9A03D] transition">+1234567890</a></p>
-                    <p>✉️ Email: <a href="mailto:lordsarmy@example.com" class="hover:text-[#C9A03D] transition">lordsarmy@example.com</a></p>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-                <p>&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved.</p>
-            </div>
+<div id="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="../activities/activities.html">Activities</a></li>
+    <li><a href="../services/services.html">Services</a></li>
+    <li><a href="../contact/contact.html">Contact</a></li>
+  </ul>
+</div>
+
+<!-- hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1600" alt="Lord's ARMY Members" loading="eager">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Who We Are</div>
+    <h1 class="hero-title">Lord's <em>ARMY</em><br>Pathfinder Club</h1>
+    <p class="hero-subtitle">A movement of young people trained in leadership, faith, and service — reaching communities across Mindanao and beyond since 2021.</p>
+    <a href="#whoWeAre" class="hero-scroll">Discover our story <i class="fas fa-arrow-down"></i></a>
+  </div>
+</section>
+
+<!-- tape -->
+<div class="tape">
+  <div class="tape-inner" id="tapeInner"></div>
+</div>
+
+<!-- who we are split -->
+<section class="split-section" id="whoWeAre">
+  <div class="split-text">
+    <div class="section-eyebrow">Who We Are</div>
+    <h2 class="section-heading">A Ministry<br>Built on <em>Faith</em></h2>
+    <p class="body-text"><strong>Lord's ARMY</strong> — Lord's Adventist Reign Ministry–Youth — is a group of Seventh-day Adventist young people committed to serving God and serving people. United by faith and a desire to make a lasting difference, we go where we are called.</p>
+    <p class="body-text">Founded in 2021 from a small group of aspiring Master Guides, we have grown into a vibrant Pathfinder Club that reaches communities through camps, outreach, and evangelism. Our journey has taken us from local investitures to international recognition — including being featured in <strong>Guide Magazine</strong>.</p>
+    <p class="body-text">Through outdoor adventures, community service, and leadership development, we equip young people to become confident, compassionate, and Christ-centered leaders. Members trained within our ministry have gone on to establish their own Pathfinder and Adventurer clubs across the region.</p>
+    <div class="scripture-block">
+      <p>"Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go."</p>
+      <div class="scripture-ref">— Joshua 1:9</div>
+    </div>
+  </div>
+  <div class="split-image">
+    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200" alt="Lord's ARMY members in community service" loading="lazy">
+    <div class="split-image-overlay"></div>
+    <div class="split-image-label">
+      <blockquote>"Hands to Serve, Hearts to Love"</blockquote>
+      <cite>— Lord's ARMY Theme 2025</cite>
+    </div>
+  </div>
+</section>
+
+<!-- stats -->
+<div class="stat-bar">
+  <div class="stat-bar-inner">
+    <div class="stat-item"><div class="stat-num">2021<sup></sup></div><div class="stat-label">Year Founded</div></div>
+    <div class="stat-item"><div class="stat-num">4<sup>+</sup></div><div class="stat-label">Clubs Established</div></div>
+    <div class="stat-item"><div class="stat-num">21<sup>+</sup></div><div class="stat-label">Ministry Activities</div></div>
+    <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Lives Touched</div></div>
+  </div>
+</div>
+
+<!-- mission dark -->
+<section class="mission-section">
+  <div class="mission-inner">
+    <div class="mission-header">
+      <div class="section-eyebrow">Our Purpose</div>
+      <h2 class="section-heading" style="color:#fff">Built to <em style="color:var(--gold)">Serve</em></h2>
+    </div>
+    <div class="mission-grid">
+      <div class="mission-card"><div class="mission-icon">✝️</div><div class="mission-title"><span>Serve</span> God</div><p class="mission-desc">Leading young people to Christ through ministry, worship, and outdoor adventure. Training leaders who will carry the gospel into their communities and beyond.</p></div>
+      <div class="mission-card"><div class="mission-icon">🤝</div><div class="mission-title"><span>Serve</span> People</div><p class="mission-desc">Reaching remote communities through feeding programs, medical missions, book donations, and acts of kindness that demonstrate God's love in tangible, lasting ways.</p></div>
+      <div class="mission-card"><div class="mission-icon">📖</div><div class="mission-title"><span>Share</span> Hope</div><p class="mission-desc">Distributing resources, sharing the Word, and bringing light to those who need it — through partnerships with BUGTAW Philippines, Red Cross Bukidnon, and others.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- timeline -->
+<section class="timeline-section">
+  <div class="timeline-inner">
+    <div class="timeline-header"><div class="section-eyebrow">Our Journey</div><h2 class="section-heading">Milestones &amp; <em>Legacy</em></h2></div>
+    <div class="timeline-grid">
+      <div class="timeline-card"><div class="timeline-corner"></div><div class="timeline-year">2021</div>
+        <div class="timeline-entry"><div class="timeline-date">August 13</div><p class="timeline-text">First batch of aspiring Master Guides begins training under the Progressive Class, led by East Jordan Association Youth Department.</p></div>
+        <div class="timeline-entry"><div class="timeline-date">October 30</div><p class="timeline-text">The <strong>"MAGIC 8"</strong> are officially invested by Pastor Tedy Baang at Crossing SDA Church, Libona, Bukidnon.</p></div>
+        <div class="timeline-entry"><div class="timeline-date">December 11</div><p class="timeline-text">Second batch of Master Guides trained and invested.</p></div>
+      </div>
+      <div class="timeline-card"><div class="timeline-corner"></div><div class="timeline-year">2022</div>
+        <div class="timeline-entry"><div class="timeline-date">June 3</div><p class="timeline-text"><strong>LORD'S ARMY Pathfinder Club formally established</strong> — officers inducted by Pastor Ebenezer Perez at Manolo Fortich SDA Church.</p></div>
+        <div class="timeline-entry"><div class="timeline-date">July 9</div><p class="timeline-text">Twelve additional Master Guides invested by Pastor Virailio Teves Jr. in Lantapan, Bukidnon.</p></div>
+        <div class="timeline-entry"><div class="timeline-date">July 29</div><p class="timeline-text">Constitution and By-Laws officially adopted, solidifying the club's identity and mission.</p></div>
+      </div>
+      <div class="timeline-card"><div class="timeline-corner"></div><div class="timeline-year">2023</div>
+        <div class="timeline-entry"><div class="timeline-date">Various Camps</div><p class="timeline-text">Members participated in Pathfinder Camp/Fliesing, Pag-asa Youth Camp (as facilitators), and multiple district and provincial camps.</p></div>
+        <div class="timeline-entry"><div class="timeline-date">Outreach & Service</div><p class="timeline-text">Expanded community outreach through medical assessments, gift-giving, and partnerships with BUGTAW Philippines and other organizations.</p></div>
+      </div>
+      <div class="timeline-card"><div class="timeline-corner"></div><div class="timeline-year">2024</div>
+        <div class="timeline-entry"><div class="timeline-date">International Recognition</div><p class="timeline-text">Lord's ARMY featured in <strong>Guide Magazine</strong> — a Pacific Press SDA weekly periodical — marking a global milestone for the ministry.</p></div>
+        <div class="timeline-entry"><div class="timeline-date">Legacy Building</div><p class="timeline-text">Members trained within Lord's ARMY became Club Directors of their own clubs: Lightfinders, Obsidian Armor, Herald, and Little Vanguard.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTOR SECTION with updated name & title -->
+<section class="director-section">
+  <div class="director-inner">
+    <div class="director-visual">
+      <div class="director-accent"></div>
+      <div class="director-accent-br"></div>
+      <div class="director-img-frame">
+        <!-- Director image: ../images/a.png -->
+        <img src="../images/a.jpg" alt="Arlie Joy Damiles — Club Director" loading="lazy">
+        <div class="director-img-overlay"></div>
+        <div class="director-badge">
+          <div class="director-badge-inner">Club Director</div>
+          <div class="director-badge-name">Arlie Joy Damiles</div>
         </div>
-    </footer>
+      </div>
+    </div>
+    <div class="director-text">
+      <div class="section-eyebrow">Leadership</div>
+      <h2 class="section-heading">Meet Our <em>Director</em></h2>
+      <div class="role">Master Guide &nbsp;|&nbsp; Nutrition-Dietitian</div>
+      <p class="body-text"><strong>Arlie Joy Damiles</strong> is a dedicated Master Guide and a licensed Nutrition-Dietitian who brings a unique blend of professional expertise and spiritual passion to Lord's ARMY. With years of experience in youth ministry and community health, she leads our club with a holistic vision — caring for both the physical and spiritual well-being of every member.</p>
+      <p class="body-text">Her background in nutrition and dietetics has shaped our outreach programs, emphasizing wellness as a key component of service. She is deeply committed to guiding young people toward Christ, while also equipping them with practical skills for leadership and healthy living.</p>
+      <div class="director-quote">
+        <p>"I can do all things through Christ who strengthens me."</p>
+        <cite>— Philippians 4:13</cite>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="../js/script.js"></script>
+<!-- legacy -->
+<section class="legacy-section">
+  <div class="legacy-inner">
+    <div class="legacy-header"><div class="section-eyebrow">Our Legacy</div><h2 class="section-heading">Clubs We <em>Inspired</em></h2></div>
+    <div class="legacy-grid">
+      <div class="legacy-card"><div class="legacy-num">01</div><div class="legacy-name">Lightfinders</div><p class="legacy-desc">Established by a Lord's ARMY–trained director. Continuing the mission of light and service in their local community.</p></div>
+      <div class="legacy-card"><div class="legacy-num">02</div><div class="legacy-name">Obsidian Armor</div><p class="legacy-desc">Founded by a graduate of our Master Guide training program, bringing strength and resilience to youth ministry.</p></div>
+      <div class="legacy-card"><div class="legacy-num">03</div><div class="legacy-name">Herald</div><p class="legacy-desc">A proclamation club built on the foundations of leadership excellence nurtured within Lord's ARMY.</p></div>
+      <div class="legacy-card"><div class="legacy-num">04</div><div class="legacy-name">Little Vanguard</div><p class="legacy-desc">Serving the youngest members — Adventurers — with the same heart of service that defines Lord's ARMY.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- fb float -->
+<a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank" class="fb-float" title="Visit our Facebook page">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+</a>
+<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <h3>Lord's ARMY</h3>
+        <p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p>
+        <p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country. Serving Jesus by serving others.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about/about.html">About</a></li>
+          <li><a href="activities/activities.html">Activities</a></li>
+          <li><a href="services/services.html">Services</a></li>
+          <li><a href="contact/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <div class="footer-contact">
+          <p> <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p>
+          <p> <a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p>
+          <p> <a href="tel:09177718251">0917 771 8251</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved. · Hands to Serve, Hearts to Love.</div>
+  </div>
+</footer>
+
+<script>
+  // tape
+  const tapeWords=['Lord\'s ARMY','Master Guides','Pathfinder Club','Seventh-day Adventist','Bukidnon','Mindanao','Youth Ministry','Community Service','God\'s Love','Guide Magazine'];
+  function buildTape() {
+    const items = tapeWords.map(w => `<div class="tape-item"><span>✦</span>${w}<div class="tape-dot"></div></div>`).join('');
+    document.getElementById('tapeInner').innerHTML = items + items;
+  }
+  buildTape();
+
+  // scroll progress + nav + back to top
+  window.addEventListener('scroll', () => {
+    const st = window.scrollY;
+    const dh = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (st / dh * 100) + '%';
+    document.getElementById('navbar').classList.toggle('scrolled', st > 50);
+    document.getElementById('btt').classList.toggle('show', st > 400);
+  });
+  document.getElementById('btt').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // hamburger
+  document.getElementById('ham').onclick = function() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  };
+</script>
+
 </body>
 </html>

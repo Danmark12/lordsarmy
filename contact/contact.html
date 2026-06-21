@@ -1,323 +1,1004 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Contact | Lord's ARMY Pathfinder Club</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { font-family: 'Inter', sans-serif; }
-        h1, h2 { font-family: 'Playfair Display', serif; }
-        
-        /* ===== COLOR PALETTE ===== */
-        :root {
-            --red-primary: #8B1A1A;
-            --red-secondary: #A52A2A;
-            --red-light: #C0392B;
-            --red-muted: #E8D4D0;
-            --gold: #C9A03D;
-            --cream: #FDF6F3;
-            --dark: #1A1A1A;
-        }
-        
-        /* Page Header - Matches Home */
-        .page-header { 
-            background: linear-gradient(135deg, #6B1515 0%, #8B1A1A 100%); 
-        }
-        
-        .whatsapp-float { 
-            position: fixed; 
-            bottom: 30px; 
-            right: 30px; 
-            z-index: 100; 
-            transition: all 0.3s; 
-        }
-        .whatsapp-float:hover { transform: scale(1.05); }
-        @media (max-width: 768px) { 
-            .whatsapp-float span { display: none; } 
-            .whatsapp-float { padding: 12px; } 
-        }
-        
-        .form-input:focus { 
-            outline: none; 
-            border-color: #8B1A1A; 
-            box-shadow: 0 0 0 3px rgba(139,26,26,0.1); 
-        }
-        
-        .prayer-section { 
-            background: linear-gradient(135deg, #6B1515 0%, #8B1A1A 100%); 
-        }
-        .subscribe-section { 
-            background: linear-gradient(135deg, #5C0015 0%, #8B1A1A 100%); 
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Lord's ARMY Pathfinder Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* ===== TRANSPARENT NAVBAR ===== */
-        #navbar {
-            background: transparent !important;
-            box-shadow: none !important;
-            transition: all 0.4s ease;
-            padding: 0;
-        }
-        #navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98) !important;
-            box-shadow: 0 2px 20px rgba(139,26,26,0.10) !important;
-        }
+    :root {
+      --crimson: #8B1A1A;
+      --crimson-deep: #5C0F0F;
+      --crimson-glow: #C0362C;
+      --gold: #C9A03D;
+      --gold-light: #EDD98A;
+      --ivory: #FDFAF4;
+      --ink: #1A1208;
+      --muted: #7A6A55;
+      --border: #E8E0D0;
+      --surface: #FFFFFF;
+      --surface-warm: #FDF8F2;
+    }
 
-        .nav-link {
-            color: white !important;
-            transition: all 0.3s;
-            position: relative;
-            padding-bottom: 4px;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #C9A03D;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-        .nav-link:hover { color: #C9A03D !important; }
-        .nav-link.active { color: #C9A03D !important; }
+    html { scroll-behavior: smooth; }
 
-        #navbar.scrolled .nav-link { color: #2c2c2c !important; }
-        #navbar.scrolled .nav-link:hover { color: #8B1A1A !important; }
-        #navbar.scrolled .nav-link.active { color: #8B1A1A !important; }
-        #navbar.scrolled .nav-link::after { background: #8B1A1A; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
 
-        /* Logo - Matches Home */
-        .logo-text { 
-            color: white; 
-            transition: color 0.3s; 
-        }
-        .logo-sub { 
-            color: rgba(255,255,255,0.8); 
-            transition: color 0.3s; 
-        }
-        #navbar.scrolled .logo-text { color: #8B1A1A; }
-        #navbar.scrolled .logo-sub { color: #A52A2A; }
+    /* PROGRESS */
+    #progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold));
+      z-index: 9999; width: 0%; transition: width 0.1s;
+    }
 
-        .logo-image {
-            height: 45px;
-            width: auto;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
-        .logo-image:hover {
-            transform: scale(1.05);
-        }
-        @media (max-width: 768px) {
-            .logo-image { height: 35px; }
-        }
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      padding: 0 40px;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(253,250,244,0.97);
+      box-shadow: 0 1px 0 var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-emblem {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--crimson);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(201,160,61,0.3);
+      transition: box-shadow 0.3s;
+      overflow: hidden;
+    }
+    .brand-emblem img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+    .nav-brand:hover .brand-emblem { box-shadow: 0 0 0 3px var(--gold); }
+    .brand-text-top {
+      font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700;
+      color: #fff; line-height: 1; transition: color 0.3s; letter-spacing: 0.5px;
+    }
+    .brand-text-sub {
+      font-size: 10px; color: rgba(255,255,255,0.7); letter-spacing: 2px;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    nav.scrolled .brand-text-top { color: var(--crimson); }
+    nav.scrolled .brand-text-sub { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; color: rgba(255,255,255,0.85);
+      position: relative; transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--gold); transition: width 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { color: var(--crimson); }
+    nav.scrolled .nav-links a::after { background: var(--crimson); }
 
-        .hamburger span {
-            background: white;
-            transition: all 0.3s;
-        }
-        #navbar.scrolled .hamburger span { background: #8B1A1A; }
+    /* HAMBURGER */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: #fff; transition: all 0.3s; }
+    nav.scrolled .hamburger span { background: var(--crimson); }
+    #mobile-menu {
+      display: none; position: fixed; top: 72px; left: 0; right: 0;
+      background: var(--surface-warm); border-bottom: 1px solid var(--border);
+      padding: 16px 24px; z-index: 99;
+    }
+    #mobile-menu.open { display: block; }
+    #mobile-menu ul { list-style: none; }
+    #mobile-menu li a {
+      display: block; padding: 12px 0; font-size: 0.9rem; font-weight: 600;
+      color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.3s;
+    }
+    #mobile-menu li:last-child a { border-bottom: none; }
+    #mobile-menu li a:hover, #mobile-menu li a.active { color: var(--crimson); }
 
-        #mobile-menu { background: white !important; }
-        #mobile-menu a { color: #2c2c2c !important; }
-        #mobile-menu a:hover { 
-            color: #8B1A1A !important; 
-            background: #FDF6F3 !important; 
-        }
-        #mobile-menu a.active { 
-            color: #8B1A1A !important; 
-            background: #FDF6F3 !important; 
-            font-weight: 600; 
-        }
-    </style>
+    /* HERO */
+    .hero {
+      position: relative; height: 60vh; min-height: 480px;
+      overflow: hidden; background: #0A0605;
+    }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-bg img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.35) saturate(0.65);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(10,6,5,0.75) 0%, rgba(10,6,5,0.15) 65%);
+    }
+    .hero-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 900; line-height: 1.02; color: #fff;
+      margin-bottom: 16px; letter-spacing: -1px;
+    }
+    .hero-title em { font-style: normal; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.45); }
+    .hero-subtitle { font-size: 1rem; color: rgba(255,255,255,0.65); line-height: 1.85; max-width: 480px; }
+
+    /* TAPE */
+    .tape {
+      background: var(--crimson-deep); padding: 16px 0; overflow: hidden;
+      border-top: 1px solid rgba(201,160,61,0.25);
+      border-bottom: 1px solid rgba(201,160,61,0.25);
+    }
+    .tape-inner { display: flex; animation: tape 25s linear infinite; white-space: nowrap; }
+    .tape-inner:hover { animation-play-state: paused; }
+    @keyframes tape { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .tape-item {
+      display: inline-flex; align-items: center; gap: 16px; padding: 0 36px;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .tape-item span { color: var(--gold); }
+    .tape-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 50%; flex-shrink: 0; }
+
+    /* SHARED SECTION LABELS */
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--crimson); margin-bottom: 16px;
+    }
+    .section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--crimson); }
+    .section-heading {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 900; color: var(--ink); line-height: 1.1; margin-bottom: 12px;
+    }
+    .section-heading em { font-style: normal; color: var(--crimson); }
+
+    /* ── CONTACT INFO STRIP ── */
+    .info-strip {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .info-strip-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+    }
+    .info-strip-item {
+      padding: 40px 36px;
+      border-right: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 18px;
+      transition: background 0.3s;
+    }
+    .info-strip-item:last-child { border-right: none; }
+    .info-strip-item:hover { background: var(--surface-warm); }
+    .info-strip-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      border: 1px solid rgba(139,26,26,0.25);
+      background: rgba(139,26,26,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .info-strip-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 6px;
+    }
+    .info-strip-value {
+      font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--ink); line-height: 1.4; margin-bottom: 2px;
+    }
+    .info-strip-sub { font-size: 0.8rem; color: var(--muted); }
+    .info-strip-sub a { color: var(--muted); text-decoration: none; transition: color 0.3s; }
+    .info-strip-sub a:hover { color: var(--crimson); }
+
+    /* ── MAIN CONTACT SECTION ── */
+    .contact-section {
+      padding: 100px 40px;
+      background: var(--ivory);
+    }
+    .contact-inner { max-width: 1280px; margin: 0 auto; }
+    .contact-header { margin-bottom: 60px; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* ── FORM PANEL ── */
+    .form-panel {
+      background: var(--surface);
+      padding: 56px 52px;
+    }
+    .form-panel-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .form-panel-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+    .form-panel-title {
+      font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 900;
+      color: var(--ink); line-height: 1.1; margin-bottom: 8px;
+    }
+    .form-panel-title em { font-style: normal; color: var(--crimson); }
+    .form-panel-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 36px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 14px 16px;
+      border: 1px solid var(--border); background: var(--ivory);
+      font-size: 0.88rem; font-family: 'Inter', sans-serif;
+      color: var(--ink); transition: all 0.3s; outline: none;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--crimson);
+      background: var(--surface);
+      box-shadow: inset 3px 0 0 var(--crimson);
+    }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-group select { cursor: pointer; }
+
+    .btn-submit {
+      background: var(--crimson); color: #fff;
+      padding: 16px 40px; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 12px;
+      transition: all 0.3s; width: 100%;
+      justify-content: center;
+    }
+    .btn-submit:hover { background: var(--crimson-deep); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139,26,26,0.25); }
+    .btn-submit i { font-size: 0.8rem; transition: transform 0.3s; }
+    .btn-submit:hover i { transform: translateX(4px); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    /* Toast notification */
+    .toast {
+      position: fixed; bottom: 100px; right: 30px; z-index: 9999;
+      padding: 16px 24px; background: var(--ink); color: #fff;
+      font-size: 0.88rem; max-width: 360px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transform: translateY(20px); opacity: 0; transition: all 0.4s ease;
+      pointer-events: none; border-left: 3px solid var(--gold);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .toast.success { border-left-color: #4CAF50; }
+    .toast.error { border-left-color: #f44336; }
+    .toast strong { display: block; margin-bottom: 4px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); }
+
+    /* ── SIDE PANEL ── */
+    .side-panel {
+      background: var(--ink);
+      padding: 56px 44px;
+      display: flex; flex-direction: column; gap: 0;
+    }
+
+    .side-block {
+      padding-bottom: 40px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .side-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .side-block-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .side-block-label::before { content: ''; width: 16px; height: 1px; background: var(--gold); }
+    .side-block-title {
+      font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700;
+      color: #fff; line-height: 1.2; margin-bottom: 10px;
+    }
+    .side-block-title span { color: var(--gold); }
+    .side-block-desc { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.85; margin-bottom: 20px; }
+
+    .benefit-list { list-style: none; margin-bottom: 22px; }
+    .benefit-list li {
+      font-size: 0.8rem; color: rgba(255,255,255,0.55); padding: 5px 0;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .benefit-list li::before { content: '✦'; color: var(--gold); font-size: 0.7rem; flex-shrink: 0; }
+
+    .btn-side {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 12px 28px; transition: all 0.3s; text-decoration: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; border: none;
+    }
+    .btn-side-gold {
+      background: var(--gold); color: var(--ink);
+    }
+    .btn-side-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-side-outline {
+      background: transparent; color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn-side-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Prayer reveal */
+    .prayer-reveal {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
+      margin-top: 0;
+    }
+    .prayer-reveal.open { max-height: 500px; opacity: 1; margin-top: 20px; }
+    .prayer-reveal input,
+    .prayer-reveal textarea {
+      width: 100%; padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      font-size: 0.83rem; font-family: 'Inter', sans-serif;
+      color: #fff; outline: none; margin-bottom: 10px;
+      transition: all 0.3s;
+    }
+    .prayer-reveal input::placeholder,
+    .prayer-reveal textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .prayer-reveal input:focus,
+    .prayer-reveal textarea:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.08);
+    }
+    .prayer-reveal textarea { resize: vertical; min-height: 80px; }
+    .btn-prayer-submit {
+      width: 100%; padding: 12px; background: var(--crimson); color: #fff;
+      border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .btn-prayer-submit:hover { background: var(--crimson-deep); }
+    .btn-prayer-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* scripture */
+    .scripture {
+      padding: 16px 20px;
+      border-left: 2px solid rgba(201,160,61,0.4);
+      background: rgba(255,255,255,0.03);
+    }
+    .scripture p {
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      font-style: italic; line-height: 1.7; margin-bottom: 4px;
+    }
+    .scripture cite { font-size: 0.7rem; color: var(--gold); font-style: normal; font-weight: 700; letter-spacing: 1px; }
+
+    /* ── LOCATION SECTION ── */
+    .location-section {
+      background: var(--surface-warm);
+      border-top: 1px solid var(--border);
+      padding: 80px 40px;
+    }
+    .location-inner { max-width: 1280px; margin: 0 auto; }
+    .location-header { margin-bottom: 48px; }
+    .location-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border); border: 1px solid var(--border);
+    }
+    .location-map {
+      background: var(--surface); position: relative; overflow: hidden;
+      min-height: 320px;
+    }
+    .location-map iframe {
+      width: 100%; height: 100%; min-height: 320px;
+      display: block; border: none; filter: saturate(0.7) contrast(1.05);
+    }
+    .location-details {
+      background: var(--surface); padding: 52px 48px;
+      display: flex; flex-direction: column; justify-content: center; gap: 28px;
+    }
+    .loc-item { display: flex; gap: 16px; align-items: flex-start; }
+    .loc-icon-wrap {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border: 1px solid rgba(139,26,26,0.2);
+      background: rgba(139,26,26,0.05);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .loc-item-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 4px;
+    }
+    .loc-item-value { font-size: 0.88rem; color: var(--ink); font-weight: 500; line-height: 1.5; }
+    .loc-item-sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+    .btn-map {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      background: var(--crimson); color: #fff; padding: 14px 32px;
+      text-decoration: none; border: none; transition: all 0.3s; width: fit-content;
+    }
+    .btn-map:hover { background: var(--crimson-deep); transform: translateY(-2px); }
+
+    /* ── FB FLOAT ── */
+    .fb-float {
+      position: fixed; bottom: 30px; right: 30px; z-index: 500;
+      background: #1877F2; color: #fff;
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(24,119,242,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .fb-float:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 8px 30px rgba(24,119,242,0.5); }
+
+    /* ── BACK TO TOP ── */
+    #btt {
+      position: fixed; bottom: 96px; right: 30px; z-index: 500;
+      width: 40px; height: 40px; background: var(--crimson); color: #fff;
+      border: none; cursor: pointer; font-size: 0.8rem;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(16px); transition: all 0.4s; pointer-events: none;
+    }
+    #btt.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #btt:hover { background: var(--crimson-deep); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.4);
+      padding: 60px 40px 30px;
+      border-top: 1px solid rgba(201,160,61,0.2);
+    }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
+    footer h3 { font-family: 'Cinzel', serif; color: #fff; font-size: 1.2rem; margin-bottom: 6px; }
+    .footer-sub { font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 20px; }
+    .footer-desc { font-size: 0.82rem; line-height: 1.8; max-width: 300px; }
+    footer h4 {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 16px;
+    }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 10px; }
+    footer ul li a { font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+    footer ul li a:hover { color: var(--gold); }
+    footer .footer-contact p { font-size: 0.82rem; margin-bottom: 10px; }
+    footer .footer-contact a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
+    footer .footer-contact a:hover { color: var(--gold); }
+    footer .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px; text-align: center; font-size: 0.75rem; letter-spacing: 0.5px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .location-grid { grid-template-columns: 1fr; }
+      .info-strip-inner { grid-template-columns: 1fr; }
+      .info-strip-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .info-strip-item:last-child { border-bottom: none; }
+      footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 40px 24px 60px; }
+      .form-panel { padding: 36px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .side-panel { padding: 36px 24px; }
+      .location-details { padding: 36px 24px; }
+      .contact-section { padding: 60px 20px; }
+      .location-section { padding: 60px 20px; }
+      footer { padding: 40px 20px 24px; }
+      footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .tape { display: none; }
+      .toast { right: 16px; left: 16px; max-width: none; bottom: 90px; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ===== NAVIGATION ===== -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-3 md:py-4">
-                <!-- Logo with Image -->
-                <div class="flex items-center gap-3">
-                    <img src="../logo/LA_logo.png" alt="Lord's ARMY Logo" class="logo-image">
-                    <div>
-                        <h1 class="logo-text text-lg md:text-xl font-bold leading-tight">Lord's ARMY</h1>
-                        <p class="logo-sub text-[10px] md:text-xs tracking-wider">Pathfinder Club</p>
-                    </div>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <ul class="hidden md:flex gap-6 lg:gap-8">
-                    <li><a href="../index.html" class="nav-link font-medium">Home</a></li>
-                    <li><a href="../about/about.html" class="nav-link font-medium">About</a></li>
-                    <li><a href="../activities/activities.html" class="nav-link font-medium">Activities</a></li>
-                    <li><a href="../services/services.html" class="nav-link font-medium">Services</a></li>
-                    <li><a href="../contact/contact.html" class="nav-link active font-medium">Contact</a></li>
-                </ul>
-                
-                <!-- Mobile Hamburger -->
-                <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1 hamburger">
-                    <span class="w-6 h-0.5 transition-all duration-300"></span>
-                    <span class="w-6 h-0.5 transition-all duration-300"></span>
-                    <span class="w-6 h-0.5 transition-all duration-300"></span>
-                </button>
-            </div>
-            
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4 rounded-b-2xl shadow-lg">
-                <ul class="flex flex-col gap-2 pt-4 px-2">
-                    <li><a href="../index.html" class="block py-2.5 px-3 rounded-lg transition">Home</a></li>
-                    <li><a href="../about/about.html" class="block py-2.5 px-3 rounded-lg transition">About</a></li>
-                    <li><a href="../activities/activities.html" class="block py-2.5 px-3 rounded-lg transition">Activities</a></li>
-                    <li><a href="../services/services.html" class="block py-2.5 px-3 rounded-lg transition">Services</a></li>
-                    <li><a href="../contact/contact.html" class="block py-2.5 px-3 rounded-lg font-semibold active">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<div id="progress"></div>
 
-    <!-- ===== PAGE HEADER ===== -->
-    <section class="page-header py-20 md:py-28 text-center text-white">
-        <div class="max-w-4xl mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-bold">Contact Us</h1>
-            <p class="text-lg md:text-xl mt-3 opacity-90">Get in touch or join Lord's ARMY</p>
-        </div>
-    </section>
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast">
+  <strong id="toastTitle">Success</strong>
+  <span id="toastMessage">Message sent successfully!</span>
+</div>
 
-    <!-- ===== CONTACT SECTION ===== -->
-    <section class="py-16 md:py-20 bg-[#FDF6F3]">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-                
-                <!-- Contact Info -->
-                <div>
-                    <h2 class="text-3xl font-bold text-[#8B1A1A] mb-6">Get In Touch</h2>
-                    
-                    <div class="flex items-start gap-4 mb-6">
-                        <div class="text-3xl">📱</div>
-                        <div>
-                            <h4 class="font-semibold text-gray-800">WhatsApp</h4>
-                            <a href="https://wa.me/1234567890" class="text-[#C9A03D] hover:text-[#D4B050] transition">+1234567890</a>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start gap-4 mb-6">
-                        <div class="text-3xl">✉️</div>
-                        <div>
-                            <h4 class="font-semibold text-gray-800">Email</h4>
-                            <a href="mailto:lordsarmy@example.com" class="text-[#C9A03D] hover:text-[#D4B050] transition">lordsarmy@example.com</a>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start gap-4 mb-6">
-                        <div class="text-3xl">📍</div>
-                        <div>
-                            <h4 class="font-semibold text-gray-800">Meeting Location</h4>
-                            <p class="text-gray-600">[Your Church Name & Address]</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start gap-4">
-                        <div class="text-3xl">⏰</div>
-                        <div>
-                            <h4 class="font-semibold text-gray-800">Meeting Time</h4>
-                            <p class="text-gray-600">Saturdays 3:00 PM - 5:00 PM</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
-                    <h2 class="text-2xl font-bold text-[#8B1A1A] mb-6">Send Us a Message</h2>
-                    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                        <input type="text" name="name" placeholder="Your Name" required
-                               class="form-input w-full px-4 py-3 rounded-xl border border-gray-300 mb-4 transition">
-                        <input type="email" name="email" placeholder="Your Email" required
-                               class="form-input w-full px-4 py-3 rounded-xl border border-gray-300 mb-4 transition">
-                        <input type="tel" name="phone" placeholder="Your WhatsApp/Phone (optional)"
-                               class="form-input w-full px-4 py-3 rounded-xl border border-gray-300 mb-4 transition">
-                        <textarea name="message" placeholder="Your Message" rows="5" required
-                                  class="form-input w-full px-4 py-3 rounded-xl border border-gray-300 mb-4 transition"></textarea>
-                        <button type="submit" class="w-full bg-[#8B1A1A] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#6B1515] transition transform hover:-translate-y-1 hover:shadow-lg">
-                            Send Message →
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Prayer Request -->
-            <div class="prayer-section rounded-2xl p-6 md:p-8 text-white mt-10">
-                <h2 class="text-2xl md:text-3xl font-bold mb-2">🙏 Prayer Request</h2>
-                <p class="opacity-90 mb-6">Share your prayer request. Our team will pray for you.</p>
-                <form action="https://formspree.io/f/YOUR_FORM_ID_2" method="POST" class="grid sm:grid-cols-2 gap-4">
-                    <input type="text" name="name" placeholder="Your Name (optional)"
-                           class="form-input px-4 py-3 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/70 transition focus:bg-white/20">
-                    <textarea name="prayer" placeholder="Your prayer request..." rows="2" required
-                              class="form-input px-4 py-3 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/70 transition focus:bg-white/20 sm:col-span-2"></textarea>
-                    <button type="submit" class="bg-[#C9A03D] text-[#8B1A1A] px-8 py-3 rounded-full font-semibold hover:bg-[#D4B050] transition transform hover:-translate-y-1 sm:col-span-2">
-                        Submit Prayer Request
-                    </button>
-                </form>
-            </div>
-
-            <!-- Subscribe -->
-            <div class="subscribe-section rounded-2xl p-6 md:p-8 text-center text-white mt-10">
-                <h2 class="text-2xl md:text-3xl font-bold mb-2">📧 Stay Updated</h2>
-                <p class="opacity-90 mb-6">Subscribe to get news about our activities, camping, and feeding programs.</p>
-                <form action="https://formspree.io/f/YOUR_FORM_ID_3" method="POST" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                    <input type="email" name="email" placeholder="Your email address" required
-                           class="form-input flex-1 px-4 py-3 rounded-full border border-white/30 bg-white/10 text-white placeholder-white/70 transition focus:bg-white/20">
-                    <button type="submit" class="bg-[#C9A03D] text-[#8B1A1A] px-8 py-3 rounded-full font-semibold hover:bg-[#D4B050] transition transform hover:-translate-y-1">
-                        Subscribe
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== WHATSAPP FLOAT ===== -->
-    <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-float bg-[#25D366] hover:bg-[#1DA851] text-white rounded-full p-3 md:p-4 shadow-lg flex items-center gap-2">
-        <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="white">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        <span class="hidden sm:inline text-sm font-medium">Chat with us</span>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="brand-emblem">
+        <img src="../logo/LA_logo.png" alt="Lord's ARMY Pathfinder Club Logo">
+      </div>
+      <div>
+        <div class="brand-text-top">Lord's ARMY</div>
+        <div class="brand-text-sub">Pathfinder Club</div>
+      </div>
     </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/about.html">About</a></li>
+      <li><a href="../activities/activities.html">Activities</a></li>
+      <li><a href="../services/services.html">Services</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="bg-[#1A1A1A] text-gray-400 py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-white text-xl font-bold mb-3">Lord's ARMY</h3>
-                    <p>Pathfinder Club<br>Seventh-day Adventist</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-3">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="../index.html" class="hover:text-[#C9A03D] transition">Home</a></li>
-                        <li><a href="../about/about.html" class="hover:text-[#C9A03D] transition">About</a></li>
-                        <li><a href="../activities/activities.html" class="hover:text-[#C9A03D] transition">Activities</a></li>
-                        <li><a href="../services/services.html" class="hover:text-[#C9A03D] transition">Services</a></li>
-                        <li><a href="../contact/contact.html" class="hover:text-[#C9A03D] transition">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-3">Connect</h4>
-                    <p class="mb-2">📱 WhatsApp: <a href="https://wa.me/1234567890" class="hover:text-[#C9A03D] transition">+1234567890</a></p>
-                    <p>✉️ Email: <a href="mailto:lordsarmy@example.com" class="hover:text-[#C9A03D] transition">lordsarmy@example.com</a></p>
-                </div>
+<div id="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../about/about.html">About</a></li>
+    <li><a href="../activities/activities.html">Activities</a></li>
+    <li><a href="../services/services.html">Services</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600" alt="Lord's ARMY Community" loading="eager">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Reach Out</div>
+    <h1 class="hero-title">Get in <em>Touch</em><br>With Us</h1>
+    <p class="hero-subtitle">Whether you want to volunteer, partner, request prayer, or simply learn more — our doors are open and our hearts are ready.</p>
+  </div>
+</section>
+
+<!-- TAPE -->
+<div class="tape">
+  <div class="tape-inner" id="tapeInner"></div>
+</div>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="info-strip-inner">
+    <div class="info-strip-item">
+      <div class="info-strip-icon">📱</div>
+      <div>
+        <div class="info-strip-label">Call / Message</div>
+        <div class="info-strip-value">0917 771 8251</div>
+        <div class="info-strip-sub"><a href="tel:09177718251">Available for WhatsApp & calls</a></div>
+      </div>
+    </div>
+    <div class="info-strip-item">
+      <div class="info-strip-icon">✉️</div>
+      <div>
+        <div class="info-strip-label">Email Us</div>
+        <div class="info-strip-value">danmarkpetalcurin<br>@gmail.com</div>
+        <div class="info-strip-sub"><a href="mailto:danmarkpetalcurin@gmail.com">We reply within 24–48 hours</a></div>
+      </div>
+    </div>
+    <div class="info-strip-item">
+      <div class="info-strip-icon">⛪</div>
+      <div>
+        <div class="info-strip-label">Church Location</div>
+        <div class="info-strip-value">Crossing 8 SDA Church</div>
+        <div class="info-strip-sub">Libona, Bukidnon, Philippines</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTACT SECTION -->
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-header">
+      <div class="section-eyebrow">Contact</div>
+      <h2 class="section-heading">Send a <em>Message</em></h2>
+      <p style="font-size:0.9rem;color:var(--muted);max-width:480px;line-height:1.8;">Fill out the form below or reach us directly. We'd love to hear about how we can serve you, partner together, or welcome you into our ministry.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- FORM PANEL -->
+      <div class="form-panel">
+        <div class="form-panel-eyebrow">Send a Message</div>
+        <h3 class="form-panel-title">We'd Love to<br><em>Hear From You</em></h3>
+        <p class="form-panel-desc">Whether it's a question, a partnership inquiry, or simply saying hello — fill in the details below and we'll get back to you as soon as possible.</p>
+
+        <form id="contactForm" onsubmit="sendEmail(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="first_name" id="firstName" placeholder="e.g. Juan" required>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-                <p>&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved.</p>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="last_name" id="lastName" placeholder="e.g. dela Cruz" required>
             </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" id="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone / WhatsApp (Optional)</label>
+            <input type="tel" name="phone" id="phone" placeholder="09XX XXX XXXX">
+          </div>
+          <div class="form-group">
+            <label>Reason for Contact</label>
+            <select name="reason" id="reason">
+              <option value="" disabled selected>Select a reason…</option>
+              <option>General Inquiry</option>
+              <option>Join Lord's ARMY</option>
+              <option>Partnership or Donation</option>
+              <option>Prayer Request</option>
+              <option>Media / Press</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Your Message</label>
+            <textarea name="message" id="message" placeholder="Tell us how we can help, or share what's on your heart…" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            Send Message <i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- SIDE PANEL -->
+      <div class="side-panel">
+
+        <!-- Join -->
+        <div class="side-block">
+          <div class="side-block-label">Membership</div>
+          <h3 class="side-block-title">Join <span>Lord's ARMY</span></h3>
+          <p class="side-block-desc">Be part of a generation of young people who serve God and transform communities. There's a place for you here — whether you're a Pathfinder, a young adult, or simply called to serve.</p>
+          <ul class="benefit-list">
+            <li>Camping, survival, and leadership training</li>
+            <li>Community feeding and outreach programs</li>
+            <li>Faith formation and Master Guide pathway</li>
+            <li>A family that prays and serves together</li>
+          </ul>
+          <a href="#" class="btn-side btn-side-gold">Join us<i class="fas fa-arrow-right"></i></a>
         </div>
-    </footer>
 
-    <script src="../js/script.js"></script>
+        <!-- Prayer -->
+        <div class="side-block">
+          <div class="side-block-label">Prayer</div>
+          <h3 class="side-block-title">Submit a <span>Prayer Request</span></h3>
+          <p class="side-block-desc">We believe in the power of prayer. Share your request and our ministry team will lift it up in our next gathering.</p>
+
+          <button class="btn-side btn-side-outline" id="prayerToggle" style="margin-bottom:0;">
+            Open Prayer Form <i class="fas fa-chevron-down" id="prayerChevron" style="font-size:0.7rem;transition:transform 0.3s;"></i>
+          </button>
+
+          <div class="prayer-reveal" id="prayerReveal">
+            <form id="prayerForm" onsubmit="sendPrayer(event)">
+              <input type="text" name="name" id="prayerName" placeholder="Your name (optional)">
+              <textarea name="prayer" id="prayerMessage" placeholder="Share your prayer request…" required></textarea>
+              <button type="submit" class="btn-prayer-submit" id="prayerSubmitBtn">Submit Prayer Request</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Support -->
+        <div class="side-block">
+          <div class="side-block-label">Support</div>
+          <h3 class="side-block-title">Give to the <span>Mission</span></h3>
+          <p class="side-block-desc">Every gift fuels outreach — feeding programs, books for children, community missions, and more. Your generosity changes lives across Mindanao.</p>
+          <div class="scripture">
+            <p>"Each one must give as he has decided in his heart, for God loves a cheerful giver."</p>
+            <cite>— 2 Corinthians 9:7</cite>
+          </div>
+          <a href="#" class="btn-side btn-side-gold" style="margin-top:18px;">Give Today <i class="fas fa-heart" style="font-size:0.8rem;"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION SECTION -->
+<section class="location-section">
+  <div class="location-inner">
+    <div class="location-header">
+      <div class="section-eyebrow">Find Us</div>
+      <h2 class="section-heading">Our <em>Location</em></h2>
+    </div>
+    <div class="location-grid">
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31428.12345!2d124.7!3d8.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sLibona%2C+Bukidnon!5e0!3m2!1sen!2sph!4v1"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Libona, Bukidnon map">
+        </iframe>
+      </div>
+      <div class="location-details">
+        <div>
+          <div class="section-eyebrow" style="margin-bottom:8px;">Visit Us</div>
+          <h3 style="font-family:'Cinzel',serif;font-size:1.5rem;font-weight:900;color:var(--ink);margin-bottom:20px;">Crossing 8 SDA Church<br><span style="color:var(--crimson);">Libona, Bukidnon</span></h3>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:22px;">
+          <div class="loc-item">
+            <div class="loc-icon-wrap">📍</div>
+            <div>
+              <div class="loc-item-label">Address</div>
+              <div class="loc-item-value">Crossing 8, Seventh-day Adventist Church</div>
+              <div class="loc-item-sub">Libona, Bukidnon, Philippines</div>
+            </div>
+          </div>
+         
+        <a href="https://maps.google.com/?q=Libona+Bukidnon+Philippines" target="_blank" class="btn-map">
+          Open in Google Maps <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FB FLOAT -->
+<a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank" class="fb-float" title="Visit our Facebook page">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </svg>
+</a>
+<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <h3>Lord's ARMY</h3>
+        <p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p>
+        <p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country. Serving Jesus by serving others.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about/about.html">About</a></li>
+          <li><a href="../activities/activities.html">Activities</a></li>
+          <li><a href="../services/services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <div class="footer-contact">
+          <p> <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p>
+          <p> <a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p>
+          <p> <a href="tel:09177718251">0917 771 8251</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved. · Hands to Serve, Hearts to Love.</div>
+  </div>
+</footer>
+
+<script>
+  // ============================================
+  // 🔧 EMAILJS CONFIGURATION - REPLACE THESE
+  // ============================================
+  const EMAILJS_CONFIG = {
+    PUBLIC_KEY: 'YOUR_EMAILJS_PUBLIC_KEY',    // Get from EmailJS dashboard
+    SERVICE_ID: 'YOUR_SERVICE_ID',            // e.g., 'service_abc123'
+    CONTACT_TEMPLATE_ID: 'YOUR_CONTACT_TEMPLATE_ID',  // e.g., 'template_xyz789'
+    PRAYER_TEMPLATE_ID: 'YOUR_PRAYER_TEMPLATE_ID'     // e.g., 'template_prayer123'
+  };
+
+  // Initialize EmailJS
+  (function initEmailJS() {
+    if (EMAILJS_CONFIG.PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+      emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+      console.log('✅ EmailJS initialized');
+    } else {
+      console.warn('⚠️ Please configure your EmailJS keys in the EMAILJS_CONFIG object');
+    }
+  })();
+
+  // ============================================
+  // TOAST NOTIFICATION
+  // ============================================
+  function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    const toastTitle = document.getElementById('toastTitle');
+    const toastMessage = document.getElementById('toastMessage');
+    
+    toast.className = 'toast ' + type;
+    toastTitle.textContent = type === 'success' ? '✅ Success' : '❌ Error';
+    toastMessage.textContent = message;
+    
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 5000);
+  }
+
+  // ============================================
+  // SEND CONTACT EMAIL
+  // ============================================
+  function sendEmail(e) {
+    e.preventDefault();
+    
+    // Check if EmailJS is configured
+    if (EMAILJS_CONFIG.PUBLIC_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
+      showToast('Please configure EmailJS first. See the EMAILJS_CONFIG object in the script.', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+
+    // Get form values
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const reason = document.getElementById('reason').value;
+    const message = document.getElementById('message').value.trim();
+
+    // Prepare template parameters
+    const templateParams = {
+      from_name: firstName + ' ' + lastName,
+      from_email: email,
+      phone: phone || 'Not provided',
+      reason: reason || 'General Inquiry',
+      message: message,
+      to_email: 'danmarkpetalcurin@gmail.com'  // Your email
+    };
+
+    // Send via EmailJS
+    emailjs.send(
+      EMAILJS_CONFIG.SERVICE_ID,
+      EMAILJS_CONFIG.CONTACT_TEMPLATE_ID,
+      templateParams
+    )
+    .then(function(response) {
+      console.log('✅ Email sent successfully!', response);
+      showToast('Your message has been sent! We\'ll get back to you soon.', 'success');
+      document.getElementById('contactForm').reset();
+      btn.disabled = false;
+      btn.innerHTML = 'Send Message <i class="fas fa-arrow-right"></i>';
+    })
+    .catch(function(error) {
+      console.error('❌ Failed to send email:', error);
+      showToast('Something went wrong. Please try again or contact us directly.', 'error');
+      btn.disabled = false;
+      btn.innerHTML = 'Send Message <i class="fas fa-arrow-right"></i>';
+    });
+  }
+
+  // ============================================
+  // SEND PRAYER EMAIL
+  // ============================================
+  function sendPrayer(e) {
+    e.preventDefault();
+    
+    if (EMAILJS_CONFIG.PUBLIC_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
+      showToast('Please configure EmailJS first. See the EMAILJS_CONFIG object in the script.', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('prayerSubmitBtn');
+    btn.disabled = true;
+    btn.innerHTML = 'Sending...';
+
+    const name = document.getElementById('prayerName').value.trim() || 'Anonymous';
+    const prayer = document.getElementById('prayerMessage').value.trim();
+
+    const templateParams = {
+      from_name: name,
+      prayer: prayer,
+      to_email: 'danmarkpetalcurin@gmail.com'
+    };
+
+    emailjs.send(
+      EMAILJS_CONFIG.SERVICE_ID,
+      EMAILJS_CONFIG.PRAYER_TEMPLATE_ID,
+      templateParams
+    )
+    .then(function(response) {
+      console.log('✅ Prayer sent successfully!', response);
+      showToast('Your prayer request has been submitted. We\'re praying for you! 🙏', 'success');
+      document.getElementById('prayerForm').reset();
+      btn.disabled = false;
+      btn.innerHTML = 'Submit Prayer Request';
+      // Close the prayer form
+      document.getElementById('prayerReveal').classList.remove('open');
+      document.getElementById('prayerChevron').style.transform = '';
+      document.querySelector('#prayerToggle').childNodes[0].textContent = 'Open Prayer Form ';
+    })
+    .catch(function(error) {
+      console.error('❌ Failed to send prayer:', error);
+      showToast('Something went wrong. Please try again.', 'error');
+      btn.disabled = false;
+      btn.innerHTML = 'Submit Prayer Request';
+    });
+  }
+
+  // ============================================
+  // TAPE ANIMATION
+  // ============================================
+  const tapeWords = ['Contact Us','Lord\'s ARMY','Libona, Bukidnon','Join the Ministry','Send a Prayer','Hands to Serve','Hearts to Love','Seventh-day Adventist','Pathfinder Club','Get in Touch'];
+  (function buildTape() {
+    const items = tapeWords.map(w => `<div class="tape-item"><span>✦</span>${w}<div class="tape-dot"></div></div>`).join('');
+    document.getElementById('tapeInner').innerHTML = items + items;
+  })();
+
+  // ============================================
+  // SCROLL EFFECTS
+  // ============================================
+  window.addEventListener('scroll', () => {
+    const st = window.scrollY;
+    const dh = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (st / dh * 100) + '%';
+    document.getElementById('navbar').classList.toggle('scrolled', st > 50);
+    document.getElementById('btt').classList.toggle('show', st > 400);
+  });
+  document.getElementById('btt').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // ============================================
+  // HAMBURGER MENU
+  // ============================================
+  document.getElementById('ham').onclick = function () {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  };
+
+  // ============================================
+  // PRAYER REVEAL TOGGLE
+  // ============================================
+  const prayerToggle = document.getElementById('prayerToggle');
+  const prayerReveal = document.getElementById('prayerReveal');
+  const prayerChevron = document.getElementById('prayerChevron');
+  prayerToggle.addEventListener('click', () => {
+    const isOpen = prayerReveal.classList.toggle('open');
+    prayerChevron.style.transform = isOpen ? 'rotate(180deg)' : '';
+    prayerToggle.childNodes[0].textContent = isOpen ? 'Close Prayer Form ' : 'Open Prayer Form ';
+  });
+
+  // ============================================
+  // DEMO NOTIFICATION (if EmailJS not configured)
+  // ============================================
+  if (EMAILJS_CONFIG.PUBLIC_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
+    console.log('📧 EmailJS is not configured yet!');
+    console.log('To set it up:');
+    console.log('1. Go to https://www.emailjs.com/ and sign up');
+    console.log('2. Create a service (Gmail, Outlook, etc.)');
+    console.log('3. Create two email templates (contact & prayer)');
+    console.log('4. Copy your Public Key, Service ID, and Template IDs');
+    console.log('5. Replace the values in EMAILJS_CONFIG at the top of the script');
+  }
+</script>
+
 </body>
 </html>

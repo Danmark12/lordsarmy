@@ -5,46 +5,334 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Services | Lord's ARMY Pathfinder Club</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { font-family: 'Inter', sans-serif; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
         
-        /* ===== COLOR PALETTE ===== */
         :root {
             --red-primary: #8B1A1A;
             --red-secondary: #A52A2A;
-            --red-light: #C0392B;
-            --red-muted: #E8D4D0;
             --gold: #C9A03D;
             --cream: #FDF6F3;
             --dark: #1A1A1A;
         }
-        
-        /* Page Header - Matches Home */
+
+        /* ===== PAGE TRANSITION ===== */
+        body {
+            opacity: 0;
+            animation: pageFadeIn 0.8s ease forwards;
+        }
+        @keyframes pageFadeIn {
+            to { opacity: 1; }
+        }
+
+        /* ===== SCROLL PROGRESS BAR ===== */
+        #progressBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8B1A1A, #C9A03D);
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            z-index: 999;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #8B1A1A;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(139,26,26,0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        #backToTop.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        #backToTop:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(139,26,26,0.4);
+        }
+
         .page-header { 
             background: linear-gradient(135deg, #6B1515 0%, #8B1A1A 100%); 
         }
-        
-        .whatsapp-float { 
-            position: fixed; 
-            bottom: 30px; 
-            right: 30px; 
-            z-index: 100; 
-            transition: all 0.3s; 
+
+        /* ===== FACEBOOK FLOAT ===== */
+        .fb-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            transition: all 0.3s;
         }
-        .whatsapp-float:hover { transform: scale(1.05); }
-        @media (max-width: 768px) { 
-            .whatsapp-float span { display: none; } 
-            .whatsapp-float { padding: 12px; } 
+        .fb-float:hover { transform: scale(1.05); }
+        @media (max-width: 768px) {
+            .fb-float span { display: none; }
+            .fb-float { padding: 12px; }
         }
-        
-        .service-card { 
-            transition: all 0.3s; 
+
+        /* ===== SECTION HEADERS ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
         }
-        .service-card:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 20px 40px rgba(139,26,26,0.12); 
+        .section-header .subtitle {
+            color: #8B1A1A;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            background: #FDF6F3;
+            padding: 4px 16px;
+            border-radius: 20px;
+        }
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1A1A1A;
+            margin-top: 6px;
+            background: linear-gradient(135deg, #1A1A1A 40%, #8B1A1A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-header h2 span {
+            background: linear-gradient(135deg, #8B1A1A, #A52A2A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-header .line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #8B1A1A, #C9A03D);
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+        .section-header p {
+            color: #888;
+            font-size: 1.05rem;
+            margin-top: 4px;
+        }
+
+        /* ===== SERVICE COUNTER FLOATING ===== */
+        .service-counter {
+            position: sticky;
+            top: 80px;
+            float: right;
+            background: #8B1A1A;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(139,26,26,0.2);
+            z-index: 10;
+            text-align: center;
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        .service-counter .num {
+            font-size: 2rem;
+            display: block;
+            font-weight: 800;
+            color: #C9A03D;
+        }
+        @media (max-width: 768px) {
+            .service-counter {
+                float: none;
+                position: relative;
+                top: 0;
+                margin: 0 0 30px 0;
+                display: inline-block;
+            }
+        }
+
+        /* ===== SERVICES LIST - CLEAN TEXT ===== */
+        .services-section {
+            padding: 60px 0 80px;
+            background: white;
+        }
+        .services-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            padding: 30px 0;
+            border-bottom: 1px solid #f0f0f0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .service-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-item .service-number {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #8B1A1A;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .service-item .service-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin: 4px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .service-item .service-title .icon {
+            font-size: 2rem;
+        }
+        .service-item .service-title span {
+            color: #8B1A1A;
+        }
+        .service-item .service-desc {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            max-width: 85%;
+        }
+        .service-item .service-list {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .service-item .service-list .tag {
+            background: #FDF6F3;
+            color: #8B1A1A;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .service-item .service-link {
+            display: inline-block;
+            margin-top: 12px;
+            color: #8B1A1A;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .service-item .service-link:hover {
+            border-bottom-color: #8B1A1A;
+            color: #C9A03D;
+        }
+
+        /* ===== IMPACT / STATS SECTION ===== */
+        .impact-section {
+            padding: 50px 0;
+            background: #FDF6F3;
+        }
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        .impact-item .impact-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #8B1A1A;
+        }
+        .impact-item .impact-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+        .impact-item .impact-icon {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ===== CTA TEXT SECTION ===== */
+        .cta-text-section {
+            padding: 60px 0;
+            background: white;
+            text-align: center;
+        }
+        .cta-text-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+        .cta-text-section h2 span {
+            color: #8B1A1A;
+        }
+        .cta-text-section p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 12px auto 24px;
+            line-height: 1.8;
+        }
+        .cta-text-section .btn-cta {
+            display: inline-block;
+            background: #8B1A1A;
+            color: white;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s;
+        }
+        .cta-text-section .btn-cta:hover {
+            background: #6B1515;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(139,26,26,0.25);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .section-header h2 { font-size: 2.4rem; }
+            .service-item .service-title { font-size: 1.5rem; }
+            .impact-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2 { font-size: 2rem; }
+            .service-item .service-desc { max-width: 100%; }
+            .service-item .service-title { font-size: 1.3rem; }
+            .impact-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .impact-item .impact-number { font-size: 2rem; }
+            .cta-text-section h2 { font-size: 1.8rem; }
+            .service-counter { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .impact-grid { grid-template-columns: 1fr; }
+            .service-item .service-title .icon { font-size: 1.5rem; }
         }
 
         /* ===== TRANSPARENT NAVBAR ===== */
@@ -55,10 +343,10 @@
             padding: 0;
         }
         #navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98) !important;
-            box-shadow: 0 2px 20px rgba(139,26,26,0.10) !important;
+            background: rgba(255, 255, 255, 0.96) !important;
+            box-shadow: 0 2px 30px rgba(139,26,26,0.06) !important;
+            backdrop-filter: blur(12px);
         }
-
         .nav-link {
             color: white !important;
             transition: all 0.3s;
@@ -76,26 +364,16 @@
             transition: width 0.3s ease;
         }
         .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
+        .nav-link.active::after { width: 100%; }
         .nav-link:hover { color: #C9A03D !important; }
         .nav-link.active { color: #C9A03D !important; }
-
         #navbar.scrolled .nav-link { color: #2c2c2c !important; }
         #navbar.scrolled .nav-link:hover { color: #8B1A1A !important; }
         #navbar.scrolled .nav-link.active { color: #8B1A1A !important; }
         #navbar.scrolled .nav-link::after { background: #8B1A1A; }
 
-        /* Logo - Matches Home */
-        .logo-text { 
-            color: white; 
-            transition: color 0.3s; 
-        }
-        .logo-sub { 
-            color: rgba(255,255,255,0.8); 
-            transition: color 0.3s; 
-        }
+        .logo-text { color: white; transition: color 0.3s; }
+        .logo-sub { color: rgba(255,255,255,0.8); transition: color 0.3s; }
         #navbar.scrolled .logo-text { color: #8B1A1A; }
         #navbar.scrolled .logo-sub { color: #A52A2A; }
 
@@ -105,12 +383,8 @@
             object-fit: contain;
             transition: transform 0.3s ease;
         }
-        .logo-image:hover {
-            transform: scale(1.05);
-        }
-        @media (max-width: 768px) {
-            .logo-image { height: 35px; }
-        }
+        .logo-image:hover { transform: scale(1.05); }
+        @media (max-width: 768px) { .logo-image { height: 35px; } }
 
         .hamburger span {
             background: white;
@@ -120,24 +394,19 @@
 
         #mobile-menu { background: white !important; }
         #mobile-menu a { color: #2c2c2c !important; }
-        #mobile-menu a:hover { 
-            color: #8B1A1A !important; 
-            background: #FDF6F3 !important; 
-        }
-        #mobile-menu a.active { 
-            color: #8B1A1A !important; 
-            background: #FDF6F3 !important; 
-            font-weight: 600; 
-        }
+        #mobile-menu a:hover { color: #8B1A1A !important; background: #FDF6F3 !important; }
+        #mobile-menu a.active { color: #8B1A1A !important; background: #FDF6F3 !important; font-weight: 600; }
     </style>
 </head>
 <body>
+
+    <!-- ===== SCROLL PROGRESS BAR ===== -->
+    <div id="progressBar"></div>
 
     <!-- ===== NAVIGATION ===== -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-3 md:py-4">
-                <!-- Logo with Image -->
                 <div class="flex items-center gap-3">
                     <img src="../logo/LA_logo.png" alt="Lord's ARMY Logo" class="logo-image">
                     <div>
@@ -145,8 +414,6 @@
                         <p class="logo-sub text-[10px] md:text-xs tracking-wider">Pathfinder Club</p>
                     </div>
                 </div>
-                
-                <!-- Desktop Menu -->
                 <ul class="hidden md:flex gap-6 lg:gap-8">
                     <li><a href="../index.html" class="nav-link font-medium">Home</a></li>
                     <li><a href="../about/about.html" class="nav-link font-medium">About</a></li>
@@ -154,16 +421,12 @@
                     <li><a href="../services/services.html" class="nav-link active font-medium">Services</a></li>
                     <li><a href="../contact/contact.html" class="nav-link font-medium">Contact</a></li>
                 </ul>
-                
-                <!-- Mobile Hamburger -->
                 <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1 hamburger">
                     <span class="w-6 h-0.5 transition-all duration-300"></span>
                     <span class="w-6 h-0.5 transition-all duration-300"></span>
                     <span class="w-6 h-0.5 transition-all duration-300"></span>
                 </button>
             </div>
-            
-            <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4 rounded-b-2xl shadow-lg">
                 <ul class="flex flex-col gap-2 pt-4 px-2">
                     <li><a href="../index.html" class="block py-2.5 px-3 rounded-lg transition">Home</a></li>
@@ -184,87 +447,173 @@
         </div>
     </section>
 
-    <!-- ===== SERVICES GRID ===== -->
-    <section class="py-16 md:py-20 bg-[#FDF6F3]">
+    <!-- ===== SERVICES SECTION - TEXT ONLY ===== -->
+    <section class="services-section">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                
-                <div class="service-card bg-white rounded-2xl p-6 md:p-8 shadow-md">
-                    <div class="text-5xl mb-4">🍲</div>
-                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Community Feeding</h3>
-                    <p class="text-gray-600 mb-4">We regularly serve hot meals to homeless individuals, low-income families, and children in our neighborhood.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Weekly Saturday feeding</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Holiday food distribution</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Emergency food relief</li>
-                    </ul>
+            <div class="section-header">
+                <span class="subtitle">✦ What We Offer</span>
+                <h2>Our <span>Services</span></h2>
+                <p>Plain. Simple. Purposeful.</p>
+                <div class="line"></div>
+            </div>
+
+            <div class="services-container">
+                <!-- Floating Counter -->
+                <div class="service-counter">
+                    <span class="num">6</span>
+                    Services
                 </div>
 
-                <div class="service-card bg-white rounded-2xl p-6 md:p-8 shadow-md">
-                    <div class="text-5xl mb-4">📚</div>
-                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Book & Bible Giving</h3>
-                    <p class="text-gray-600 mb-4">We give Bibles, Christian literature, and educational books to schools, prisons, and communities.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Free Bible distribution</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> School book donations</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Reading programs for children</li>
-                    </ul>
+                <!-- Service 1 -->
+                <div class="service-item" data-delay="0">
+                    <div class="service-number">01</div>
+                    <div class="service-title">
+                        <span class="icon">🍲</span>
+                        <span>Community</span> Feeding
+                    </div>
+                    <p class="service-desc">We serve hot meals every Saturday to homeless individuals, low-income families, and children in our community. We believe showing God's love includes feeding the hungry.</p>
+                    <div class="service-list">
+                        <span class="tag">Weekly</span>
+                        <span class="tag">Community</span>
+                        <span class="tag">Outreach</span>
+                    </div>
+                    <a href="#" class="service-link">Learn more about this service →</a>
                 </div>
 
-                <div class="service-card bg-white rounded-2xl p-6 md:p-8 shadow-md">
-                    <div class="text-5xl mb-4">🏕️</div>
-                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Youth Camping</h3>
-                    <p class="text-gray-600 mb-4">We organize camping trips that combine outdoor adventure with spiritual growth and leadership training.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Weekend campouts</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Summer youth camps</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Leadership training</li>
-                    </ul>
+                <!-- Service 2 -->
+                <div class="service-item" data-delay="100">
+                    <div class="service-number">02</div>
+                    <div class="service-title">
+                        <span class="icon">📚</span>
+                        <span>Book &amp; Bible</span> Giving
+                    </div>
+                    <p class="service-desc">We give Bibles, Christian literature, and educational books to schools, prisons, and communities. Reading opens minds and changes lives.</p>
+                    <div class="service-list">
+                        <span class="tag">Outreach</span>
+                        <span class="tag">Education</span>
+                        <span class="tag">Bibles</span>
+                    </div>
+                    <a href="#" class="service-link">Learn more about this service →</a>
                 </div>
 
-                <div class="service-card bg-white rounded-2xl p-6 md:p-8 shadow-md">
-                    <div class="text-5xl mb-4">🤝</div>
-                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Church Support</h3>
-                    <p class="text-gray-600 mb-4">We serve our local church through ushering, children's ministry, and special event support.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Pathfinder drills demonstration</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Children's Sabbath school</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Special event volunteers</li>
-                    </ul>
+                <!-- Service 3 -->
+                <div class="service-item" data-delay="200">
+                    <div class="service-number">03</div>
+                    <div class="service-title">
+                        <span class="icon">🏕️</span>
+                        <span>Youth</span> Camping
+                    </div>
+                    <p class="service-desc">We organize camping trips that combine outdoor adventure with spiritual growth and leadership training. Building character and faith through nature.</p>
+                    <div class="service-list">
+                        <span class="tag">Youth</span>
+                        <span class="tag">Leadership</span>
+                        <span class="tag">Outdoor</span>
+                    </div>
+                    <a href="#" class="service-link">Learn more about this service →</a>
                 </div>
 
-                <div class="service-card bg-white rounded-2xl p-6 md:p-8 shadow-md">
-                    <div class="text-5xl mb-4">❤️</div>
-                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Visitation Ministry</h3>
-                    <p class="text-gray-600 mb-4">We visit the sick, elderly, and those who are lonely or in need of encouragement.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Hospital visits</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Elderly home visits</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Prayer support</li>
-                    </ul>
+                <!-- Service 4 -->
+                <div class="service-item" data-delay="300">
+                    <div class="service-number">04</div>
+                    <div class="service-title">
+                        <span class="icon">🤝</span>
+                        <span>Church</span> Support
+                    </div>
+                    <p class="service-desc">We serve our local church through ushering, children's ministry, and special event support. We are committed to building up the body of Christ.</p>
+                    <div class="service-list">
+                        <span class="tag">Church</span>
+                        <span class="tag">Volunteer</span>
+                        <span class="tag">Worship</span>
+                    </div>
+                    <a href="#" class="service-link">Learn more about this service →</a>
                 </div>
 
-                <div class="service-card bg-white rounded-2xl p-6 md:p-8 shadow-md">
-                    <div class="text-5xl mb-4">🌍</div>
-                    <h3 class="text-2xl font-bold text-[#8B1A1A] mb-3">Community Cleanup</h3>
-                    <p class="text-gray-600 mb-4">We organize community service projects to keep our neighborhood clean and beautiful.</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Neighborhood cleanup</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Recycling programs</li>
-                        <li class="flex items-start gap-2"><span class="text-[#8B1A1A]">✓</span> Tree planting</li>
-                    </ul>
+                <!-- Service 5 -->
+                <div class="service-item" data-delay="400">
+                    <div class="service-number">05</div>
+                    <div class="service-title">
+                        <span class="icon">❤️</span>
+                        <span>Visitation</span> Ministry
+                    </div>
+                    <p class="service-desc">We visit the sick, elderly, and those who are lonely or in need of encouragement. A simple visit can bring hope and healing.</p>
+                    <div class="service-list">
+                        <span class="tag">Visitation</span>
+                        <span class="tag">Compassion</span>
+                        <span class="tag">Prayer</span>
+                    </div>
+                    <a href="#" class="service-link">Learn more about this service →</a>
                 </div>
 
+                <!-- Service 6 -->
+                <div class="service-item" data-delay="500">
+                    <div class="service-number">06</div>
+                    <div class="service-title">
+                        <span class="icon">🌍</span>
+                        <span>Community</span> Cleanup
+                    </div>
+                    <p class="service-desc">We organize community service projects to keep our neighborhood clean, beautiful, and safe for everyone. Caring for God's creation is part of our mission.</p>
+                    <div class="service-list">
+                        <span class="tag">Environment</span>
+                        <span class="tag">Cleanup</span>
+                        <span class="tag">Stewardship</span>
+                    </div>
+                    <a href="#" class="service-link">Learn more about this service →</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== WHATSAPP FLOAT ===== -->
-    <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-float bg-[#25D366] hover:bg-[#1DA851] text-white rounded-full p-3 md:p-4 shadow-lg flex items-center gap-2">
+    <!-- ===== IMPACT / STATS SECTION ===== -->
+    <section class="impact-section">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="section-header">
+                <span class="subtitle">✦ Our Impact</span>
+                <h2>Making a <span>Difference</span></h2>
+                <div class="line"></div>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <span class="impact-icon">🍲</span>
+                    <div class="impact-number">500+</div>
+                    <div class="impact-label">Meals Served</div>
+                </div>
+                <div class="impact-item">
+                    <span class="impact-icon">📚</span>
+                    <div class="impact-number">300+</div>
+                    <div class="impact-label">Books Given</div>
+                </div>
+                <div class="impact-item">
+                    <span class="impact-icon">🏕️</span>
+                    <div class="impact-number">12+</div>
+                    <div class="impact-label">Camping Trips</div>
+                </div>
+                <div class="impact-item">
+                    <span class="impact-icon">❤️</span>
+                    <div class="impact-number">100+</div>
+                    <div class="impact-label">Visits Made</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA TEXT SECTION ===== -->
+    <section class="cta-text-section">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2>Ready to <span>Serve</span> with Us?</h2>
+            <p>Whether you want to volunteer, donate, or simply learn more, we'd love to hear from you. Join us in making a difference.</p>
+            <a href="../contact/contact.html" class="btn-cta">Get Involved →</a>
+        </div>
+    </section>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- ===== FACEBOOK FLOAT ===== -->
+    <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank" class="fb-float bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-full p-3 md:p-4 shadow-lg flex items-center gap-2">
         <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="white">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
         </svg>
-        <span class="hidden sm:inline text-sm font-medium">Chat with us</span>
+        <span class="hidden sm:inline text-sm font-medium">Visit our Facebook</span>
     </a>
 
     <!-- ===== FOOTER ===== -->
@@ -273,7 +622,7 @@
             <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <div>
                     <h3 class="text-white text-xl font-bold mb-3">Lord's ARMY</h3>
-                    <p>Pathfinder Club<br>Seventh-day Adventist</p>
+                    <p>Seventh-day Adventist<br>Young People Ministry</p>
                 </div>
                 <div>
                     <h4 class="text-white font-semibold mb-3">Quick Links</h4>
@@ -287,16 +636,75 @@
                 </div>
                 <div>
                     <h4 class="text-white font-semibold mb-3">Connect</h4>
-                    <p class="mb-2">📱 WhatsApp: <a href="https://wa.me/1234567890" class="hover:text-[#C9A03D] transition">+1234567890</a></p>
-                    <p>✉️ Email: <a href="mailto:lordsarmy@example.com" class="hover:text-[#C9A03D] transition">lordsarmy@example.com</a></p>
+                    <p class="mb-2">Facebook: <a href="https://web.facebook.com/profile.php?id=100083046924852" class="hover:text-[#C9A03D] transition">Lord's ARMY</a></p>
+                    <p>Email: <a href="mailto:danmarkpetalcurin@gmail.com" class="hover:text-[#C9A03D] transition">danmarkpetalcurin@gmail.com</a></p>
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-                <p>&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved.</p>
+                <p>&copy; 2026 Lord's ARMY. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script src="../js/script.js"></script>
+    <script>
+        // ===== SCROLL PROGRESS =====
+        const progressBar = document.getElementById('progressBar');
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = progress + '%';
+            
+            if (scrollTop > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== HAMBURGER MENU =====
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                const spans = this.querySelectorAll('span');
+                if (mobileMenu.classList.contains('hidden')) {
+                    spans.forEach(span => {
+                        span.style.transform = '';
+                        span.style.opacity = '1';
+                    });
+                } else {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                }
+            });
+        }
+
+        // ===== SCROLL ANIMATIONS FOR SERVICE ITEMS =====
+        const serviceItems = document.querySelectorAll('.service-item');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = parseInt(entry.target.dataset.delay) || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        serviceItems.forEach(item => observer.observe(item));
+    </script>
 </body>
-</html>
+</html> 
