@@ -1,710 +1,712 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Services | Lord's ARMY Pathfinder Club</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-        
-        :root {
-            --red-primary: #8B1A1A;
-            --red-secondary: #A52A2A;
-            --gold: #C9A03D;
-            --cream: #FDF6F3;
-            --dark: #1A1A1A;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | Lord's ARMY Pathfinder Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* ===== PAGE TRANSITION ===== */
-        body {
-            opacity: 0;
-            animation: pageFadeIn 0.8s ease forwards;
-        }
-        @keyframes pageFadeIn {
-            to { opacity: 1; }
-        }
+    :root {
+      --crimson: #8B1A1A;
+      --crimson-deep: #5C0F0F;
+      --crimson-glow: #C0362C;
+      --gold: #C9A03D;
+      --gold-light: #EDD98A;
+      --ivory: #FDFAF4;
+      --ink: #1A1208;
+      --muted: #7A6A55;
+      --border: #E8E0D0;
+      --surface: #FFFFFF;
+      --surface-warm: #FDF8F2;
+    }
 
-        /* ===== SCROLL PROGRESS BAR ===== */
-        #progressBar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #8B1A1A, #C9A03D);
-            z-index: 9999;
-            width: 0%;
-            transition: width 0.1s;
-        }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--ivory); color: var(--ink); overflow-x: hidden; }
 
-        /* ===== BACK TO TOP ===== */
-        #backToTop {
-            position: fixed;
-            bottom: 90px;
-            right: 30px;
-            z-index: 999;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: #8B1A1A;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 20px rgba(139,26,26,0.3);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-        }
-        #backToTop.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        #backToTop:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(139,26,26,0.4);
-        }
+    /* PROGRESS */
+    #progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--crimson), var(--gold)); z-index: 9999; width: 0%; transition: width 0.1s; }
 
-        .page-header { 
-            background: linear-gradient(135deg, #6B1515 0%, #8B1A1A 100%); 
-        }
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 0 40px; transition: background 0.4s, box-shadow 0.4s; }
+    nav.scrolled { background: rgba(253,250,244,0.97); box-shadow: 0 1px 0 var(--border); backdrop-filter: blur(12px); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-emblem { width: 42px; height: 42px; border-radius: 50%; background: var(--crimson); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(201,160,61,0.3); transition: box-shadow 0.3s; overflow: hidden; }
+    .brand-emblem img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+    .nav-brand:hover .brand-emblem { box-shadow: 0 0 0 3px var(--gold); }
+    .brand-text-top { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700; color: #fff; line-height: 1; transition: color 0.3s; letter-spacing: 0.5px; }
+    .brand-text-sub { font-size: 10px; color: rgba(255,255,255,0.7); letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+    nav.scrolled .brand-text-top { color: var(--crimson); }
+    nav.scrolled .brand-text-sub { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,0.85); position: relative; transition: color 0.3s; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { color: var(--crimson); }
+    nav.scrolled .nav-links a::after { background: var(--crimson); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: #fff; transition: all 0.3s; }
+    nav.scrolled .hamburger span { background: var(--crimson); }
+    #mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(--surface-warm); border-bottom: 1px solid var(--border); padding: 16px 24px; z-index: 99; }
+    #mobile-menu.open { display: block; }
+    #mobile-menu ul { list-style: none; }
+    #mobile-menu li a { display: block; padding: 12px 0; font-size: 0.9rem; font-weight: 600; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.3s; }
+    #mobile-menu li:last-child a { border-bottom: none; }
+    #mobile-menu li a:hover, #mobile-menu li a.active { color: var(--crimson); }
 
-        /* ===== FACEBOOK FLOAT ===== */
-        .fb-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            transition: all 0.3s;
-        }
-        .fb-float:hover { transform: scale(1.05); }
-        @media (max-width: 768px) {
-            .fb-float span { display: none; }
-            .fb-float { padding: 12px; }
-        }
+    /* ── HERO ── */
+    .hero { position: relative; height: 68vh; min-height: 520px; overflow: hidden; background: #0A0605; }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.32) saturate(0.65); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,6,5,0.8) 0%, rgba(10,6,5,0.15) 65%), linear-gradient(to top, rgba(10,6,5,0.7) 0%, transparent 40%); }
+    .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 80px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+    .hero-title { font-family: 'Cinzel', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.02; color: #fff; margin-bottom: 16px; letter-spacing: -1px; }
+    .hero-title em { font-style: normal; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.45); }
+    .hero-subtitle { font-size: 1rem; color: rgba(255,255,255,0.65); line-height: 1.85; max-width: 520px; }
 
-        /* ===== SECTION HEADERS ===== */
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        .section-header .subtitle {
-            color: #8B1A1A;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: inline-block;
-            background: #FDF6F3;
-            padding: 4px 16px;
-            border-radius: 20px;
-        }
-        .section-header h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #1A1A1A;
-            margin-top: 6px;
-            background: linear-gradient(135deg, #1A1A1A 40%, #8B1A1A 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .section-header h2 span {
-            background: linear-gradient(135deg, #8B1A1A, #A52A2A);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .section-header .line {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #8B1A1A, #C9A03D);
-            margin: 12px auto 0;
-            border-radius: 2px;
-        }
-        .section-header p {
-            color: #888;
-            font-size: 1.05rem;
-            margin-top: 4px;
-        }
+    /* ── TAPE ── */
+    .tape { background: var(--crimson-deep); padding: 16px 0; overflow: hidden; border-top: 1px solid rgba(201,160,61,0.25); border-bottom: 1px solid rgba(201,160,61,0.25); }
+    .tape-inner { display: flex; animation: tape 28s linear infinite; white-space: nowrap; }
+    .tape-inner:hover { animation-play-state: paused; }
+    @keyframes tape { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .tape-item { display: inline-flex; align-items: center; gap: 16px; padding: 0 36px; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .tape-item span { color: var(--gold); }
+    .tape-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 50%; flex-shrink: 0; }
 
-        /* ===== SERVICE COUNTER FLOATING ===== */
-        .service-counter {
-            position: sticky;
-            top: 80px;
-            float: right;
-            background: #8B1A1A;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 4px 20px rgba(139,26,26,0.2);
-            z-index: 10;
-            text-align: center;
-            margin-left: 30px;
-            margin-bottom: 20px;
-        }
-        .service-counter .num {
-            font-size: 2rem;
-            display: block;
-            font-weight: 800;
-            color: #C9A03D;
-        }
-        @media (max-width: 768px) {
-            .service-counter {
-                float: none;
-                position: relative;
-                top: 0;
-                margin: 0 0 30px 0;
-                display: inline-block;
-            }
-        }
+    /* SHARED */
+    .section-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--crimson); margin-bottom: 16px; }
+    .section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--crimson); }
+    .section-heading { font-family: 'Cinzel', serif; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 900; color: var(--ink); line-height: 1.08; margin-bottom: 16px; }
+    .section-heading em { font-style: normal; color: var(--crimson); }
+    .body-text { font-size: 0.92rem; color: var(--muted); line-height: 1.9; margin-bottom: 12px; }
 
-        /* ===== SERVICES LIST - CLEAN TEXT ===== */
-        .services-section {
-            padding: 60px 0 80px;
-            background: white;
-        }
-        .services-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+    /* ── STAT BAR ── */
+    .stat-bar { background: var(--crimson-deep); display: flex; justify-content: center; }
+    .stat-bar-inner { max-width: 1280px; width: 100%; display: grid; grid-template-columns: repeat(3,1fr); }
+    .stat-item { padding: 32px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Cinzel', serif; font-size: 2.6rem; font-weight: 900; color: #fff; line-height: 1; }
+    .stat-num sup { color: var(--gold); font-size: 1.2rem; vertical-align: super; }
+    .stat-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 6px; }
 
-        .service-item {
-            padding: 30px 0;
-            border-bottom: 1px solid #f0f0f0;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .service-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .service-item:last-child {
-            border-bottom: none;
-        }
+    /* ── INTRO SPLIT ── */
+    .intro-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 60vh; }
+    .intro-text { background: var(--surface); padding: 90px 80px; display: flex; flex-direction: column; justify-content: center; }
+    .intro-image { position: relative; overflow: hidden; background: #0A0605; }
+    .intro-image img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7) saturate(0.85); transition: transform 8s ease, filter 0.6s; }
+    .intro-image:hover img { transform: scale(1.04); filter: brightness(0.85) saturate(1); }
+    .intro-image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,6,5,0.6) 0%, transparent 55%); }
+    .intro-image-label { position: absolute; bottom: 32px; left: 32px; right: 32px; }
+    .intro-image-label blockquote { font-family: 'Cinzel', serif; font-size: 1rem; color: #fff; line-height: 1.5; margin-bottom: 6px; }
+    .intro-image-label cite { font-size: 0.72rem; color: var(--gold); letter-spacing: 1px; font-style: normal; font-weight: 600; }
+    .scripture-block { margin-top: 28px; border-left: 2px solid var(--gold); padding: 18px 22px; background: var(--surface-warm); }
+    .scripture-block p { font-size: 0.9rem; color: var(--ink); line-height: 1.75; font-style: italic; margin-bottom: 6px; }
+    .scripture-ref { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; }
 
-        .service-item .service-number {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #8B1A1A;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .service-item .service-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1A1A1A;
-            margin: 4px 0 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .service-item .service-title .icon {
-            font-size: 2rem;
-        }
-        .service-item .service-title span {
-            color: #8B1A1A;
-        }
-        .service-item .service-desc {
-            color: #666;
-            line-height: 1.8;
-            font-size: 1.05rem;
-            max-width: 85%;
-        }
-        .service-item .service-list {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .service-item .service-list .tag {
-            background: #FDF6F3;
-            color: #8B1A1A;
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        .service-item .service-link {
-            display: inline-block;
-            margin-top: 12px;
-            color: #8B1A1A;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.9rem;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s;
-        }
-        .service-item .service-link:hover {
-            border-bottom-color: #8B1A1A;
-            color: #C9A03D;
-        }
+    /* ── SERVICES LIST ── */
+    .services-section { padding: 100px 40px; background: var(--ivory); border-top: 1px solid var(--border); }
+    .services-inner { max-width: 1280px; margin: 0 auto; }
+    .services-header { margin-bottom: 60px; }
 
-        /* ===== IMPACT / STATS SECTION ===== */
-        .impact-section {
-            padding: 50px 0;
-            background: #FDF6F3;
-        }
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            text-align: center;
-        }
-        .impact-item .impact-number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #8B1A1A;
-        }
-        .impact-item .impact-label {
-            font-size: 0.9rem;
-            color: #666;
-            font-weight: 500;
-            margin-top: 4px;
-        }
-        .impact-item .impact-icon {
-            font-size: 1.8rem;
-            display: block;
-            margin-bottom: 4px;
-        }
+    /* Big numbered list layout */
+    .services-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+    .service-row {
+      display: grid; grid-template-columns: 120px 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      transition: background 0.3s;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s;
+    }
+    .service-row.visible { opacity: 1; transform: translateY(0); }
+    .service-row:last-child { border-bottom: none; }
+    .service-row:hover { background: var(--surface-warm); }
+    .service-row:hover .service-num { color: var(--crimson); }
 
-        /* ===== CTA TEXT SECTION ===== */
-        .cta-text-section {
-            padding: 60px 0;
-            background: white;
-            text-align: center;
-        }
-        .cta-text-section h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1A1A1A;
-        }
-        .cta-text-section h2 span {
-            color: #8B1A1A;
-        }
-        .cta-text-section p {
-            color: #666;
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 12px auto 24px;
-            line-height: 1.8;
-        }
-        .cta-text-section .btn-cta {
-            display: inline-block;
-            background: #8B1A1A;
-            color: white;
-            padding: 12px 40px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.4s;
-        }
-        .cta-text-section .btn-cta:hover {
-            background: #6B1515;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(139,26,26,0.25);
-        }
+    .service-num-col { padding: 48px 32px; border-right: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: center; }
+    .service-num { font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 900; color: var(--border); line-height: 1; transition: color 0.3s; }
+    .service-main-col { padding: 48px 44px; border-right: 1px solid var(--border); }
+    .service-side-col { padding: 48px 36px; display: flex; flex-direction: column; justify-content: space-between; }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .section-header h2 { font-size: 2.4rem; }
-            .service-item .service-title { font-size: 1.5rem; }
-            .impact-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+    .service-icon-wrap { width: 44px; height: 44px; border: 1px solid rgba(139,26,26,0.2); background: rgba(139,26,26,0.05); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 16px; }
+    .service-title { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 6px; }
+    .service-title span { color: var(--crimson); }
+    .service-tagline { font-size: 0.78rem; color: var(--gold); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .service-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.85; }
 
-        @media (max-width: 768px) {
-            .section-header h2 { font-size: 2rem; }
-            .service-item .service-desc { max-width: 100%; }
-            .service-item .service-title { font-size: 1.3rem; }
-            .impact-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
-            .impact-item .impact-number { font-size: 2rem; }
-            .cta-text-section h2 { font-size: 1.8rem; }
-            .service-counter { display: none; }
-        }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .service-tag { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--border); color: var(--muted); }
+    .service-tag.primary { border-color: rgba(139,26,26,0.3); color: var(--crimson); background: rgba(139,26,26,0.04); }
 
-        @media (max-width: 480px) {
-            .impact-grid { grid-template-columns: 1fr; }
-            .service-item .service-title .icon { font-size: 1.5rem; }
-        }
+    .service-details { margin-top: 16px; }
+    .service-detail-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+    .service-detail-item::before { content: '✦'; color: var(--gold); font-size: 0.6rem; margin-top: 4px; flex-shrink: 0; }
+    .service-detail-item span { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
 
-        /* ===== TRANSPARENT NAVBAR ===== */
-        #navbar {
-            background: transparent !important;
-            box-shadow: none !important;
-            transition: all 0.4s ease;
-            padding: 0;
-        }
-        #navbar.scrolled {
-            background: rgba(255, 255, 255, 0.96) !important;
-            box-shadow: 0 2px 30px rgba(139,26,26,0.06) !important;
-            backdrop-filter: blur(12px);
-        }
-        .nav-link {
-            color: white !important;
-            transition: all 0.3s;
-            position: relative;
-            padding-bottom: 4px;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #C9A03D;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after,
-        .nav-link.active::after { width: 100%; }
-        .nav-link:hover { color: #C9A03D !important; }
-        .nav-link.active { color: #C9A03D !important; }
-        #navbar.scrolled .nav-link { color: #2c2c2c !important; }
-        #navbar.scrolled .nav-link:hover { color: #8B1A1A !important; }
-        #navbar.scrolled .nav-link.active { color: #8B1A1A !important; }
-        #navbar.scrolled .nav-link::after { background: #8B1A1A; }
+    /* ── DARK FEATURE SECTION ── */
+    .feature-section { background: var(--ink); padding: 100px 40px; position: relative; overflow: hidden; }
+    .feature-section::before { content: ''; position: absolute; bottom: -60px; left: -40px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(139,26,26,0.1) 0%, transparent 70%); pointer-events: none; }
+    .feature-inner { max-width: 1280px; margin: 0 auto; }
+    .feature-header { margin-bottom: 60px; }
+    .feature-header .section-eyebrow { color: var(--gold); }
+    .feature-header .section-eyebrow::before { background: var(--gold); }
+    .feature-header .section-heading { color: #fff; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.05); }
+    .feature-card { background: var(--ink); padding: 44px 32px; border: 1px solid rgba(255,255,255,0.05); transition: border-color 0.3s, transform 0.4s; }
+    .feature-card:hover { border-color: rgba(201,160,61,0.25); transform: translateY(-4px); }
+    .feature-card-icon { width: 50px; height: 50px; border: 1px solid rgba(139,26,26,0.4); background: rgba(139,26,26,0.12); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 20px; }
+    .feature-card-title { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .feature-card-title span { color: var(--gold); }
+    .feature-card-desc { font-size: 0.82rem; color: rgba(255,255,255,0.42); line-height: 1.85; }
 
-        .logo-text { color: white; transition: color 0.3s; }
-        .logo-sub { color: rgba(255,255,255,0.8); transition: color 0.3s; }
-        #navbar.scrolled .logo-text { color: #8B1A1A; }
-        #navbar.scrolled .logo-sub { color: #A52A2A; }
+    /* ── PROCESS SECTION ── */
+    .process-section { padding: 100px 40px; background: var(--surface-warm); border-top: 1px solid var(--border); }
+    .process-inner { max-width: 1280px; margin: 0 auto; }
+    .process-header { margin-bottom: 60px; }
+    .process-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid var(--border); }
+    .process-card { padding: 40px 28px; border-right: 1px solid var(--border); background: var(--surface); position: relative; transition: background 0.3s; }
+    .process-card:last-child { border-right: none; }
+    .process-card:hover { background: var(--ivory); }
+    .process-step { font-family: 'Cinzel', serif; font-size: 3.5rem; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 18px; transition: color 0.3s; }
+    .process-card:hover .process-step { color: rgba(139,26,26,0.2); }
+    .process-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+    .process-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.75; }
+    .process-corner { position: absolute; top: 0; right: 0; width: 0; height: 0; border-style: solid; border-width: 0 24px 24px 0; border-color: transparent var(--crimson) transparent transparent; opacity: 0; transition: opacity 0.3s; }
+    .process-card:hover .process-corner { opacity: 1; }
 
-        .logo-image {
-            height: 45px;
-            width: auto;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
-        .logo-image:hover { transform: scale(1.05); }
-        @media (max-width: 768px) { .logo-image { height: 35px; } }
+    /* ── CTA SECTION ── */
+    .cta-section { background: var(--crimson-deep); padding: 100px 40px; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--crimson-deep) 0%, var(--crimson) 100%); }
+    .cta-inner { max-width: 1280px; margin: 0 auto; position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .cta-text .section-eyebrow { color: var(--gold-light); }
+    .cta-text .section-eyebrow::before { background: var(--gold-light); }
+    .cta-text .section-heading { color: #fff; }
+    .cta-text .body-text { color: rgba(255,255,255,0.6); }
+    .cta-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 36px; }
+    .btn-cta-white { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: var(--crimson); padding: 16px 36px; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+    .btn-cta-white:hover { background: var(--ivory); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .btn-cta-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: rgba(255,255,255,0.7); padding: 16px 36px; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s; }
+    .btn-cta-outline:hover { border-color: #fff; color: #fff; }
+    .cta-verse { padding: 36px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); }
+    .cta-verse p { font-size: 1.05rem; font-style: italic; color: rgba(255,255,255,0.75); line-height: 1.75; font-family: 'Cinzel', serif; margin-bottom: 12px; }
+    .cta-verse cite { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-style: normal; }
 
-        .hamburger span {
-            background: white;
-            transition: all 0.3s;
-        }
-        #navbar.scrolled .hamburger span { background: #8B1A1A; }
+    /* ── FB FLOAT ── */
+    .fb-float { position: fixed; bottom: 30px; right: 30px; z-index: 500; background: #1877F2; color: #fff; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 20px rgba(24,119,242,0.4); transition: transform 0.3s, box-shadow 0.3s; }
+    .fb-float:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 8px 30px rgba(24,119,242,0.5); }
+    #btt { position: fixed; bottom: 96px; right: 30px; z-index: 500; width: 40px; height: 40px; background: var(--crimson); color: #fff; border: none; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(16px); transition: all 0.4s; pointer-events: none; }
+    #btt.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #btt:hover { background: var(--crimson-deep); }
 
-        #mobile-menu { background: white !important; }
-        #mobile-menu a { color: #2c2c2c !important; }
-        #mobile-menu a:hover { color: #8B1A1A !important; background: #FDF6F3 !important; }
-        #mobile-menu a.active { color: #8B1A1A !important; background: #FDF6F3 !important; font-weight: 600; }
-    </style>
+    /* ── FOOTER ── */
+    footer { background: var(--ink); color: rgba(255,255,255,0.4); padding: 60px 40px 30px; border-top: 1px solid rgba(201,160,61,0.2); }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
+    footer h3 { font-family: 'Cinzel', serif; color: #fff; font-size: 1.2rem; margin-bottom: 6px; }
+    .footer-sub { font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 20px; }
+    .footer-desc { font-size: 0.82rem; line-height: 1.8; max-width: 300px; }
+    footer h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 10px; }
+    footer ul li a { font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+    footer ul li a:hover { color: var(--gold); }
+    footer .footer-contact p { font-size: 0.82rem; margin-bottom: 10px; }
+    footer .footer-contact a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
+    footer .footer-contact a:hover { color: var(--gold); }
+    footer .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; text-align: center; font-size: 0.75rem; letter-spacing: 0.5px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .intro-section { grid-template-columns: 1fr; }
+      .intro-image { height: 400px; }
+      .service-row { grid-template-columns: 80px 1fr; }
+      .service-side-col { display: none; }
+      .service-num { font-size: 2rem; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: repeat(2,1fr); }
+      .process-card:nth-child(2) { border-right: none; }
+      .process-card:nth-child(3) { border-top: 1px solid var(--border); }
+      .cta-inner { grid-template-columns: 1fr; gap: 48px; }
+      .stat-bar-inner { grid-template-columns: repeat(3,1fr); }
+      .stat-item:nth-child(2) { border-right: 1px solid rgba(255,255,255,0.07); }
+      .stat-item:nth-child(3) { border-right: none; }
+      footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 40px 24px 60px; }
+      .intro-text { padding: 60px 24px; }
+      .services-section { padding: 60px 20px; }
+      .service-row { grid-template-columns: 60px 1fr; }
+      .service-num-col { padding: 32px 16px; }
+      .service-main-col { padding: 32px 24px; }
+      .service-num { font-size: 1.6rem; }
+      .feature-section { padding: 60px 20px; }
+      .process-section { padding: 60px 20px; }
+      .process-grid { grid-template-columns: 1fr; }
+      .process-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .process-card:last-child { border-bottom: none; }
+      .cta-section { padding: 60px 20px; }
+      footer { padding: 40px 20px 24px; }
+      footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .tape { display: none; }
+      .stat-bar-inner { grid-template-columns: repeat(3,1fr); }
+      .stat-item { padding: 20px 12px; }
+      .stat-num { font-size: 1.8rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ===== SCROLL PROGRESS BAR ===== -->
-    <div id="progressBar"></div>
+<div id="progress"></div>
 
-    <!-- ===== NAVIGATION ===== -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-3 md:py-4">
-                <div class="flex items-center gap-3">
-                    <img src="../logo/LA_logo.png" alt="Lord's ARMY Logo" class="logo-image">
-                    <div>
-                        <h1 class="logo-text text-lg md:text-xl font-bold leading-tight">Lord's ARMY</h1>
-                        <p class="logo-sub text-[10px] md:text-xs tracking-wider">Pathfinder Club</p>
-                    </div>
-                </div>
-                <ul class="hidden md:flex gap-6 lg:gap-8">
-                    <li><a href="../index.html" class="nav-link font-medium">Home</a></li>
-                    <li><a href="../about/about.html" class="nav-link font-medium">About</a></li>
-                    <li><a href="../activities/activities.html" class="nav-link font-medium">Activities</a></li>
-                    <li><a href="../services/services.html" class="nav-link active font-medium">Services</a></li>
-                    <li><a href="../contact/contact.html" class="nav-link font-medium">Contact</a></li>
-                </ul>
-                <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1 hamburger">
-                    <span class="w-6 h-0.5 transition-all duration-300"></span>
-                    <span class="w-6 h-0.5 transition-all duration-300"></span>
-                    <span class="w-6 h-0.5 transition-all duration-300"></span>
-                </button>
-            </div>
-            <div id="mobile-menu" class="hidden md:hidden pb-4 rounded-b-2xl shadow-lg">
-                <ul class="flex flex-col gap-2 pt-4 px-2">
-                    <li><a href="../index.html" class="block py-2.5 px-3 rounded-lg transition">Home</a></li>
-                    <li><a href="../about/about.html" class="block py-2.5 px-3 rounded-lg transition">About</a></li>
-                    <li><a href="../activities/activities.html" class="block py-2.5 px-3 rounded-lg transition">Activities</a></li>
-                    <li><a href="../services/services.html" class="block py-2.5 px-3 rounded-lg font-semibold active">Services</a></li>
-                    <li><a href="../contact/contact.html" class="block py-2.5 px-3 rounded-lg transition">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- ===== PAGE HEADER ===== -->
-    <section class="page-header py-20 md:py-28 text-center text-white">
-        <div class="max-w-4xl mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-bold">Our Services</h1>
-            <p class="text-lg md:text-xl mt-3 opacity-90">How we serve our community and church</p>
-        </div>
-    </section>
-
-    <!-- ===== SERVICES SECTION - TEXT ONLY ===== -->
-    <section class="services-section">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="section-header">
-                <span class="subtitle">✦ What We Offer</span>
-                <h2>Our <span>Services</span></h2>
-                <p>Plain. Simple. Purposeful.</p>
-                <div class="line"></div>
-            </div>
-
-            <div class="services-container">
-                <!-- Floating Counter -->
-                <div class="service-counter">
-                    <span class="num">6</span>
-                    Services
-                </div>
-
-                <!-- Service 1 -->
-                <div class="service-item" data-delay="0">
-                    <div class="service-number">01</div>
-                    <div class="service-title">
-                        <span class="icon">🍲</span>
-                        <span>Community</span> Feeding
-                    </div>
-                    <p class="service-desc">We serve hot meals every Saturday to homeless individuals, low-income families, and children in our community. We believe showing God's love includes feeding the hungry.</p>
-                    <div class="service-list">
-                        <span class="tag">Weekly</span>
-                        <span class="tag">Community</span>
-                        <span class="tag">Outreach</span>
-                    </div>
-                    <a href="#" class="service-link">Learn more about this service →</a>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="service-item" data-delay="100">
-                    <div class="service-number">02</div>
-                    <div class="service-title">
-                        <span class="icon">📚</span>
-                        <span>Book &amp; Bible</span> Giving
-                    </div>
-                    <p class="service-desc">We give Bibles, Christian literature, and educational books to schools, prisons, and communities. Reading opens minds and changes lives.</p>
-                    <div class="service-list">
-                        <span class="tag">Outreach</span>
-                        <span class="tag">Education</span>
-                        <span class="tag">Bibles</span>
-                    </div>
-                    <a href="#" class="service-link">Learn more about this service →</a>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="service-item" data-delay="200">
-                    <div class="service-number">03</div>
-                    <div class="service-title">
-                        <span class="icon">🏕️</span>
-                        <span>Youth</span> Camping
-                    </div>
-                    <p class="service-desc">We organize camping trips that combine outdoor adventure with spiritual growth and leadership training. Building character and faith through nature.</p>
-                    <div class="service-list">
-                        <span class="tag">Youth</span>
-                        <span class="tag">Leadership</span>
-                        <span class="tag">Outdoor</span>
-                    </div>
-                    <a href="#" class="service-link">Learn more about this service →</a>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="service-item" data-delay="300">
-                    <div class="service-number">04</div>
-                    <div class="service-title">
-                        <span class="icon">🤝</span>
-                        <span>Church</span> Support
-                    </div>
-                    <p class="service-desc">We serve our local church through ushering, children's ministry, and special event support. We are committed to building up the body of Christ.</p>
-                    <div class="service-list">
-                        <span class="tag">Church</span>
-                        <span class="tag">Volunteer</span>
-                        <span class="tag">Worship</span>
-                    </div>
-                    <a href="#" class="service-link">Learn more about this service →</a>
-                </div>
-
-                <!-- Service 5 -->
-                <div class="service-item" data-delay="400">
-                    <div class="service-number">05</div>
-                    <div class="service-title">
-                        <span class="icon">❤️</span>
-                        <span>Visitation</span> Ministry
-                    </div>
-                    <p class="service-desc">We visit the sick, elderly, and those who are lonely or in need of encouragement. A simple visit can bring hope and healing.</p>
-                    <div class="service-list">
-                        <span class="tag">Visitation</span>
-                        <span class="tag">Compassion</span>
-                        <span class="tag">Prayer</span>
-                    </div>
-                    <a href="#" class="service-link">Learn more about this service →</a>
-                </div>
-
-                <!-- Service 6 -->
-                <div class="service-item" data-delay="500">
-                    <div class="service-number">06</div>
-                    <div class="service-title">
-                        <span class="icon">🌍</span>
-                        <span>Community</span> Cleanup
-                    </div>
-                    <p class="service-desc">We organize community service projects to keep our neighborhood clean, beautiful, and safe for everyone. Caring for God's creation is part of our mission.</p>
-                    <div class="service-list">
-                        <span class="tag">Environment</span>
-                        <span class="tag">Cleanup</span>
-                        <span class="tag">Stewardship</span>
-                    </div>
-                    <a href="#" class="service-link">Learn more about this service →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== IMPACT / STATS SECTION ===== -->
-    <section class="impact-section">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="section-header">
-                <span class="subtitle">✦ Our Impact</span>
-                <h2>Making a <span>Difference</span></h2>
-                <div class="line"></div>
-            </div>
-            <div class="impact-grid">
-                <div class="impact-item">
-                    <span class="impact-icon">🍲</span>
-                    <div class="impact-number">500+</div>
-                    <div class="impact-label">Meals Served</div>
-                </div>
-                <div class="impact-item">
-                    <span class="impact-icon">📚</span>
-                    <div class="impact-number">300+</div>
-                    <div class="impact-label">Books Given</div>
-                </div>
-                <div class="impact-item">
-                    <span class="impact-icon">🏕️</span>
-                    <div class="impact-number">12+</div>
-                    <div class="impact-label">Camping Trips</div>
-                </div>
-                <div class="impact-item">
-                    <span class="impact-icon">❤️</span>
-                    <div class="impact-number">100+</div>
-                    <div class="impact-label">Visits Made</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== CTA TEXT SECTION ===== -->
-    <section class="cta-text-section">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2>Ready to <span>Serve</span> with Us?</h2>
-            <p>Whether you want to volunteer, donate, or simply learn more, we'd love to hear from you. Join us in making a difference.</p>
-            <a href="../contact/contact.html" class="btn-cta">Get Involved →</a>
-        </div>
-    </section>
-
-    <!-- ===== BACK TO TOP ===== -->
-    <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
-
-    <!-- ===== FACEBOOK FLOAT ===== -->
-    <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank" class="fb-float bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-full p-3 md:p-4 shadow-lg flex items-center gap-2">
-        <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="white">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-        </svg>
-        <span class="hidden sm:inline text-sm font-medium">Visit our Facebook</span>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="brand-emblem">
+        <img src="../logo/LA_logo.png" alt="Lord's ARMY Pathfinder Club Logo">
+      </div>
+      <div>
+        <div class="brand-text-top">Lord's ARMY</div>
+        <div class="brand-text-sub">Pathfinder Club</div>
+      </div>
     </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/about.html">About</a></li>
+      <li><a href="../activities/activities.html">Activities</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="../contact/contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="bg-[#1A1A1A] text-gray-400 py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-white text-xl font-bold mb-3">Lord's ARMY</h3>
-                    <p>Seventh-day Adventist<br>Young People Ministry</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-3">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="../index.html" class="hover:text-[#C9A03D] transition">Home</a></li>
-                        <li><a href="../about/about.html" class="hover:text-[#C9A03D] transition">About</a></li>
-                        <li><a href="../activities/activities.html" class="hover:text-[#C9A03D] transition">Activities</a></li>
-                        <li><a href="../services/services.html" class="hover:text-[#C9A03D] transition">Services</a></li>
-                        <li><a href="../contact/contact.html" class="hover:text-[#C9A03D] transition">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-3">Connect</h4>
-                    <p class="mb-2">Facebook: <a href="https://web.facebook.com/profile.php?id=100083046924852" class="hover:text-[#C9A03D] transition">Lord's ARMY</a></p>
-                    <p>Email: <a href="mailto:danmarkpetalcurin@gmail.com" class="hover:text-[#C9A03D] transition">danmarkpetalcurin@gmail.com</a></p>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-                <p>&copy; 2026 Lord's ARMY. All rights reserved.</p>
-            </div>
+<div id="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../about/about.html">About</a></li>
+    <li><a href="../activities/activities.html">Activities</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="../contact/contact.html">Contact</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600" alt="Lord's ARMY in service" loading="eager">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">What We Offer</div>
+    <h1 class="hero-title">Serving with<br><em>Purpose</em></h1>
+    <p class="hero-subtitle">From high-altitude mountain camps to riverside cleanups, from classroom lectures to medical outreach — Lord's ARMY shows up wherever we are called to serve.</p>
+  </div>
+</section>
+
+<!-- TAPE -->
+<div class="tape">
+  <div class="tape-inner" id="tapeInner"></div>
+</div>
+
+
+<!-- INTRO SPLIT -->
+<section class="intro-section">
+  <div class="intro-text">
+    <div class="section-eyebrow">Our Services</div>
+    <h2 class="section-heading">Called to <em>Serve</em></h2>
+    <p class="body-text">Lord's ARMY is not just a club — it is a ministry. Everything we do is rooted in the belief that faith without action is incomplete. We offer our time, skills, and hearts to serve God by serving people in practical, meaningful ways.</p>
+    <p class="body-text">From facilitating youth camps and delivering lectures to conducting outreach in remote communities, our services are designed to equip the next generation of leaders while making a lasting difference in the lives of those we encounter.</p>
+    <div class="scripture-block">
+      <p>"For even the Son of Man did not come to be served, but to serve, and to give his life as a ransom for many."</p>
+      <div class="scripture-ref">— Mark 10:45</div>
+    </div>
+  </div>
+  <div class="intro-image">
+    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200" alt="Lord's ARMY serving communities" loading="lazy">
+    <div class="intro-image-overlay"></div>
+    <div class="intro-image-label">
+      <blockquote>"Hands to Serve, Hearts to Love"</blockquote>
+      <cite>— Lord's ARMY Theme 2025</cite>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES LIST -->
+<section class="services-section">
+  <div class="services-inner">
+    <div class="services-header">
+      <div class="section-eyebrow">Core Services</div>
+      <h2 class="section-heading">What We <em>Do</em></h2>
+      <p style="font-size:0.88rem;color:var(--muted);max-width:520px;line-height:1.85;">Each service we offer is a deliberate act of faith — carried out by trained young people committed to excellence in ministry.</p>
+    </div>
+
+    <div class="services-list">
+
+      <!-- 01 -->
+      <div class="service-row" data-delay="0">
+        <div class="service-num-col"><div class="service-num">01</div></div>
+        <div class="service-main-col">
+          <div class="service-icon-wrap">🏕️</div>
+          <div class="service-title"><span>Pathfinder</span> Camp Facilitation</div>
+          <div class="service-tagline">Leading Camps with Excellence</div>
+          <p class="service-desc">Lord's ARMY has been the trusted facilitator of the KSDAES Pathfinder and Adventurer Camp for four consecutive years. Our members plan, organize, and lead every aspect of camp — from devotional programs and investitures to outdoor skills and team-building activities. We bring structure, creativity, and a spirit of service to every camp we handle.</p>
         </div>
-    </footer>
+        <div class="service-side-col">
+          <div>
+            <div class="service-tags">
+              <span class="service-tag primary">Camping</span>
+              <span class="service-tag primary">Leadership</span>
+              <span class="service-tag">Youth</span>
+              <span class="service-tag">Annual</span>
+            </div>
+            <div class="service-details">
+              <div class="service-detail-item"><span>Full camp planning and program design</span></div>
+              <div class="service-detail-item"><span>Spiritual and devotional program leadership</span></div>
+              <div class="service-detail-item"><span>Outdoor skills and investiture ceremonies</span></div>
+              <div class="service-detail-item"><span>4th consecutive year facilitating KSDAES</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <script src="../js/script.js"></script>
-    <script>
-        // ===== SCROLL PROGRESS =====
-        const progressBar = document.getElementById('progressBar');
-        const backToTop = document.getElementById('backToTop');
+      <!-- 02 -->
+      <div class="service-row" data-delay="100">
+        <div class="service-num-col"><div class="service-num">02</div></div>
+        <div class="service-main-col">
+          <div class="service-icon-wrap">🎯</div>
+          <div class="service-title"><span>Pathfinder</span> Class Lectures</div>
+          <div class="service-tagline">Teaching the Next Generation</div>
+          <p class="service-desc">Our Master Guides serve as lecturers and instructors for Pathfinder Progressive Classes across the district. We cover core Pathfinder curriculum — from basic honor requirements and nature study to marching, drilling, and the CATS (Camping, Arts and Crafts, and others). Our goal is to produce well-rounded, disciplined, and spiritually grounded Pathfinders.</p>
+        </div>
+        <div class="service-side-col">
+          <div>
+            <div class="service-tags">
+              <span class="service-tag primary">Education</span>
+              <span class="service-tag primary">Lectures</span>
+              <span class="service-tag">Master Guide</span>
+              <span class="service-tag">Training</span>
+            </div>
+            <div class="service-details">
+              <div class="service-detail-item"><span>Progressive Class curriculum instruction</span></div>
+              <div class="service-detail-item"><span>Marching, drilling, and sign language</span></div>
+              <div class="service-detail-item"><span>CATS and outdoor survival skills</span></div>
+              <div class="service-detail-item"><span>Honor requirements coaching</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (scrollTop / docHeight) * 100;
-            progressBar.style.width = progress + '%';
-            
-            if (scrollTop > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
+      <!-- 03 -->
+      <div class="service-row" data-delay="150">
+        <div class="service-num-col"><div class="service-num">03</div></div>
+        <div class="service-main-col">
+          <div class="service-icon-wrap">🪖</div>
+          <div class="service-title"><span>CMT</span> Training Lectures</div>
+          <div class="service-tagline">Citizen Military Training Support</div>
+          <p class="service-desc">Lord's ARMY members serve as resource persons and lecturers in Citizen Military Training (CMT) programs. We bring discipline, structure, and leadership formation experience to CMT sessions — instilling values of duty, honor, and service in young participants while supporting the educational institutions that host these programs.</p>
+        </div>
+        <div class="service-side-col">
+          <div>
+            <div class="service-tags">
+              <span class="service-tag primary">CMT</span>
+              <span class="service-tag primary">Military Training</span>
+              <span class="service-tag">Discipline</span>
+              <span class="service-tag">Schools</span>
+            </div>
+            <div class="service-details">
+              <div class="service-detail-item"><span>Resource speaking and lecture facilitation</span></div>
+              <div class="service-detail-item"><span>Marching commands and formation drills</span></div>
+              <div class="service-detail-item"><span>Leadership and values formation</span></div>
+              <div class="service-detail-item"><span>Partnership with schools and institutions</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+      <!-- 04 -->
+      <div class="service-row" data-delay="200">
+        <div class="service-num-col"><div class="service-num">04</div></div>
+        <div class="service-main-col">
+          <div class="service-icon-wrap">⛺</div>
+          <div class="service-title"><span>Youth</span> Camp Facilitation</div>
+          <div class="service-tagline">Beyond Pathfinders — All Youth Welcome</div>
+          <p class="service-desc">Beyond the Pathfinder program, Lord's ARMY facilitates a wide range of youth camps — including Adventist Youth (AY) camps, survival camps, BSP and GSP encampments, and provincial gatherings. We have served as facilitators for the Pag-asa Youth Camp, NEMM Survival Camp, TSDACC Conquers' Camp, and more — bringing the same commitment to excellence to every event.</p>
+        </div>
+        <div class="service-side-col">
+          <div>
+            <div class="service-tags">
+              <span class="service-tag primary">Youth Camps</span>
+              <span class="service-tag primary">AY</span>
+              <span class="service-tag">BSP / GSP</span>
+              <span class="service-tag">Survival</span>
+            </div>
+            <div class="service-details">
+              <div class="service-detail-item"><span>AY Progressive Class facilitation</span></div>
+              <div class="service-detail-item"><span>Survival camp training and leadership</span></div>
+              <div class="service-detail-item"><span>BSP & GSP Encampment facilitation</span></div>
+              <div class="service-detail-item"><span>Program design and event coordination</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        // ===== HAMBURGER MENU =====
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobile-menu');
+      <!-- 05 -->
+      <div class="service-row" data-delay="250">
+        <div class="service-num-col"><div class="service-num">05</div></div>
+        <div class="service-main-col">
+          <div class="service-icon-wrap">🤝</div>
+          <div class="service-title"><span>Community</span> Outreach Programs</div>
+          <div class="service-tagline">Taking the Ministry Beyond the Church</div>
+          <p class="service-desc">Our outreach programs bring tangible expressions of God's love to schools, IP communities, and underserved barangays across Bukidnon and beyond. These programs include feeding programs, book and school supply donations, storytelling sessions, free blood pressure monitoring, and prayer ministry. We have reached the Dangcay Mission School, Cayaga National High School, Nauwanan ta Bawayan IP School, and many more.</p>
+        </div>
+        <div class="service-side-col">
+          <div>
+            <div class="service-tags">
+              <span class="service-tag primary">Outreach</span>
+              <span class="service-tag primary">Feeding</span>
+              <span class="service-tag">Books</span>
+              <span class="service-tag">IP Communities</span>
+            </div>
+            <div class="service-details">
+              <div class="service-detail-item"><span>Feeding programs and meal distribution</span></div>
+              <div class="service-detail-item"><span>Book and school supply donations</span></div>
+              <div class="service-detail-item"><span>Free health monitoring and medical support</span></div>
+              <div class="service-detail-item"><span>Storytelling, games, and spiritual ministry</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        if (hamburger && mobileMenu) {
-            hamburger.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-                const spans = this.querySelectorAll('span');
-                if (mobileMenu.classList.contains('hidden')) {
-                    spans.forEach(span => {
-                        span.style.transform = '';
-                        span.style.opacity = '1';
-                    });
-                } else {
-                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    spans[1].style.opacity = '0';
-                    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-                }
-            });
-        }
+      <!-- 06 -->
+      <div class="service-row" data-delay="300">
+        <div class="service-num-col"><div class="service-num">06</div></div>
+        <div class="service-main-col">
+          <div class="service-icon-wrap">🌿</div>
+          <div class="service-title"><span>Community</span> Service & Cleanup</div>
+          <div class="service-tagline">Caring for God's Creation</div>
+          <p class="service-desc">Stewardship of the environment is part of our calling. Lord's ARMY has conducted clean-up drives at Lagilay Falls, along rivers and drainage canals in Balulang, and in partnership with local communities to prevent flooding and promote environmental responsibility. We also install signage encouraging proper waste disposal — turning one-day events into lasting advocacy.</p>
+        </div>
+        <div class="service-side-col">
+          <div>
+            <div class="service-tags">
+              <span class="service-tag primary">Environment</span>
+              <span class="service-tag primary">Cleanup</span>
+              <span class="service-tag">Advocacy</span>
+              <span class="service-tag">Community</span>
+            </div>
+            <div class="service-details">
+              <div class="service-detail-item"><span>River, canal, and waterfall cleanup drives</span></div>
+              <div class="service-detail-item"><span>Flood prevention community campaigns</span></div>
+              <div class="service-detail-item"><span>Environmental signage installation</span></div>
+              <div class="service-detail-item"><span>Partnership with LGUs and local orgs</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        // ===== SCROLL ANIMATIONS FOR SERVICE ITEMS =====
-        const serviceItems = document.querySelectorAll('.service-item');
+      <!-- 07 -->
+      <div class="service-row" data-delay="350">
+        <div class="service-num-col"><div class="service-num">07</div></div>
+        <div class="service-main-col">
+          <div class="service-icon-wrap">⛪</div>
+          <div class="service-title"><span>Church</span> & Ministry Volunteer Work</div>
+          <div class="service-tagline">Serving the Body of Christ</div>
+          <p class="service-desc">We are committed to the local church and to the wider Adventist community. Lord's ARMY members volunteer for church programs, special Sabbath events, children's ministry, investiture ceremonies, and district gatherings. We also support World Adventurer Day, World Pathfinder Day, and Global Youth Day celebrations — bringing energy, creativity, and commitment to every occasion.</p>
+        </div>
+        <div class="service-side-col">
+          <div>
+            <div class="service-tags">
+              <span class="service-tag primary">Church</span>
+              <span class="service-tag primary">Volunteer</span>
+              <span class="service-tag">Sabbath</span>
+              <span class="service-tag">Ministry</span>
+            </div>
+            <div class="service-details">
+              <div class="service-detail-item"><span>Church event planning and volunteering</span></div>
+              <div class="service-detail-item"><span>Children's ministry and Adventurer support</span></div>
+              <div class="service-detail-item"><span>World Pathfinder Day & Global Youth Day</span></div>
+              <div class="service-detail-item"><span>District and association gatherings</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const delay = parseInt(entry.target.dataset.delay) || 0;
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, delay);
-                }
-            });
-        }, { threshold: 0.2 });
+    </div>
+  </div>
+</section>
 
-        serviceItems.forEach(item => observer.observe(item));
-    </script>
+<!-- DARK FEATURE — WHY WE SERVE -->
+<section class="feature-section">
+  <div class="feature-inner">
+    <div class="feature-header">
+      <div class="section-eyebrow">Why We Serve</div>
+      <h2 class="section-heading" style="color:#fff">The Heart<br>Behind the <em style="color:var(--gold)">Work</em></h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">✝️</div>
+        <div class="feature-card-title"><span>Faith</span> in Action</div>
+        <p class="feature-card-desc">We believe that true faith is expressed through service. Every camp, lecture, and outreach we do is a declaration that our belief in God compels us to act — not just to worship inside a church, but to go out and make a difference.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">🌱</div>
+        <div class="feature-card-title"><span>Raising</span> Leaders</div>
+        <p class="feature-card-desc">Service develops character. Every time a Lord's ARMY member stands in front of a class, plans a camp, or leads a team into a remote community, they are growing into the leader God has called them to be.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">🔗</div>
+        <div class="feature-card-title"><span>Building</span> Bridges</div>
+        <p class="feature-card-desc">Our services connect people — churches to communities, youth to purpose, institutions to hope. We believe that young people positioned in the right place, at the right time, with willing hearts, can bridge gaps that others overlook.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK / PROCESS -->
+<section class="process-section">
+  <div class="process-inner">
+    <div class="process-header">
+      <div class="section-eyebrow">Our Process</div>
+      <h2 class="section-heading">How We <em>Prepare</em></h2>
+      <p style="font-size:0.88rem;color:var(--muted);max-width:480px;line-height:1.85;">Every service we offer goes through a deliberate process — because we believe that excellence honors God.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-corner"></div>
+        <div class="process-step">01</div>
+        <div class="process-title">Prayer & Planning</div>
+        <p class="process-desc">Every service begins with prayer and careful planning. We identify needs, assign roles, set goals, and commit the entire effort to God before a single step is taken in the field.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-corner"></div>
+        <div class="process-step">02</div>
+        <div class="process-title">Training & Preparation</div>
+        <p class="process-desc">Our members undergo relevant training before serving — whether reviewing curriculum for lectures, rehearsing camp programs, or preparing materials for community outreach.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-corner"></div>
+        <div class="process-step">03</div>
+        <div class="process-title">Execution with Excellence</div>
+        <p class="process-desc">When the day of service arrives, we show up fully — committed, prepared, and present. We serve with discipline and warmth, representing both our club and our faith.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-corner"></div>
+        <div class="process-step">04</div>
+        <div class="process-title">Reflection & Gratitude</div>
+        <p class="process-desc">After every service, we gather to reflect, give thanks, and learn. What worked? What can we improve? This culture of reflection keeps us growing with every mission.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-text">
+      <div class="section-eyebrow">Get Involved</div>
+      <h2 class="section-heading">Partner With <em style="color:var(--gold-light)">Us</em></h2>
+      <p class="body-text">Whether you're a school looking for camp facilitators, a church seeking volunteer support, or an organization that wants to co-host a community outreach — Lord's ARMY is ready to serve alongside you.</p>
+      <p class="body-text">Reach out and let's talk about how we can work together to bring hope, training, and service to the communities that need it most.</p>
+      <div class="cta-actions">
+        <a href="../contact/contact.html" class="btn-cta-white">Contact Us <i class="fas fa-arrow-right"></i></a>
+        <a href="../activities/activities.html" class="btn-cta-outline">See Our Activities</a>
+      </div>
+    </div>
+    <div class="cta-verse">
+      <p>"For even the Son of Man did not come to be served, but to serve, and to give his life as a ransom for many."</p>
+      <cite>— Mark 10:45</cite>
+    </div>
+  </div>
+</section>
+
+<!-- FB FLOAT -->
+<a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank" class="fb-float" title="Visit our Facebook page">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+</a>
+<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <h3>Lord's ARMY</h3>
+        <p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p>
+        <p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country. Serving Jesus by serving others.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about/about.html">About</a></li>
+          <li><a href="../activities/activities.html">Activities</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="../contact/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <div class="footer-contact">
+          <p> <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p>
+          <p> <a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p>
+          <p> <a href="tel:09177718251">0917 771 8251</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved. · Hands to Serve, Hearts to Love.</div>
+  </div>
+</footer>
+
+<script>
+  // Tape
+  const words = ['Camp Facilitation','Pathfinder Lectures','CMT Training','Youth Camps','Community Outreach','Environmental Stewardship','Church Volunteer','Hands to Serve','Hearts to Love','Lord\'s ARMY','Master Guides','Bukidnon'];
+  (function buildTape() {
+    const items = words.map(w => `<div class="tape-item"><span>✦</span>${w}<div class="tape-dot"></div></div>`).join('');
+    document.getElementById('tapeInner').innerHTML = items + items;
+  })();
+
+  // Scroll
+  window.addEventListener('scroll', () => {
+    const st = window.scrollY;
+    const dh = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (st / dh * 100) + '%';
+    document.getElementById('navbar').classList.toggle('scrolled', st > 50);
+    document.getElementById('btt').classList.toggle('show', st > 400);
+  });
+  document.getElementById('btt').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Hamburger
+  document.getElementById('ham').onclick = function () {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  };
+
+  // Scroll-reveal for service rows
+  const rows = document.querySelectorAll('.service-row');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = parseInt(entry.target.dataset.delay) || 0;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  rows.forEach(r => observer.observe(r));
+</script>
+
 </body>
-</html> 
+</html>
