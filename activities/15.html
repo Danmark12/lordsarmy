@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEMM Pathfinder Survival Camp | Lord's ARMY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Same base styles as page 14 */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --crimson: #8B1A1A;
+      --crimson-deep: #5C0F0F;
+      --gold: #C9A03D;
+      --gold-light: #EDD98A;
+      --ivory: #FDFAF4;
+      --ink: #1A1208;
+      --muted: #7A6A55;
+      --border: #E8E0D0;
+      --surface: #FFFFFF;
+      --surface-warm: #FDF8F2;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+    /* ... (same styles as page 14) ... */
+  </style>
+</head>
+<body>
+  <!-- Same nav structure as page 14 -->
+  <div id="progress"></div>
+  <nav id="navbar">...</nav>
+  <div id="mobile-menu">...</div>
+
+  <section class="article-hero">
+    <div class="hero-img">
+      <img src="../images/16/1.jpg" alt="NEMM Survival Camp" id="heroImg" loading="eager">
+    </div>
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+      <div class="breadcrumb">
+        <a href="activities.html"><i class="fas fa-arrow-left"></i>&nbsp; Activities</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Camping &amp; Outdoor</span>
+      </div>
+      <div class="category-pill"><i class="fas fa-campground"></i>&nbsp; Camping &amp; Outdoor</div>
+      <h1 class="hero-title">NEMM Pathfinder Survival Camp</h1>
+      <p class="hero-tagline">Developing Future Church Leaders</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><i class="fas fa-calendar-alt"></i> 2024</div>
+        <div class="hero-meta-item"><i class="fas fa-map-marker-alt"></i> NEMM</div>
+        <div class="hero-meta-item"><i class="fas fa-award"></i> Training</div>
+        <div class="hero-meta-item"><i class="fas fa-clock"></i> 2 min read</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-section">
+    <div class="marquee-inner" id="marqueeInner"></div>
+  </div>
+
+  <div class="page-wrap">
+    <main class="article-main">
+      <div class="opening-rule reveal"><span>The Story</span></div>
+      <div class="article-body">
+        <p class="drop-cap reveal">We are truly inspired by the incredible individuals we worked with during the Pathfinder Survival Camp and Advanced Survival Camp. It's no surprise they are destined to become leaders in their respective churches.</p>
+        <div class="pull-quote reveal">
+          <p>"I can do all things through Christ who strengthens me."</p>
+          <cite>Philippians 4:13</cite>
+        </div>
+        <p class="reveal">We have gained so much from these amazing people. Kudos to all the youth of Division A Seventh-Day Adventist Youth Department at NEMM. The camp was a transformative experience that built character, strengthened faith, and developed leadership skills.</p>
+        <div class="gallery-block reveal">
+          <div class="gallery-eyebrow">Camp Highlights</div>
+          <div class="gallery-grid two-up">
+            <div class="g-item" onclick="openLb(0)"><img src="../images/16/1.jpg" alt="Survival camp" loading="lazy"><div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div></div>
+            <div class="g-item" onclick="openLb(1)"><img src="../images/16/2.jpg" alt="Training" loading="lazy"><div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div></div>
+          </div>
+          <div class="gallery-caption">NEMM Pathfinder Survival Camp</div>
+        </div>
+        <p class="reveal">The survival camp pushed participants beyond their comfort zones, teaching them valuable skills in teamwork, resilience, and faith. These are the leaders who will shape the future of the church.</p>
+        <div class="gallery-block reveal">
+          <div class="gallery-eyebrow">More Moments</div>
+          <div class="gallery-grid">
+            <div class="g-item" onclick="openLb(2)"><img src="../images/16/3.jpg" alt="Group photo" loading="lazy"><div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div></div>
+            <div class="g-item" onclick="openLb(3)"><img src="../images/16/4.jpg" alt="Activities" loading="lazy"><div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div></div>
+            <div class="g-item" onclick="openLb(4)"><img src="../images/16/5.jpg" alt="Camp" loading="lazy"><div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div></div>
+          </div>
+        </div>
+        <div class="article-tags reveal">
+          <span class="tag-label">Tags</span>
+          <span class="a-tag">#Survival</span>
+          <span class="a-tag">#Youth</span>
+          <span class="a-tag">#NEMM</span>
+          <span class="a-tag">#Leadership</span>
+          <span class="a-tag">#Training</span>
+        </div>
+      </div>
+    </main>
+    <aside class="article-sidebar">
+      <div class="sb-section">
+        <div class="sb-heading">Fast Facts</div>
+        <ul class="fact-list">
+          <li class="fact-item"><div class="fact-icon"><i class="fas fa-calendar-alt"></i></div><div><div class="fact-label">Event</div><div class="fact-value">Survival Camp 2024</div></div></li>
+          <li class="fact-item"><div class="fact-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="fact-label">Location</div><div class="fact-value">NEMM</div></div></li>
+          <li class="fact-item"><div class="fact-icon"><i class="fas fa-award"></i></div><div><div class="fact-label">Type</div><div class="fact-value">Survival &amp; Advanced Camp</div></div></li>
+          <li class="fact-item"><div class="fact-icon"><i class="fas fa-users"></i></div><div><div class="fact-label">Participants</div><div class="fact-value">Youth of Division A</div></div></li>
+        </ul>
+      </div>
+      <div class="sb-section">
+        <div class="sb-heading">Scripture</div>
+        <div class="sb-scripture">
+          <p>"I can do all things through Christ who strengthens me."</p>
+          <cite>Philippians 4:13</cite>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-heading">Related</div>
+        <a href="12.html" class="related-link"><div class="rl-img"><img src="../images/13/8.jpg" alt="Light Camp" loading="lazy"></div><div><div class="rl-cat">Camping</div><div class="rl-title">"Be the Light" Camp</div></div></a>
+        <a href="20.html" class="related-link"><div class="rl-img"><img src="../images/21/2.jpg" alt="TSDACC Camp" loading="lazy"></div><div><div class="rl-cat">Survival</div><div class="rl-title">TSDACC Survival Camp 2024</div></div></a>
+      </div>
+      <a href="activities.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Activities</a>
+    </aside>
+  </div>
+
+  <!-- Lightbox, FB float, BTT, Footer - same as page 14 -->
+</body>
+</html>

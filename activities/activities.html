@@ -1,600 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Activities | Lord's ARMY Pathfinder Club</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activities | Lord's ARMY Pathfinder Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* reset & base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root{
-  --crimson:#8B1A1A;
-  --crimson-deep:#5C0F0F;
-  --crimson-glow:#C0362C;
-  --gold:#C9A03D;
-  --gold-light:#EDD98A;
-  --ivory:#FDFAF4;
-  --ink:#1A1208;
-  --muted:#7A6A55;
-  --border:#E8E0D0;
-  --surface:#FFFFFF;
-  --surface-warm:#FDF8F2;
-}
+    :root {
+      --crimson: #8B1A1A;
+      --crimson-deep: #5C0F0F;
+      --crimson-glow: #C0362C;
+      --gold: #C9A03D;
+      --gold-light: #EDD98A;
+      --ivory: #FDFAF4;
+      --ink: #1A1208;
+      --muted: #7A6A55;
+      --border: #E8E0D0;
+      --surface: #FFFFFF;
+      --surface-warm: #FDF8F2;
+    }
 
-html{scroll-behavior:smooth}
+    html { scroll-behavior: smooth; }
 
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--ivory);
-  color:var(--ink);
-  overflow-x:hidden;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
 
-/* PROGRESS BAR */
-#progress{
-  position:fixed;top:0;left:0;height:2px;
-  background:linear-gradient(90deg,var(--crimson),var(--gold));
-  z-index:9999;width:0%;transition:width 0.1s;
-}
+    /* progress bar */
+    #progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold));
+      z-index: 9999; width: 0%; transition: width 0.1s;
+    }
 
-/* NAV */
-nav{
-  position:fixed;top:0;left:0;width:100%;z-index:100;
-  padding:0 40px;
-  transition:background 0.4s,box-shadow 0.4s;
-}
-nav.scrolled{
-  background:rgba(253,250,244,0.97);
-  box-shadow:0 1px 0 var(--border);
-  backdrop-filter:blur(12px);
-}
-.nav-inner{
-  max-width:1280px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  height:72px;
-}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand-emblem{
-  width:42px;height:42px;border-radius:50%;
-  background:var(--crimson);
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;color:#fff;font-family:'Cinzel',serif;font-weight:700;
-  flex-shrink:0;
-  box-shadow:0 0 0 3px rgba(201,160,61,0.3);
-  transition:box-shadow 0.3s;
-}
-.nav-brand:hover .brand-emblem{box-shadow:0 0 0 3px var(--gold)}
-.brand-text-top{
-  font-family:'Cinzel',serif;font-size:15px;font-weight:700;
-  color:#fff;line-height:1;transition:color 0.3s;
-  letter-spacing:0.5px;
-}
-.brand-text-sub{
-  font-size:10px;color:rgba(255,255,255,0.7);letter-spacing:2px;
-  text-transform:uppercase;transition:color 0.3s;
-}
-nav.scrolled .brand-text-top{color:var(--crimson)}
-nav.scrolled .brand-text-sub{color:var(--gold)}
+    /* nav */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      padding: 0 40px;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(253, 250, 244, 0.97);
+      box-shadow: 0 1px 0 var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-emblem {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--crimson);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #fff; font-family: 'Cinzel', serif; font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(201, 160, 61, 0.3);
+      transition: box-shadow 0.3s;
+    }
+    .nav-brand:hover .brand-emblem { box-shadow: 0 0 0 3px var(--gold); }
+    .brand-text-top {
+      font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700;
+      color: #fff; line-height: 1; transition: color 0.3s;
+      letter-spacing: 0.5px;
+    }
+    .brand-text-sub {
+      font-size: 10px; color: rgba(255,255,255,0.7); letter-spacing: 2px;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    nav.scrolled .brand-text-top { color: var(--crimson); }
+    nav.scrolled .brand-text-sub { color: var(--gold); }
 
-.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
-.nav-links a{
-  font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
-  text-decoration:none;color:rgba(255,255,255,0.85);
-  position:relative;transition:color 0.3s;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;
-  background:var(--gold);transition:width 0.3s;
-}
-.nav-links a:hover,
-.nav-links a.active{color:#fff}
-.nav-links a:hover::after,
-.nav-links a.active::after{width:100%}
-nav.scrolled .nav-links a{color:var(--muted)}
-nav.scrolled .nav-links a:hover,
-nav.scrolled .nav-links a.active{color:var(--crimson)}
-nav.scrolled .nav-links a::after{background:var(--crimson)}
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; color: rgba(255,255,255,0.85);
+      position: relative; transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--gold); transition: width 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { color: var(--crimson); }
+    nav.scrolled .nav-links a::after { background: var(--crimson); }
 
-/* HERO */
-.hero{
-  position:relative;height:100vh;min-height:600px;
-  overflow:hidden;background:#0A0605;
-}
-.hero-slides-wrap{position:absolute;inset:0}
-.hero-slide{
-  position:absolute;inset:0;opacity:0;
-  transition:opacity 1.4s ease;
-}
-.hero-slide.active{opacity:1}
-.hero-slide img{
-  width:100%;height:100%;object-fit:cover;
-  transform:scale(1.05);
-  transition:transform 9s ease;
-  filter:brightness(0.45) saturate(0.8);
-}
-.hero-slide.active img{transform:scale(1)}
+    /* hero */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px;
+      overflow: hidden; background: #0A0605;
+    }
+    .hero-slides-wrap { position: absolute; inset: 0; }
+    .hero-slide {
+      position: absolute; inset: 0; opacity: 0;
+      transition: opacity 1.4s ease;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide img {
+      width: 100%; height: 100%; object-fit: cover;
+      transform: scale(1.05);
+      transition: transform 9s ease;
+      filter: brightness(0.45) saturate(0.8);
+    }
+    .hero-slide.active img { transform: scale(1); }
 
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(135deg, rgba(10,6,5,0.65) 0%, rgba(10,6,5,0.1) 60%);
-}
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(10,6,5,0.65) 0%, rgba(10,6,5,0.1) 60%);
+    }
 
-.hero-content{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:80px 80px 80px;
-  max-width:900px;
-}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:20px;
-}
-.hero-eyebrow::before{
-  content:'';display:block;width:32px;height:1px;background:var(--gold);
-}
-.hero-title{
-  font-family:'Cinzel',serif;
-  font-size:clamp(3rem,6vw,5.5rem);
-  font-weight:900;line-height:1.02;
-  color:#fff;margin-bottom:20px;
-  letter-spacing:-1px;
-}
-.hero-title em{
-  font-style:normal;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(255,255,255,0.5);
-}
-.hero-subtitle{
-  font-size:1.05rem;color:rgba(255,255,255,0.75);
-  line-height:1.8;max-width:480px;margin-bottom:36px;
-}
-.hero-cta{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--gold);color:var(--ink);
-  padding:14px 32px;border-radius:2px;
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  text-decoration:none;transition:all 0.3s;
-}
-.hero-cta:hover{background:var(--gold-light);transform:translateY(-2px)}
+    .hero-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px 80px 80px;
+      max-width: 900px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 32px; height: 1px; background: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900; line-height: 1.02;
+      color: #fff; margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.5);
+    }
+    .hero-subtitle {
+      font-size: 1.05rem; color: rgba(255,255,255,0.75);
+      line-height: 1.8; max-width: 480px; margin-bottom: 36px;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: var(--ink);
+      padding: 14px 32px; border-radius: 2px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; transition: all 0.3s;
+    }
+    .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-.hero-dots{
-  position:absolute;right:60px;bottom:50%;transform:translateY(50%);
-  display:flex;flex-direction:column;gap:10px;
-}
-.hero-dots span{
-  width:2px;height:20px;background:rgba(255,255,255,0.25);
-  cursor:pointer;transition:all 0.4s;display:block;
-}
-.hero-dots span.active{height:40px;background:var(--gold)}
+    .hero-dots {
+      position: absolute; right: 60px; bottom: 50%; transform: translateY(50%);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .hero-dots span {
+      width: 2px; height: 20px; background: rgba(255,255,255,0.25);
+      cursor: pointer; transition: all 0.4s; display: block;
+    }
+    .hero-dots span.active { height: 40px; background: var(--gold); }
 
-.hero-counter{
-  position:absolute;right:60px;bottom:40px;
-  font-size:11px;font-weight:600;letter-spacing:2px;
-  color:rgba(255,255,255,0.45);
-}
-.hero-counter strong{color:#fff;font-size:20px;font-family:'Cinzel',serif;}
+    .hero-counter {
+      position: absolute; right: 60px; bottom: 40px;
+      font-size: 11px; font-weight: 600; letter-spacing: 2px;
+      color: rgba(255,255,255,0.45);
+    }
+    .hero-counter strong { color: #fff; font-size: 20px; font-family: 'Cinzel', serif; }
 
-/* STAT STRIP */
-.stat-strip{
-  background:var(--crimson-deep);
-  display:flex;justify-content:center;
-  border-bottom:1px solid rgba(201,160,61,0.2);
-}
-.stat-strip-inner{
-  max-width:1280px;width:100%;
-  display:grid;grid-template-columns:repeat(4,1fr);
-}
-.stat-item{
-  padding:32px 24px;text-align:center;
-  border-right:1px solid rgba(255,255,255,0.08);
-  position:relative;
-}
-.stat-item:last-child{border-right:none}
-.stat-num{
-  font-family:'Cinzel',serif;font-size:2.8rem;font-weight:900;
-  color:#fff;line-height:1;
-}
-.stat-num span{color:var(--gold);font-size:1.5rem}
-.stat-label{
-  font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(255,255,255,0.45);margin-top:6px;
-}
+    /* stat strip */
+    .stat-strip {
+      background: var(--crimson-deep);
+      display: flex; justify-content: center;
+      border-bottom: 1px solid rgba(201, 160, 61, 0.2);
+    }
+    .stat-strip-inner {
+      max-width: 1280px; width: 100%;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-item {
+      padding: 32px 24px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Cinzel', serif; font-size: 2.8rem; font-weight: 900;
+      color: #fff; line-height: 1;
+    }
+    .stat-num span { color: var(--gold); font-size: 1.5rem; }
+    .stat-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); margin-top: 6px;
+    }
 
-/* SECTION LABEL */
-.section-label{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-  color:var(--crimson);margin-bottom:16px;
-}
-.section-label::before{
-  content:'';width:24px;height:1px;background:var(--crimson);
-}
-.section-title{
-  font-family:'Cinzel',serif;
-  font-size:clamp(2rem,3.5vw,3.2rem);
-  font-weight:900;color:var(--ink);line-height:1.1;
-}
-.section-title em{font-style:normal;color:var(--crimson)}
+    /* section label */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--crimson); margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: ''; width: 24px; height: 1px; background: var(--crimson);
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 900; color: var(--ink); line-height: 1.1;
+    }
+    .section-title em { font-style: normal; color: var(--crimson); }
 
-/* FILTERS */
-.filter-section{
-  padding:60px 40px 0;background:var(--surface-warm);
-  border-top:1px solid var(--border);
-}
-.filter-section-inner{max-width:1280px;margin:0 auto}
-.filter-header{margin-bottom:36px}
-.filter-row{
-  display:flex;align-items:center;gap:0;
-  border-bottom:2px solid var(--border);
-  overflow-x:auto;padding-bottom:0;
-  scrollbar-width:none;
-}
-.filter-row::-webkit-scrollbar{display:none}
-.filter-btn{
-  padding:14px 20px;
-  border:none;background:none;cursor:pointer;
-  font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
-  color:var(--muted);transition:all 0.3s;
-  white-space:nowrap;position:relative;
-  font-family:'Inter',sans-serif;
-}
-.filter-btn::after{
-  content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;
-  background:var(--crimson);transform:scaleX(0);transition:transform 0.3s;
-}
-.filter-btn:hover{color:var(--ink)}
-.filter-btn.active{color:var(--crimson)}
-.filter-btn.active::after{transform:scaleX(1)}
+    /* filters */
+    .filter-section {
+      padding: 60px 40px 0; background: var(--surface-warm);
+      border-top: 1px solid var(--border);
+    }
+    .filter-section-inner { max-width: 1280px; margin: 0 auto; }
+    .filter-header { margin-bottom: 36px; }
+    .filter-row {
+      display: flex; align-items: center; gap: 0;
+      border-bottom: 2px solid var(--border);
+      overflow-x: auto; padding-bottom: 0;
+      scrollbar-width: none;
+    }
+    .filter-row::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      padding: 14px 20px;
+      border: none; background: none; cursor: pointer;
+      font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); transition: all 0.3s;
+      white-space: nowrap; position: relative;
+      font-family: 'Inter', sans-serif;
+    }
+    .filter-btn::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px;
+      background: var(--crimson); transform: scaleX(0); transition: transform 0.3s;
+    }
+    .filter-btn:hover { color: var(--ink); }
+    .filter-btn.active { color: var(--crimson); }
+    .filter-btn.active::after { transform: scaleX(1); }
 
-/* ACTIVITY GRID */
-.activities-grid-section{
-  padding:0 40px 80px;
-  background:var(--surface-warm);
-}
-.activities-grid-inner{max-width:1280px;margin:0 auto;padding-top:48px}
-.activities-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:var(--border);
-  border:1px solid var(--border);
-}
+    /* grid */
+    .activities-grid-section {
+      padding: 0 40px 80px;
+      background: var(--surface-warm);
+    }
+    .activities-grid-inner { max-width: 1280px; margin: 0 auto; padding-top: 48px; }
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
 
-.activity-card{
-  background:var(--surface);
-  position:relative;overflow:hidden;
-  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
-  cursor:pointer;
-  display:flex;flex-direction:column;
-}
-.activity-card.hidden{display:none}
-.activity-card:hover{z-index:2;transform:scale(1.01);box-shadow:0 24px 60px rgba(0,0,0,0.12)}
+    .activity-card {
+      background: var(--surface);
+      position: relative; overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      cursor: pointer;
+      display: flex; flex-direction: column;
+    }
+    .activity-card.hidden { display: none; }
+    .activity-card:hover { z-index: 2; transform: scale(1.01); box-shadow: 0 24px 60px rgba(0,0,0,0.12); }
 
-.card-img-wrap{
-  position:relative;height:200px;overflow:hidden;flex-shrink:0;
-}
-.card-img-wrap img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform 0.7s ease;filter:brightness(0.9) saturate(0.9);
-}
-.activity-card:hover .card-img-wrap img{transform:scale(1.06);filter:brightness(1) saturate(1)}
+    .card-img-wrap {
+      position: relative; height: 200px; overflow: hidden; flex-shrink: 0;
+    }
+    .card-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.7s ease; filter: brightness(0.9) saturate(0.9);
+    }
+    .activity-card:hover .card-img-wrap img { transform: scale(1.06); filter: brightness(1) saturate(1); }
 
-.card-cat{
-  position:absolute;top:14px;left:14px;
-  background:var(--crimson);color:#fff;
-  font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  padding:5px 12px;
-}
-.card-badge{
-  position:absolute;top:14px;right:14px;
-  background:var(--gold);color:var(--ink);
-  font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  padding:4px 10px;
-}
+    .card-cat {
+      position: absolute; top: 14px; left: 14px;
+      background: var(--crimson); color: #fff;
+      font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 12px;
+    }
+    .card-badge {
+      position: absolute; top: 14px; right: 14px;
+      background: var(--gold); color: var(--ink);
+      font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 4px 10px;
+    }
 
-.card-body{padding:22px 24px 24px;flex:1;display:flex;flex-direction:column}
-.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.card-tag{
-  font-size:9px;font-weight:600;letter-spacing:0.5px;
-  color:var(--muted);border:1px solid var(--border);
-  padding:3px 8px;
-}
-.card-title{
-  font-family:'Cinzel',serif;font-size:1rem;font-weight:700;
-  color:var(--ink);line-height:1.3;margin-bottom:6px;
-}
-.card-tagline{
-  font-size:0.78rem;color:var(--crimson);font-weight:500;
-  margin-bottom:10px;font-style:italic;
-}
-.card-desc{
-  font-size:0.82rem;color:var(--muted);line-height:1.7;
-  flex:1;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
-  margin-bottom:16px;
-}
-.card-link{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--crimson);text-decoration:none;
-  border-bottom:1px solid var(--crimson);padding-bottom:2px;
-  width:fit-content;transition:gap 0.3s,color 0.3s;
-}
-.card-link:hover{gap:14px;color:var(--crimson-glow)}
+    .card-body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .card-tag {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.5px;
+      color: var(--muted); border: 1px solid var(--border);
+      padding: 3px 8px;
+    }
+    .card-title {
+      font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700;
+      color: var(--ink); line-height: 1.3; margin-bottom: 6px;
+    }
+    .card-tagline {
+      font-size: 0.78rem; color: var(--crimson); font-weight: 500;
+      margin-bottom: 10px; font-style: italic;
+    }
+    .card-desc {
+      font-size: 0.82rem; color: var(--muted); line-height: 1.7;
+      flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--crimson); text-decoration: none;
+      border-bottom: 1px solid var(--crimson); padding-bottom: 2px;
+      width: fit-content; transition: gap 0.3s, color 0.3s;
+    }
+    .card-link:hover { gap: 14px; color: var(--crimson-glow); }
 
-/* FEATURED LARGE CARD (first card) */
-.activity-card.featured{
-  grid-column:1/3;grid-row:1/3;
-}
-.activity-card.featured .card-img-wrap{height:380px}
-.activity-card.featured .card-title{font-size:1.4rem}
-.activity-card.featured .card-desc{-webkit-line-clamp:4}
+    /* featured large */
+    .activity-card.featured {
+      grid-column: 1 / 3; grid-row: 1 / 3;
+    }
+    .activity-card.featured .card-img-wrap { height: 380px; }
+    .activity-card.featured .card-title { font-size: 1.4rem; }
+    .activity-card.featured .card-desc { -webkit-line-clamp: 4; }
 
-/* NO RESULTS */
-.no-results{
-  grid-column:1/-1;padding:80px;text-align:center;
-  display:none;
-}
-.no-results.show{display:block}
-.no-results-icon{font-size:3rem;margin-bottom:16px;opacity:0.3}
-.no-results h3{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--muted);margin-bottom:8px}
-.no-results p{font-size:0.9rem;color:var(--muted)}
+    .no-results {
+      grid-column: 1 / -1; padding: 80px; text-align: center;
+      display: none;
+    }
+    .no-results.show { display: block; }
+    .no-results-icon { font-size: 3rem; margin-bottom: 16px; opacity: 0.3; }
+    .no-results h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--muted); margin-bottom: 8px; }
+    .no-results p { font-size: 0.9rem; color: var(--muted); }
 
-/* MARQUEE / TAPE */
-.marquee-section{
-  background:var(--crimson-deep);
-  padding:18px 0;overflow:hidden;
-  border-top:1px solid rgba(201,160,61,0.3);
-  border-bottom:1px solid rgba(201,160,61,0.3);
-}
-.marquee-inner{
-  display:flex;gap:0;animation:marquee 30s linear infinite;
-  white-space:nowrap;
-}
-.marquee-inner:hover{animation-play-state:paused}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.marquee-item{
-  display:inline-flex;align-items:center;gap:20px;padding:0 40px;
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(255,255,255,0.5);
-}
-.marquee-item span{color:var(--gold)}
-.marquee-item .dot{width:4px;height:4px;background:rgba(255,255,255,0.2);border-radius:50%}
+    /* marquee */
+    .marquee-section {
+      background: var(--crimson-deep);
+      padding: 18px 0; overflow: hidden;
+      border-top: 1px solid rgba(201,160,61,0.3);
+      border-bottom: 1px solid rgba(201,160,61,0.3);
+    }
+    .marquee-inner {
+      display: flex; gap: 0; animation: marquee 30s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-inner:hover { animation-play-state: paused; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 20px; padding: 0 40px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .marquee-item span { color: var(--gold); }
+    .marquee-item .dot { width: 4px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 50%; }
 
-/* TIMELINE / HIGHLIGHT SECTION */
-.highlights-section{
-  padding:100px 40px;
-  background:var(--ink);
-  position:relative;overflow:hidden;
-}
-.highlights-section::before{
-  content:'';position:absolute;top:-40px;right:-60px;
-  width:600px;height:600px;
-  background:radial-gradient(circle,rgba(139,26,26,0.12) 0%,transparent 70%);
-  pointer-events:none;
-}
-.highlights-inner{max-width:1280px;margin:0 auto}
-.highlights-header{margin-bottom:60px}
-.highlights-header .section-label{color:var(--gold)}
-.highlights-header .section-label::before{background:var(--gold)}
-.highlights-header .section-title{color:#fff}
-.highlights-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
-}
-.highlight-card{
-  border:1px solid rgba(255,255,255,0.06);
-  padding:36px 28px;
-  position:relative;
-  transition:border-color 0.3s,transform 0.4s;
-}
-.highlight-card:hover{
-  border-color:rgba(201,160,61,0.3);
-  transform:translateY(-4px);
-}
-.highlight-num{
-  font-family:'Cinzel',serif;font-size:4rem;font-weight:900;
-  color:rgba(255,255,255,0.04);
-  position:absolute;top:20px;right:20px;line-height:1;
-}
-.highlight-icon{
-  width:48px;height:48px;background:rgba(139,26,26,0.2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.3rem;margin-bottom:20px;
-  border:1px solid rgba(139,26,26,0.3);
-}
-.highlight-title{
-  font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;
-  color:#fff;margin-bottom:10px;line-height:1.3;
-}
-.highlight-desc{
-  font-size:0.82rem;color:rgba(255,255,255,0.45);
-  line-height:1.8;
-}
-.highlight-link{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--gold);text-decoration:none;margin-top:18px;
-  transition:gap 0.3s;
-}
-.highlight-link:hover{gap:12px}
+    /* highlights */
+    .highlights-section {
+      padding: 100px 40px;
+      background: var(--ink);
+      position: relative; overflow: hidden;
+    }
+    .highlights-section::before {
+      content: ''; position: absolute; top: -40px; right: -60px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(139,26,26,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .highlights-inner { max-width: 1280px; margin: 0 auto; }
+    .highlights-header { margin-bottom: 60px; }
+    .highlights-header .section-label { color: var(--gold); }
+    .highlights-header .section-label::before { background: var(--gold); }
+    .highlights-header .section-title { color: #fff; }
+    .highlights-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    }
+    .highlight-card {
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 36px 28px;
+      position: relative;
+      transition: border-color 0.3s, transform 0.4s;
+    }
+    .highlight-card:hover {
+      border-color: rgba(201,160,61,0.3);
+      transform: translateY(-4px);
+    }
+    .highlight-num {
+      font-family: 'Cinzel', serif; font-size: 4rem; font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      position: absolute; top: 20px; right: 20px; line-height: 1;
+    }
+    .highlight-icon {
+      width: 48px; height: 48px; background: rgba(139,26,26,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 20px;
+      border: 1px solid rgba(139,26,26,0.3);
+    }
+    .highlight-title {
+      font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700;
+      color: #fff; margin-bottom: 10px; line-height: 1.3;
+    }
+    .highlight-desc {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      line-height: 1.8;
+    }
+    .highlight-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); text-decoration: none; margin-top: 18px;
+      transition: gap 0.3s;
+    }
+    .highlight-link:hover { gap: 12px; }
 
-/* SLIDER SECTION */
-.slider-section{
-  padding:100px 40px;
-  background:var(--surface-warm);
-  border-top:1px solid var(--border);
-}
-.slider-inner{max-width:1280px;margin:0 auto}
-.slider-header{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  margin-bottom:48px;
-}
-.slider-controls{display:flex;gap:10px}
-.slider-btn{
-  width:44px;height:44px;
-  border:1px solid var(--border);background:var(--surface);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all 0.3s;font-size:0.8rem;
-  color:var(--muted);
-}
-.slider-btn:hover{background:var(--crimson);border-color:var(--crimson);color:#fff}
+    /* slider */
+    .slider-section {
+      padding: 100px 40px;
+      background: var(--surface-warm);
+      border-top: 1px solid var(--border);
+    }
+    .slider-inner { max-width: 1280px; margin: 0 auto; }
+    .slider-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 48px;
+    }
+    .slider-controls { display: flex; gap: 10px; }
+    .slider-btn {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border); background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s; font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .slider-btn:hover { background: var(--crimson); border-color: var(--crimson); color: #fff; }
 
-.slider-track-wrap{overflow:hidden}
-.slider-track{
-  display:flex;gap:24px;
-  transition:transform 0.7s cubic-bezier(0.4,0,0.2,1);
-}
-.slide-card{
-  flex:0 0 calc(25% - 18px);
-  border:1px solid var(--border);background:var(--surface);
-  overflow:hidden;
-  transition:transform 0.4s,box-shadow 0.4s;
-}
-.slide-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.08)}
-.slide-card .sc-img{height:160px;overflow:hidden;position:relative}
-.slide-card .sc-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s}
-.slide-card:hover .sc-img img{transform:scale(1.08)}
-.slide-card .sc-badge{
-  position:absolute;bottom:10px;left:10px;
-  background:var(--crimson);color:#fff;
-  font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  padding:3px 8px;
-}
-.slide-card .sc-body{padding:18px 18px 20px}
-.slide-card .sc-title{
-  font-family:'Cinzel',serif;font-size:0.85rem;font-weight:700;
-  color:var(--ink);line-height:1.3;margin-bottom:6px;
-}
-.slide-card .sc-tagline{font-size:0.72rem;color:var(--crimson);font-style:italic;margin-bottom:8px}
-.slide-card .sc-desc{
-  font-size:0.75rem;color:var(--muted);line-height:1.7;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-  margin-bottom:12px;
-}
-.slide-card .sc-link{
-  font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--crimson);text-decoration:none;
-  display:inline-flex;align-items:center;gap:6px;
-  transition:gap 0.3s;
-}
-.slide-card .sc-link:hover{gap:10px}
+    .slider-track-wrap { overflow: hidden; }
+    .slider-track {
+      display: flex; gap: 24px;
+      transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .slide-card {
+      flex: 0 0 calc(25% - 18px);
+      border: 1px solid var(--border); background: var(--surface);
+      overflow: hidden;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .slide-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.08); }
+    .slide-card .sc-img { height: 160px; overflow: hidden; position: relative; }
+    .slide-card .sc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s; }
+    .slide-card:hover .sc-img img { transform: scale(1.08); }
+    .slide-card .sc-badge {
+      position: absolute; bottom: 10px; left: 10px;
+      background: var(--crimson); color: #fff;
+      font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 8px;
+    }
+    .slide-card .sc-body { padding: 18px 18px 20px; }
+    .slide-card .sc-title {
+      font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700;
+      color: var(--ink); line-height: 1.3; margin-bottom: 6px;
+    }
+    .slide-card .sc-tagline { font-size: 0.72rem; color: var(--crimson); font-style: italic; margin-bottom: 8px; }
+    .slide-card .sc-desc {
+      font-size: 0.75rem; color: var(--muted); line-height: 1.7;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .slide-card .sc-link {
+      font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--crimson); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: gap 0.3s;
+    }
+    .slide-card .sc-link:hover { gap: 10px; }
 
-/* FACEBOOK FLOAT */
-.fb-float{
-  position:fixed;bottom:30px;right:30px;z-index:500;
-  background:#1877F2;color:#fff;
-  width:52px;height:52px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;text-decoration:none;
-  box-shadow:0 4px 20px rgba(24,119,242,0.4);
-  transition:transform 0.3s,box-shadow 0.3s;
-}
-.fb-float:hover{transform:scale(1.08) translateY(-2px);box-shadow:0 8px 30px rgba(24,119,242,0.5)}
+    /* fb float */
+    .fb-float {
+      position: fixed; bottom: 30px; right: 30px; z-index: 500;
+      background: #1877F2; color: #fff;
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(24,119,242,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .fb-float:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 8px 30px rgba(24,119,242,0.5); }
 
-/* BACK TO TOP */
-#btt{
-  position:fixed;bottom:96px;right:30px;z-index:500;
-  width:40px;height:40px;
-  background:var(--crimson);color:#fff;
-  border:none;cursor:pointer;font-size:0.8rem;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transform:translateY(16px);
-  transition:all 0.4s;pointer-events:none;
-}
-#btt.show{opacity:1;transform:translateY(0);pointer-events:auto}
-#btt:hover{background:var(--crimson-deep)}
+    /* back to top */
+    #btt {
+      position: fixed; bottom: 96px; right: 30px; z-index: 500;
+      width: 40px; height: 40px;
+      background: var(--crimson); color: #fff;
+      border: none; cursor: pointer; font-size: 0.8rem;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(16px);
+      transition: all 0.4s; pointer-events: none;
+    }
+    #btt.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #btt:hover { background: var(--crimson-deep); }
 
-/* FOOTER */
-footer{
-  background:var(--ink);color:rgba(255,255,255,0.4);
-  padding:60px 40px 30px;
-  border-top:1px solid rgba(201,160,61,0.2);
-}
-footer .footer-inner{max-width:1280px;margin:0 auto}
-footer .footer-grid{
-  display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:50px;
-}
-footer h3{
-  font-family:'Cinzel',serif;color:#fff;font-size:1.2rem;
-  margin-bottom:6px;
-}
-footer .footer-sub{font-size:0.75rem;letter-spacing:1px;margin-bottom:20px}
-footer .footer-desc{font-size:0.82rem;line-height:1.8;max-width:300px}
-footer h4{
-  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(255,255,255,0.35);margin-bottom:16px;
-}
-footer ul{list-style:none}
-footer ul li{margin-bottom:10px}
-footer ul li a{
-  font-size:0.82rem;color:rgba(255,255,255,0.4);text-decoration:none;
-  transition:color 0.3s;
-}
-footer ul li a:hover{color:var(--gold)}
-footer .footer-contact p{font-size:0.82rem;margin-bottom:10px}
-footer .footer-contact a{color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.3s}
-footer .footer-contact a:hover{color:var(--gold)}
-footer .footer-bottom{
-  border-top:1px solid rgba(255,255,255,0.06);
-  padding-top:24px;text-align:center;
-  font-size:0.75rem;letter-spacing:0.5px;
-}
+    /* footer */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.4);
+      padding: 60px 40px 30px;
+      border-top: 1px solid rgba(201,160,61,0.2);
+    }
+    footer .footer-inner { max-width: 1280px; margin: 0 auto; }
+    footer .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px;
+    }
+    footer h3 { font-family: 'Cinzel', serif; color: #fff; font-size: 1.2rem; margin-bottom: 6px; }
+    footer .footer-sub { font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 20px; }
+    footer .footer-desc { font-size: 0.82rem; line-height: 1.8; max-width: 300px; }
+    footer h4 {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); margin-bottom: 16px;
+    }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 10px; }
+    footer ul li a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer ul li a:hover { color: var(--gold); }
+    footer .footer-contact p { font-size: 0.82rem; margin-bottom: 10px; }
+    footer .footer-contact a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.3s; }
+    footer .footer-contact a:hover { color: var(--gold); }
+    footer .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px; text-align: center;
+      font-size: 0.75rem; letter-spacing: 0.5px;
+    }
 
-/* HAMBURGER */
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
-.hamburger span{display:block;width:24px;height:1.5px;background:#fff;transition:all 0.3s}
-nav.scrolled .hamburger span{background:var(--crimson)}
-#mobile-menu{
-  display:none;position:fixed;top:72px;left:0;right:0;
-  background:var(--surface-warm);border-bottom:1px solid var(--border);
-  padding:16px 24px;z-index:99;
-}
-#mobile-menu.open{display:block}
-#mobile-menu ul{list-style:none}
-#mobile-menu li a{
-  display:block;padding:12px 0;font-size:0.9rem;font-weight:600;
-  color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border);
-  transition:color 0.3s;
-}
-#mobile-menu li:last-child a{border-bottom:none}
-#mobile-menu li a:hover,#mobile-menu li a.active{color:var(--crimson)}
+    /* hamburger */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: #fff; transition: all 0.3s; }
+    nav.scrolled .hamburger span { background: var(--crimson); }
+    #mobile-menu {
+      display: none; position: fixed; top: 72px; left: 0; right: 0;
+      background: var(--surface-warm); border-bottom: 1px solid var(--border);
+      padding: 16px 24px; z-index: 99;
+    }
+    #mobile-menu.open { display: block; }
+    #mobile-menu ul { list-style: none; }
+    #mobile-menu li a {
+      display: block; padding: 12px 0; font-size: 0.9rem; font-weight: 600;
+      color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border);
+      transition: color 0.3s;
+    }
+    #mobile-menu li:last-child a { border-bottom: none; }
+    #mobile-menu li a:hover, #mobile-menu li a.active { color: var(--crimson); }
 
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .hero-content{padding:60px 50px}
-  .activities-grid{grid-template-columns:repeat(2,1fr)}
-  .activity-card.featured{grid-column:1/-1;grid-row:auto}
-  .activity-card.featured .card-img-wrap{height:280px}
-  .highlights-grid{grid-template-columns:repeat(2,1fr)}
-  .slide-card{flex:0 0 calc(33.333% - 16px)}
-  footer .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
-}
-@media(max-width:768px){
-  nav{padding:0 20px}
-  .nav-links{display:none}
-  .hamburger{display:flex}
-  .hero-content{padding:40px 24px 60px}
-  .hero-dots{display:none}
-  .hero-counter{right:24px}
-  .filter-section{padding:40px 20px 0}
-  .activities-grid-section{padding:0 20px 60px}
-  .activities-grid{grid-template-columns:1fr}
-  .activity-card.featured{grid-column:1/-1}
-  .stat-strip-inner{grid-template-columns:repeat(2,1fr)}
-  .stat-item:nth-child(2){border-right:none}
-  .highlights-section{padding:60px 20px}
-  .highlights-grid{grid-template-columns:1fr;gap:16px}
-  .slider-section{padding:60px 20px}
-  .slide-card{flex:0 0 calc(100% - 0px)}
-  .slider-header{flex-direction:column;align-items:flex-start;gap:20px}
-  footer{padding:40px 20px 24px}
-  footer .footer-grid{grid-template-columns:1fr;gap:32px}
-  .marquee-section{display:none}
-}
-</style>
+    /* responsive */
+    @media (max-width: 1024px) {
+      .hero-content { padding: 60px 50px; }
+      .activities-grid { grid-template-columns: repeat(2, 1fr); }
+      .activity-card.featured { grid-column: 1 / -1; grid-row: auto; }
+      .activity-card.featured .card-img-wrap { height: 280px; }
+      .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+      .slide-card { flex: 0 0 calc(33.333% - 16px); }
+      footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 40px 24px 60px; }
+      .hero-dots { display: none; }
+      .hero-counter { right: 24px; }
+      .filter-section { padding: 40px 20px 0; }
+      .activities-grid-section { padding: 0 20px 60px; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .activity-card.featured { grid-column: 1 / -1; }
+      .stat-strip-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .highlights-section { padding: 60px 20px; }
+      .highlights-grid { grid-template-columns: 1fr; gap: 16px; }
+      .slider-section { padding: 60px 20px; }
+      .slide-card { flex: 0 0 calc(100% - 0px); }
+      .slider-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+      footer { padding: 40px 20px 24px; }
+      footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .marquee-section { display: none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -671,7 +665,7 @@ nav.scrolled .hamburger span{background:var(--crimson)}
   <div class="marquee-inner" id="marqueeInner"></div>
 </div>
 
-<!-- FILTER + GRID -->
+<!-- FILTER + GRID - ONLY FIRST 9 ACTIVITIES -->
 <div class="filter-section">
   <div class="filter-section-inner">
     <div class="filter-header">
@@ -705,7 +699,7 @@ nav.scrolled .hamburger span{background:var(--crimson)}
   </div>
 </section>
 
-<!-- SLIDER -->
+<!-- SLIDER - REMAINING ACTIVITIES (10-20) -->
 <section class="slider-section">
   <div class="slider-inner">
     <div class="slider-header">
@@ -763,248 +757,251 @@ nav.scrolled .hamburger span{background:var(--crimson)}
 </footer>
 
 <script>
-const activities=[
-  {id:1,icon:'🏕️',title:'KSDAES Pathfinder & Adventurer Camp 2025',tagline:'Four Years of Faithful Service in Kadingilan',badge:'Featured',tags:['Camp','Youth','Worship'],category:'Camping & Outdoor',image:'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800',description:'The Lord\'s ARMY Pathfinder Club proudly facilitated the KSDAES Pathfinder and Adventurer Camp for the fourth consecutive year, marking a significant milestone in the club\'s ministry. With the theme "Hands to Serve, Hearts to Love," the camp brought together pupils, teachers, and parents who have entrusted the club with facilitating this transformative experience.',page:'#'},
-  {id:2,icon:'⛺',title:'Lindaban BSP & GSP Encampment 2025',tagline:'Leading Public School Scouts with Excellence',badge:'Leadership',tags:['Scouting','BSP','GSP'],category:'Camping & Outdoor',image:'https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=800',description:'The Lord\'s ARMY Pathfinder Club was honored to facilitate the Boy Scouts of the Philippines and Girl Scouts of the Philippines Encampment 2025. Under the theme "Youth Engagement: Sustaining Relevance & Strengthening Resilience," the encampment showcased the spirit of scouting through challenges including tent pitching, fire building, and team-building activities.',page:'#'},
-  {id:3,icon:'🌿',title:'75th World Pathfinder Day Clean-Up at Lagilay Falls',tagline:'Caring for God\'s Creation',badge:'Environmental',tags:['Environment','Cleanup','Advocacy'],category:'Environmental Stewardship',image:'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800',description:'In celebration of the 75th World Pathfinder Day, the club conducted a meaningful Clean-Up Drive at Lagilay Falls in Balubal, Cagayan de Oro City. Members trekked while cleaning rivers and appreciating God\'s creation, also installing signage to encourage responsible waste management.',page:'#'},
-  {id:4,icon:'🌊',title:'Balulang Clean-Up Drive for Flood Prevention',tagline:'Creating a Cleaner, Flood-Free Community',badge:'Environmental',tags:['Cleanup','Community','Flood Prevention'],category:'Environmental Stewardship',image:'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800',description:'As part of the 75th World Pathfinder Day celebration, the club partnered with Mambatangan SDA Church to conduct a Clean-Up Drive focused on rivers, canals, and drainage systems in Balulang, aiming to create a cleaner and flood-free community.',page:'#'},
-  {id:5,icon:'📚',title:'Dangcay Mission School Outreach 2025',tagline:'Resilience in the Face of Adversity',badge:'Outreach',tags:['Education','Resilience','Books'],category:'Community Service / Outreach',image:'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',description:'The team was deeply moved by the resilience of the pupils who bravely swam across floodwaters just to welcome them. Despite the challenges, the mission pressed on—bringing books, snacks, and lunch, as well as PE uniforms. The experience served as a powerful reminder of the importance of remaining grounded in faith.',page:'#'},
-  {id:6,icon:'📖',title:'Cayaga National High School Outreach 2025',tagline:'Nurturing Tomorrow\'s Leaders Through Education',badge:'Outreach',tags:['Education','Books','Games','Feeding'],category:'Community Service / Outreach',image:'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800',description:'The club, in partnership with Bugtaw Philippines, spent a blessed day with 100 vibrant students at Cayaga National High School. The outreach brought hope through books, games, prizes, and lunch. The mission: nurture today\'s students into tomorrow\'s leaders.',page:'#'},
-  {id:7,icon:'🌾',title:'Nauwanan ta Bawayan IP School Outreach',tagline:'Crossing Mountains to Reach Indigenous Communities',badge:'Outreach',tags:['IP Community','Feeding','Books','Health'],category:'Community Service / Outreach',image:'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800',description:'The club crossed mountains and canyons to reach an Indigenous Peoples School in Manolo Fortich, Bukidnon. The program included a feeding program, donation of books and bookshelves, storytelling, free blood pressure monitoring, and interactive games.',page:'#'},
-  {id:8,icon:'📰',title:'Guide Magazine Feature June 2025',tagline:'International Recognition for Pathfinder Ministry',badge:'Recognition',tags:['Media','Magazine','International'],category:'Media & Recognition',image:'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=800',description:'The Lord\'s ARMY Pathfinder Club landed in the pages of Guide Magazine, an SDA weekly periodical. The June 2025 issue featured the club, highlighting that there is so much in Pathfindering—from campfires to community, marching to ministry.',page:'#'},
-  {id:9,icon:'⛪',title:'World Adventurer Day Celebration 2025',tagline:'"Travel with Faith"',badge:'Kids',tags:['Children','Adventurer','Faith'],category:'Youth & Children\'s Ministry',image:'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800',description:'The Millennium Association and Lord\'s ARMY joyfully celebrated World Adventurer Day at Gango SDA Church. The day was filled with faith-building stations and culminated in a gift-giving activity for children and free health check-ups for parents.',page:'#'},
-  {id:10,icon:'🏃',title:'Run4Me: Run for Mother Earth 2025',tagline:'Physical Fitness as an Act of Stewardship',badge:'Health',tags:['Fitness','Environment','Run'],category:'Health & Fitness',image:'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800',description:'The LA Runners participated in the Run4Me: Run for Mother Earth event, honoring the club\'s commitment to caring for bodies through a healthy and active lifestyle, demonstrating that fitness and environmental stewardship go hand in hand.',page:'#'},
-  {id:11,icon:'🌍',title:'Global Youth Day 2025',tagline:'A Community Transformed Through Service',badge:'Youth',tags:['Youth','Community','Service'],category:'Youth & Children\'s Ministry',image:'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800',description:'Global Youth Day 2025 marked a significant moment as the ministry went beyond the church, building a community transformed through education, awareness, and empowerment. The Commitment Board made a meaningful impact, reflecting dedication to positive change.',page:'#'},
-  {id:12,icon:'🎯',title:'AY Progressive Class at Camp 1',tagline:'Training the Next Generation of Leaders',badge:'Training',tags:['Youth','Marching','Leadership'],category:'Leadership & Training',image:'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800',description:'The club facilitated the Adventist Youth progressive class at Camp 1, Maramag, Bukidnon. Pathfinders acquired knowledge about basic commands on marching and drilling, sign language, and CATS—equipping young members with essential leadership skills.',page:'#'},
-  {id:13,icon:'🏕️',title:'"Be the Light of the World" Camp',tagline:'Embracing the Call to Shine',badge:'Camp',tags:['Camp','Worship','Youth'],category:'Camping & Outdoor',image:'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800',description:'The amazing camping experience at Kadingilan Seventh-Day Adventist Elementary School brought together campers to learn, laugh, and embrace the call to "Be the Light of the World." The spirit-filled journey created lasting memories and deepened faith.',page:'#'},
-  {id:14,icon:'⛰️',title:'Master Guide Climb at Mt. Kalatungan',tagline:'Conquering the 5th Highest Mountain',badge:'Advanced',tags:['Master Guide','Mountain','Leadership'],category:'Leadership & Training',image:'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800',description:'The club participated in the Master Guide Climb for Honor from November 29 to December 1, 2024, at Mt. Kalatungan. The climb tested endurance, leadership, and commitment of all participants, serving as a transformative experience.',page:'#'},
-  {id:15,icon:'⛺',title:'Lindaban BSP & GSP Encampment 2024',tagline:'Sustaining Relevance Through Youth Engagement',badge:'Leadership',tags:['Scouting','BSP','GSP'],category:'Camping & Outdoor',image:'https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=800',description:'The club facilitated and led the Boy Scouts of the Philippines 2024 event under the theme "Youth Engagement: Sustaining Relevance & Strengthening Resilience" at Lindaban Elementary School.',page:'#'},
-  {id:16,icon:'🏕️',title:'NEMM Pathfinder Survival Camp',tagline:'Developing Future Church Leaders',badge:'Training',tags:['Survival','Youth','NEMM'],category:'Camping & Outdoor',image:'https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=800',description:'The club worked with incredible individuals during the Pathfinder Survival Camp and Advanced Survival Camp. These participants are destined to become leaders in their respective churches. Kudos to all youth of Division A SDA Youth Department at NEMM.',page:'#'},
-  {id:17,icon:'🌍',title:'SSD AYM Convention',tagline:'Southern Asia-Pacific Division Gathering',badge:'Conference',tags:['Convention','SSD','International'],category:'Youth & Children\'s Ministry',image:'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800',description:'A heartfelt thank you to all delegates, Master Guides, and Pathfinders from across the Southern Asia-Pacific for the unforgettable memories at the AYM Southern Asia-Pacific Division Convention.',page:'#'},
-  {id:18,icon:'📚',title:'Puntian Technical Institute Outreach 2024',tagline:'Supporting Reading Literacy and Education',badge:'Education',tags:['Literacy','Books','Education'],category:'Community Service / Outreach',image:'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',description:'Together with Bugtaw Philippines and Diamond Civilian Employee Association, the club conducted an Outreach Program at Puntian Technical Institute Inc., supporting reading literacy among children and youths.',page:'#'},
-  {id:19,icon:'🎒',title:'74th World Pathfinder Day Donation Drive',tagline:'Generous Support for Kadingilan SDA Elementary',badge:'Donation',tags:['School Supplies','Books','Donation'],category:'Community Service / Outreach',image:'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800',description:'Celebrating the 74th World Pathfinder Day, the event featured a generous donation of school supplies from DCEA along with new uniforms and a bookshelf filled with books provided by Bugtaw Philippines.',page:'#'},
-  {id:20,icon:'🤝',title:'Dangcay Mission School Humanitarian Mission 2024',tagline:'Extending Outreach to Remote Communities',badge:'Outreach',tags:['Humanitarian','Community','Mission'],category:'Community Service / Outreach',image:'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800',description:'The humanitarian mission at Dangcay Mission School was conducted in partnership with Followers of God Society, Bugtaw Philippines, Red Cross Bukidnon, and Diamond Civilian Employee Association, demonstrating the power of unity.',page:'#'},
-  {id:21,icon:'🏕️',title:'TSDACC Conquers\' Survival Camp 2024',tagline:'Chosen for a Greater Mission',badge:'Training',tags:['Survival','Camp','Leadership'],category:'Camping & Outdoor',image:'https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=800',description:'The club helped facilitate the TSDACC Conquers\' Pathfinder Survival Camp with the theme "Chosen for a Greater Mission," held at Malitbog, Bukidnon. The camp provided transformative experiences that built character, strengthened faith, and developed leadership skills.',page:'#'}
-];
+  // ALL 20 ACTIVITIES DATA - UPDATED WITH NUMBERED PAGES
+  const allActivities = [
+    {id:1, icon:'🏕️', title:'KSDAES Pathfinder & Adventurer Camp 2025', tagline:'Four Years of Faithful Service in Kadingilan', badge:'Featured', tags:['Camp','Youth','Worship'], category:'Camping & Outdoor', image:'../images/1/3.jpg', description:'The Lord\'s ARMY Pathfinder Club proudly facilitated the KSDAES Pathfinder and Adventurer Camp for the fourth consecutive year, marking a significant milestone in the club\'s ministry. With the theme "Hands to Serve, Hearts to Love," the camp brought together pupils, teachers, and parents who have entrusted the club with facilitating this transformative experience.', page:'1.html' },
+    {id:2, icon:'⛺', title:'Lindaban BSP & GSP Encampment 2025', tagline:'Leading Public School Scouts with Excellence', badge:'Leadership', tags:['Scouting','BSP','GSP'], category:'Camping & Outdoor', image:'../images/3/2.jpg', description:'The Lord\'s ARMY Pathfinder Club was honored to facilitate the Boy Scouts of the Philippines and Girl Scouts of the Philippines Encampment 2025. Under the theme "Youth Engagement: Sustaining Relevance & Strengthening Resilience," the encampment showcased the spirit of scouting through challenges including tent pitching, fire building, and team-building activities.', page:'2.html' },
+    {id:3, icon:'🌿', title:'75th World Pathfinder Day Clean-Up at Lagilay Falls', tagline:'Caring for God\'s Creation', badge:'Environmental', tags:['Environment','Cleanup','Advocacy'], category:'Environmental Stewardship', image:'../images/4/5.jpg', description:'In celebration of the 75th World Pathfinder Day, the club conducted a meaningful Clean-Up Drive at Lagilay Falls in Balubal, Cagayan de Oro City. Members trekked while cleaning rivers and appreciating God\'s creation, also installing signage to encourage responsible waste management.', page:'3.html' },
+    {id:4, icon:'📚', title:'Dangcay Mission School Outreach 2025', tagline:'Resilience in the Face of Adversity', badge:'Outreach', tags:['Education','Resilience','Books'], category:'Community Service / Outreach', image:'../images/5/7.jpg', description:'The team was deeply moved by the resilience of the pupils who bravely swam across floodwaters just to welcome them. Despite the challenges, the mission pressed on—bringing books, snacks, and lunch, as well as PE uniforms. The experience served as a powerful reminder of the importance of remaining grounded in faith.', page:'4.html' },
+    {id:5, icon:'📖', title:'Cayaga National High School Outreach 2025', tagline:'Nurturing Tomorrow\'s Leaders Through Education', badge:'Outreach', tags:['Education','Books','Games','Feeding'], category:'Community Service / Outreach', image:'../images/6/6.jpg', description:'The club, in partnership with Bugtaw Philippines, spent a blessed day with 100 vibrant students at Cayaga National High School. The outreach brought hope through books, games, prizes, and lunch. The mission: nurture today\'s students into tomorrow\'s leaders.', page:'5.html' },
+    {id:6, icon:'🌾', title:'Nauwanan ta Bawayan IP School Outreach', tagline:'Crossing Mountains to Reach Indigenous Communities', badge:'Outreach', tags:['IP Community','Feeding','Books','Health'], category:'Community Service / Outreach', image:'../images/7/1.jpg', description:'The club crossed mountains and canyons to reach an Indigenous Peoples School in Manolo Fortich, Bukidnon. The program included a feeding program, donation of books and bookshelves, storytelling, free blood pressure monitoring, and interactive games.', page:'6.html' },
+    {id:7, icon:'📰', title:'Guide Magazine Feature June 2025', tagline:'International Recognition for Pathfinder Ministry', badge:'Recognition', tags:['Media','Magazine','International'], category:'Media & Recognition', image:'../images/8/2.jpg', description:'The Lord\'s ARMY Pathfinder Club landed in the pages of Guide Magazine, an SDA weekly periodical. The June 2025 issue featured the club, highlighting that there is so much in Pathfindering—from campfires to community, marching to ministry.', page:'7.html' },
+    {id:8, icon:'⛪', title:'World Adventurer Day Celebration 2025', tagline:'"Travel with Faith"', badge:'Kids', tags:['Children','Adventurer','Faith'], category:'Youth & Children\'s Ministry', image:'../images/9/1.jpg', description:'The Millennium Association and Lord\'s ARMY joyfully celebrated World Adventurer Day at Gango SDA Church. The day was filled with faith-building stations and culminated in a gift-giving activity for children and free health check-ups for parents.', page:'8.html' },
+    {id:9, icon:'🏃', title:'Run4Me: Run for Mother Earth 2025', tagline:'Physical Fitness as an Act of Stewardship', badge:'Health', tags:['Fitness','Environment','Run'], category:'Health & Fitness', image:'../images/10/1.jpg', description:'The LA Runners participated in the Run4Me: Run for Mother Earth event, honoring the club\'s commitment to caring for bodies through a healthy and active lifestyle, demonstrating that fitness and environmental stewardship go hand in hand.', page:'9.html' },
+    {id:10, icon:'🌍', title:'Global Youth Day 2025', tagline:'A Community Transformed Through Service', badge:'Youth', tags:['Youth','Community','Service'], category:'Youth & Children\'s Ministry', image:'../images/11/2.jpg', description:'Global Youth Day 2025 marked a significant moment as the ministry went beyond the church, building a community transformed through education, awareness, and empowerment. The Commitment Board made a meaningful impact, reflecting dedication to positive change.', page:'10.html' },
+    {id:11, icon:'🎯', title:'AY Progressive Class at Camp 1', tagline:'Training the Next Generation of Leaders', badge:'Training', tags:['Youth','Marching','Leadership'], category:'Leadership & Training', image:'../images/12/6.jpg', description:'The club facilitated the Adventist Youth progressive class at Camp 1, Maramag, Bukidnon. Pathfinders acquired knowledge about basic commands on marching and drilling, sign language, and CATS—equipping young members with essential leadership skills.', page:'11.html' },
+    {id:12, icon:'🏕️', title:'"Be the Light of the World" Camp', tagline:'Embracing the Call to Shine', badge:'Camp', tags:['Camp','Worship','Youth'], category:'Camping & Outdoor', image:'../images/13/8.jpg', description:'The amazing camping experience at Kadingilan Seventh-Day Adventist Elementary School brought together campers to learn, laugh, and embrace the call to "Be the Light of the World." The spirit-filled journey created lasting memories and deepened faith.', page:'12.html' },
+    {id:13, icon:'⛰️', title:'Master Guide Climb at Mt. Kalatungan', tagline:'Conquering the 5th Highest Mountain', badge:'Advanced', tags:['Master Guide','Mountain','Leadership'], category:'Leadership & Training', image:'../images/14/2.jpg', description:'The club participated in the Master Guide Climb for Honor from November 29 to December 1, 2024, at Mt. Kalatungan. The climb tested endurance, leadership, and commitment of all participants, serving as a transformative experience.', page:'13.html' },
+    {id:14, icon:'⛺', title:'Lindaban BSP & GSP Encampment 2024', tagline:'Sustaining Relevance Through Youth Engagement', badge:'Leadership', tags:['Scouting','BSP','GSP'], category:'Camping & Outdoor', image:'../images/15/4.jpg', description:'The club facilitated and led the Boy Scouts of the Philippines 2024 event under the theme "Youth Engagement: Sustaining Relevance & Strengthening Resilience" at Lindaban Elementary School.', page:'14.html' },
+    {id:15, icon:'🏕️', title:'NEMM Pathfinder Survival Camp', tagline:'Developing Future Church Leaders', badge:'Training', tags:['Survival','Youth','NEMM'], category:'Camping & Outdoor', image:'../images/16/1.jpg', description:'The club worked with incredible individuals during the Pathfinder Survival Camp and Advanced Survival Camp. These participants are destined to become leaders in their respective churches. Kudos to all youth of Division A SDA Youth Department at NEMM.', page:'15.html' },
+    {id:16, icon:'🌍', title:'SSD AYM Convention', tagline:'Southern Asia-Pacific Division Gathering', badge:'Conference', tags:['Convention','SSD','International'], category:'Youth & Children\'s Ministry', image:'../images/17/2.jpg', description:'A heartfelt thank you to all delegates, Master Guides, and Pathfinders from across the Southern Asia-Pacific for the unforgettable memories at the AYM Southern Asia-Pacific Division Convention.', page:'16.html' },
+    {id:17, icon:'📚', title:'Puntian Technical Institute Outreach 2024', tagline:'Supporting Reading Literacy and Education', badge:'Education', tags:['Literacy','Books','Education'], category:'Community Service / Outreach', image:'../images/18/1.jpg', description:'Together with Bugtaw Philippines and Diamond Civilian Employee Association, the club conducted an Outreach Program at Puntian Technical Institute Inc., supporting reading literacy among children and youths.', page:'17.html' },
+    {id:18, icon:'🎒', title:'74th World Pathfinder Day Donation Drive', tagline:'Generous Support for Kadingilan SDA Elementary', badge:'Donation', tags:['School Supplies','Books','Donation'], category:'Community Service / Outreach', image:'../images/19/1.jpg', description:'Celebrating the 74th World Pathfinder Day, the event featured a generous donation of school supplies from DCEA along with new uniforms and a bookshelf filled with books provided by Bugtaw Philippines.', page:'18.html' },
+    {id:19, icon:'🤝', title:'Dangcay Mission School Humanitarian Mission 2024', tagline:'Extending Outreach to Remote Communities', badge:'Outreach', tags:['Humanitarian','Community','Mission'], category:'Community Service / Outreach', image:'../images/20/2.jpg', description:'The humanitarian mission at Dangcay Mission School was conducted in partnership with Followers of God Society, Bugtaw Philippines, Red Cross Bukidnon, and Diamond Civilian Employee Association, demonstrating the power of unity.', page:'19.html' },
+    {id:20, icon:'🏕️', title:'TSDACC Conquers\' Survival Camp 2024', tagline:'Chosen for a Greater Mission', badge:'Training', tags:['Survival','Camp','Leadership'], category:'Camping & Outdoor', image:'../images/21/2.jpg', description:'The club helped facilitate the TSDACC Conquers\' Pathfinder Survival Camp with the theme "Chosen for a Greater Mission," held at Malitbog, Bukidnon. The camp provided transformative experiences that built character, strengthened faith, and developed leadership skills.', page:'20.html' },
+    // Additional activity - Balulang Clean-Up
+  ];
 
-const heroSlides=[
-  {image:'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600',eyebrow:'Ministry in Action',title:'Where Faith\nMeets<br><em>Adventure</em>',subtitle:'21 activities and counting — from mountain climbs to coastal cleanups, from jungle camps to classroom outreaches.'},
-  {image:'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600',eyebrow:'Community Outreach',title:'Hands\nto Serve,<br><em>Hearts to Love</em>',subtitle:'Reaching remote schools, indigenous communities, and flood-affected students across Mindanao with books, meals, and hope.'},
-  {image:'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1600',eyebrow:'Environmental Stewardship',title:'Caring for<br><em>God\'s Creation</em>',subtitle:'Clean-up drives, river advocacy, and environmental education — the Pathfinder commitment to the world we inherit.'}
-];
+  // FIRST 9 ACTIVITIES FOR THE MAIN GRID
+  const activities = allActivities.slice(0, 9);
 
-const categories=[
-  {id:'all',label:'All Activities'},
-  {id:'Camping & Outdoor',label:'Camping & Outdoor'},
-  {id:'Community Service / Outreach',label:'Community Outreach'},
-  {id:'Environmental Stewardship',label:'Environmental'},
-  {id:'Leadership & Training',label:'Leadership'},
-  {id:'Youth & Children\'s Ministry',label:'Youth Ministry'},
-  {id:'Health & Fitness',label:'Health & Fitness'},
-  {id:'Media & Recognition',label:'Media & Recognition'}
-];
+  // REMAINING ACTIVITIES (10-20) FOR THE SLIDER
+  const sliderActivities = allActivities.slice(9);
 
-const highlights=[
-  activities[0],activities[4],activities[7]
-];
+  const heroSlides = [
+    {image:'../images/14/3.jpg', eyebrow:'Ministry in Action', title:'Where Faith\nMeets<br><em>Adventure</em>', subtitle:'21 activities and counting — from mountain climbs to coastal cleanups, from jungle camps to classroom outreaches.'},
+    {image:'../images/5/1.jpg', eyebrow:'Community Outreach', title:'Hands\nto Serve,<br><em>Hearts to Love</em>', subtitle:'Reaching remote schools, indigenous communities, and flood-affected students across Mindanao with books, meals, and hope.'},
+    {image:'../images/4/5.jpg', eyebrow:'Environmental Stewardship', title:'Caring for<br><em>God\'s Creation</em>', subtitle:'Clean-up drives, river advocacy, and environmental education — the Pathfinder commitment to the world we inherit.'}
+  ];
 
-let heroIdx=0,heroTimer;
-let sliderIdx=0,slidesPerView=4;
+  const categories = [
+    {id:'all', label:'All Activities'},
+    {id:'Camping & Outdoor', label:'Camping & Outdoor'},
+    {id:'Community Service / Outreach', label:'Community Outreach'},
+    {id:'Environmental Stewardship', label:'Environmental'},
+    {id:'Leadership & Training', label:'Leadership'},
+    {id:'Youth & Children\'s Ministry', label:'Youth Ministry'},
+    {id:'Health & Fitness', label:'Health & Fitness'},
+    {id:'Media & Recognition', label:'Media & Recognition'}
+  ];
 
-// HERO
-function buildHero(){
-  const wrap=document.getElementById('heroSlides');
-  const content=document.getElementById('heroContent');
-  const dots=document.getElementById('heroDots');
-  document.getElementById('counterTotal').textContent=String(heroSlides.length).padStart(2,'0');
+  const highlights = [allActivities[0], allActivities[4], allActivities[7]];
 
-  heroSlides.forEach((s,i)=>{
-    const div=document.createElement('div');
-    div.className='hero-slide'+(i===0?' active':'');
-    div.innerHTML=`<img src="${s.image}" alt="${s.eyebrow}" loading="${i===0?'eager':'lazy'}">`;
-    wrap.appendChild(div);
-    const dot=document.createElement('span');
-    dot.className=i===0?'active':'';
-    dot.onclick=()=>goHero(i);
-    dots.appendChild(dot);
-  });
+  let heroIdx = 0, heroTimer;
+  let sliderIdx = 0, slidesPerView = 4;
 
-  updateHeroContent();
-  heroTimer=setInterval(()=>goHero((heroIdx+1)%heroSlides.length),5500);
-}
+  // --- HERO ---
+  function buildHero() {
+    const wrap = document.getElementById('heroSlides');
+    const content = document.getElementById('heroContent');
+    const dots = document.getElementById('heroDots');
+    document.getElementById('counterTotal').textContent = String(heroSlides.length).padStart(2, '0');
 
-function updateHeroContent(){
-  const s=heroSlides[heroIdx];
-  document.getElementById('heroContent').innerHTML=`
-    <div class="hero-eyebrow">${s.eyebrow}</div>
-    <h1 class="hero-title">${s.title}</h1>
-    <p class="hero-subtitle">${s.subtitle}</p>
-    <a href="#activitiesSection" class="hero-cta" onclick="document.querySelector('.filter-section').scrollIntoView({behavior:'smooth'});return false;">
-      Explore Activities &nbsp;<i class="fas fa-arrow-down"></i>
-    </a>
-  `;
-}
+    heroSlides.forEach((s, i) => {
+      const div = document.createElement('div');
+      div.className = 'hero-slide' + (i === 0 ? ' active' : '');
+      div.innerHTML = `<img src="${s.image}" alt="${s.eyebrow}" loading="${i === 0 ? 'eager' : 'lazy'}">`;
+      wrap.appendChild(div);
+      const dot = document.createElement('span');
+      dot.className = i === 0 ? 'active' : '';
+      dot.onclick = () => goHero(i);
+      dots.appendChild(dot);
+    });
 
-function goHero(idx){
-  clearInterval(heroTimer);
-  document.querySelectorAll('.hero-slide').forEach((s,i)=>s.classList.toggle('active',i===idx));
-  document.querySelectorAll('.hero-dots span').forEach((d,i)=>d.classList.toggle('active',i===idx));
-  heroIdx=idx;
-  document.getElementById('counterCur').textContent=String(idx+1).padStart(2,'0');
-  updateHeroContent();
-  heroTimer=setInterval(()=>goHero((heroIdx+1)%heroSlides.length),5500);
-}
+    updateHeroContent();
+    heroTimer = setInterval(() => goHero((heroIdx + 1) % heroSlides.length), 5500);
+  }
 
-// MARQUEE
-function buildMarquee(){
-  const items=activities.map(a=>`<div class="marquee-item"><span>${a.icon}</span>${a.title}<div class="dot"></div></div>`).join('');
-  const el=document.getElementById('marqueeInner');
-  el.innerHTML=items+items;
-}
-
-// FILTERS
-function buildFilters(){
-  const row=document.getElementById('filterRow');
-  categories.forEach(cat=>{
-    const btn=document.createElement('button');
-    btn.className='filter-btn'+(cat.id==='all'?' active':'');
-    btn.textContent=cat.label;
-    btn.dataset.cat=cat.id;
-    btn.onclick=()=>filterActivities(cat.id);
-    row.appendChild(btn);
-  });
-}
-
-// ACTIVITY GRID
-function buildGrid(filter='all'){
-  const grid=document.getElementById('activitiesGrid');
-  const noRes=document.getElementById('noResults');
-  grid.querySelectorAll('.activity-card').forEach(c=>c.remove());
-
-  const filtered=filter==='all'?activities:activities.filter(a=>a.category===filter);
-
-  if(filtered.length===0){noRes.classList.add('show');return;}
-  noRes.classList.remove('show');
-
-  filtered.forEach((a,i)=>{
-    const card=document.createElement('div');
-    const isFeatured=(i===0 && filter==='all');
-    card.className='activity-card'+(isFeatured?' featured':'');
-    card.dataset.category=a.category;
-    card.innerHTML=`
-      <div class="card-img-wrap">
-        <img src="${a.image}" alt="${a.title}" loading="lazy">
-        <div class="card-cat">${a.category.split('/')[0].trim()}</div>
-        <div class="card-badge">${a.badge}</div>
-      </div>
-      <div class="card-body">
-        <div class="card-tags">${a.tags.map(t=>`<span class="card-tag">#${t}</span>`).join('')}</div>
-        <div class="card-title">${a.icon} ${a.title}</div>
-        <div class="card-tagline">${a.tagline}</div>
-        <p class="card-desc">${a.description}</p>
-        <a href="${a.page}" class="card-link">Read the story <i class="fas fa-arrow-right"></i></a>
-      </div>
+  function updateHeroContent() {
+    const s = heroSlides[heroIdx];
+    document.getElementById('heroContent').innerHTML = `
+      <div class="hero-eyebrow">${s.eyebrow}</div>
+      <h1 class="hero-title">${s.title}</h1>
+      <p class="hero-subtitle">${s.subtitle}</p>
+      <a href="#activitiesSection" class="hero-cta" onclick="document.querySelector('.filter-section').scrollIntoView({behavior:'smooth'});return false;">
+        Explore Activities &nbsp;<i class="fas fa-arrow-down"></i>
+      </a>
     `;
-    grid.appendChild(card);
+  }
+
+  function goHero(idx) {
+    clearInterval(heroTimer);
+    document.querySelectorAll('.hero-slide').forEach((s, i) => s.classList.toggle('active', i === idx));
+    document.querySelectorAll('.hero-dots span').forEach((d, i) => d.classList.toggle('active', i === idx));
+    heroIdx = idx;
+    document.getElementById('counterCur').textContent = String(idx + 1).padStart(2, '0');
+    updateHeroContent();
+    heroTimer = setInterval(() => goHero((heroIdx + 1) % heroSlides.length), 5500);
+  }
+
+  // --- MARQUEE ---
+  function buildMarquee() {
+    const items = allActivities.map(a => `<div class="marquee-item"><span>${a.icon}</span>${a.title}<div class="dot"></div></div>`).join('');
+    document.getElementById('marqueeInner').innerHTML = items + items;
+  }
+
+  // --- FILTERS ---
+  function buildFilters() {
+    const row = document.getElementById('filterRow');
+    categories.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn' + (cat.id === 'all' ? ' active' : '');
+      btn.textContent = cat.label;
+      btn.dataset.cat = cat.id;
+      btn.onclick = () => filterActivities(cat.id);
+      row.appendChild(btn);
+    });
+  }
+
+  // --- GRID (only first 9 activities) ---
+  function buildGrid(filter = 'all') {
+    const grid = document.getElementById('activitiesGrid');
+    const noRes = document.getElementById('noResults');
+    grid.querySelectorAll('.activity-card').forEach(c => c.remove());
+
+    const filtered = filter === 'all' ? activities : activities.filter(a => a.category === filter);
+
+    if (filtered.length === 0) { noRes.classList.add('show'); return; }
+    noRes.classList.remove('show');
+
+    filtered.forEach((a, i) => {
+      const card = document.createElement('div');
+      const isFeatured = (i === 0 && filter === 'all');
+      card.className = 'activity-card' + (isFeatured ? ' featured' : '');
+      card.dataset.category = a.category;
+      card.innerHTML = `
+        <div class="card-img-wrap">
+          <img src="${a.image}" alt="${a.title}" loading="lazy">
+          <div class="card-cat">${a.category.split('/')[0].trim()}</div>
+          <div class="card-badge">${a.badge}</div>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">${a.tags.map(t => `<span class="card-tag">#${t}</span>`).join('')}</div>
+          <div class="card-title">${a.icon} ${a.title}</div>
+          <div class="card-tagline">${a.tagline}</div>
+          <p class="card-desc">${a.description}</p>
+          <a href="${a.page}" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function filterActivities(id) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === id));
+    buildGrid(id);
+  }
+
+  // --- HIGHLIGHTS ---
+  function buildHighlights() {
+    const grid = document.getElementById('highlightsGrid');
+    highlights.forEach((a, i) => {
+      const card = document.createElement('div');
+      card.className = 'highlight-card';
+      card.innerHTML = `
+        <div class="highlight-num">0${i + 1}</div>
+        <div class="highlight-icon">${a.icon}</div>
+        <div class="highlight-title">${a.title}</div>
+        <p class="highlight-desc">${a.description.substring(0, 150)}…</p>
+        <a href="${a.page}" class="highlight-link">Read more <i class="fas fa-arrow-right"></i></a>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // --- SLIDER (activities 10-20) ---
+  function buildSlider() {
+    const track = document.getElementById('slTrack');
+    sliderActivities.forEach(a => {
+      const card = document.createElement('div');
+      card.className = 'slide-card';
+      card.innerHTML = `
+        <div class="sc-img">
+          <img src="${a.image}" alt="${a.title}" loading="lazy">
+          <div class="sc-badge">${a.badge}</div>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title">${a.icon} ${a.title}</div>
+          <div class="sc-tagline">${a.tagline}</div>
+          <p class="sc-desc">${a.description.substring(0, 90)}…</p>
+          <a href="${a.page}" class="sc-link">Read more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      `;
+      track.appendChild(card);
+    });
+    updateSlider();
+  }
+
+  function updateSlider() {
+    const track = document.getElementById('slTrack');
+    const cards = track.querySelectorAll('.slide-card');
+    if (!cards.length) return;
+    const cardW = cards[0].offsetWidth + 24;
+    const maxIdx = Math.max(0, Math.ceil(cards.length / slidesPerView) - 1);
+    sliderIdx = Math.min(sliderIdx, maxIdx);
+    track.style.transform = `translateX(-${sliderIdx * cardW * slidesPerView}px)`;
+  }
+
+  document.getElementById('slPrev').onclick = () => { sliderIdx = Math.max(0, sliderIdx - 1); updateSlider(); };
+  document.getElementById('slNext').onclick = () => {
+    const cards = document.getElementById('slTrack').querySelectorAll('.slide-card');
+    const max = Math.max(0, Math.ceil(cards.length / slidesPerView) - 1);
+    sliderIdx = Math.min(max, sliderIdx + 1); updateSlider();
+  };
+
+  // --- SCROLL ---
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    const st = window.scrollY;
+    const dh = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (st / dh * 100) + '%';
+    nav.classList.toggle('scrolled', st > 50);
+    document.getElementById('btt').classList.toggle('show', st > 400);
   });
-}
 
-function filterActivities(id){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat===id));
-  buildGrid(id);
-}
+  document.getElementById('btt').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-// HIGHLIGHTS
-function buildHighlights(){
-  const grid=document.getElementById('highlightsGrid');
-  highlights.forEach((a,i)=>{
-    const card=document.createElement('div');
-    card.className='highlight-card';
-    card.innerHTML=`
-      <div class="highlight-num">0${i+1}</div>
-      <div class="highlight-icon">${a.icon}</div>
-      <div class="highlight-title">${a.title}</div>
-      <p class="highlight-desc">${a.description.substring(0,150)}…</p>
-      <a href="${a.page}" class="highlight-link">Read more <i class="fas fa-arrow-right"></i></a>
-    `;
-    grid.appendChild(card);
+  // --- HAMBURGER ---
+  document.getElementById('ham').onclick = function () {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  };
+
+  // --- RESIZE ---
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 640) slidesPerView = 1;
+    else if (window.innerWidth < 768) slidesPerView = 2;
+    else if (window.innerWidth < 1024) slidesPerView = 3;
+    else slidesPerView = 4;
+    updateSlider();
   });
-}
 
-// SLIDER
-function buildSlider(){
-  const track=document.getElementById('slTrack');
-  const sliderActivities=activities.slice(10);
-  sliderActivities.forEach(a=>{
-    const card=document.createElement('div');
-    card.className='slide-card';
-    card.innerHTML=`
-      <div class="sc-img">
-        <img src="${a.image}" alt="${a.title}" loading="lazy">
-        <div class="sc-badge">${a.badge}</div>
-      </div>
-      <div class="sc-body">
-        <div class="sc-title">${a.icon} ${a.title}</div>
-        <div class="sc-tagline">${a.tagline}</div>
-        <p class="sc-desc">${a.description.substring(0,90)}…</p>
-        <a href="${a.page}" class="sc-link">Read more <i class="fas fa-arrow-right"></i></a>
-      </div>
-    `;
-    track.appendChild(card);
-  });
-  updateSlider();
-}
-
-function updateSlider(){
-  const track=document.getElementById('slTrack');
-  const cards=track.querySelectorAll('.slide-card');
-  if(!cards.length)return;
-  const cardW=cards[0].offsetWidth+24;
-  const maxIdx=Math.max(0,Math.ceil(cards.length/slidesPerView)-1);
-  sliderIdx=Math.min(sliderIdx,maxIdx);
-  track.style.transform=`translateX(-${sliderIdx*cardW*slidesPerView}px)`;
-}
-
-document.getElementById('slPrev').onclick=()=>{sliderIdx=Math.max(0,sliderIdx-1);updateSlider()};
-document.getElementById('slNext').onclick=()=>{
-  const cards=document.getElementById('slTrack').querySelectorAll('.slide-card');
-  const max=Math.max(0,Math.ceil(cards.length/slidesPerView)-1);
-  sliderIdx=Math.min(max,sliderIdx+1);updateSlider();
-};
-
-// SCROLL
-window.addEventListener('scroll',()=>{
-  const nav=document.getElementById('navbar');
-  const st=window.scrollY;
-  const dh=document.documentElement.scrollHeight-window.innerHeight;
-  document.getElementById('progress').style.width=(st/dh*100)+'%';
-  nav.classList.toggle('scrolled',st>50);
-  document.getElementById('btt').classList.toggle('show',st>400);
-});
-
-document.getElementById('btt').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
-
-// HAMBURGER
-document.getElementById('ham').onclick=function(){
-  document.getElementById('mobile-menu').classList.toggle('open');
-};
-
-// RESIZE
-window.addEventListener('resize',()=>{
-  if(window.innerWidth<640)slidesPerView=1;
-  else if(window.innerWidth<768)slidesPerView=2;
-  else if(window.innerWidth<1024)slidesPerView=3;
-  else slidesPerView=4;
-  updateSlider();
-});
-
-// INIT
-buildHero();
-buildMarquee();
-buildFilters();
-buildGrid();
-buildHighlights();
-buildSlider();
+  // --- INIT ---
+  buildHero();
+  buildMarquee();
+  buildFilters();
+  buildGrid();
+  buildHighlights();
+  buildSlider();
 </script>
 </body>
 </html>

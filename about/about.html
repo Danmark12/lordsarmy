@@ -228,7 +228,7 @@
       color: var(--crimson);
     }
 
-    /* hero */
+    /* hero — slideshow */
     .hero {
       position: relative;
       height: 100vh;
@@ -236,20 +236,33 @@
       overflow: hidden;
       background: #0A0605;
     }
-    .hero-bg {
+    .hero-slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-slide {
       position: absolute;
       inset: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      z-index: 1;
     }
-    .hero-bg img {
+    .hero-slide.active {
+      opacity: 1;
+      z-index: 2;
+    }
+    .hero-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       filter: brightness(0.38) saturate(0.7);
     }
-    .hero-overlay {
+    .hero-slide .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(135deg, rgba(10, 6, 5, 0.7) 0%, rgba(10, 6, 5, 0.1) 65%);
+      pointer-events: none;
     }
     .hero-content {
       position: absolute;
@@ -258,6 +271,11 @@
       flex-direction: column;
       justify-content: flex-end;
       padding: 80px;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .hero-content * {
+      pointer-events: auto;
     }
     .hero-eyebrow {
       display: inline-flex;
@@ -316,6 +334,27 @@
     @keyframes scrollBounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(5px); }
+    }
+
+    /* slide indicators */
+    .hero-indicators {
+      position: absolute;
+      bottom: 140px;
+      left: 80px;
+      display: flex;
+      gap: 12px;
+      z-index: 4;
+    }
+    .hero-indicators span {
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: background 0.4s;
+    }
+    .hero-indicators span.active {
+      background: var(--gold);
     }
 
     /* tape */
@@ -678,7 +717,7 @@
       opacity: 1;
     }
 
-    /* director section — with the actual director image */
+    /* director section */
     .director-section {
       background: var(--surface);
       padding: 100px 40px;
@@ -998,12 +1037,15 @@
       footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
       .stat-bar-inner { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
+      .hero-indicators { left: 40px; bottom: 120px; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .hero-content { padding: 40px 24px 60px; }
+      .hero-indicators { left: 24px; bottom: 100px; }
+      .hero-indicators span { width: 28px; }
       .split-text { padding: 60px 24px; }
       .mission-section { padding: 60px 20px; }
       .timeline-section { padding: 60px 20px; }
@@ -1020,6 +1062,8 @@
     @media (max-width: 480px) {
       .legacy-grid { grid-template-columns: 1fr; }
       .stat-bar-inner { grid-template-columns: 1fr 1fr; }
+      .hero-indicators { left: 20px; bottom: 80px; }
+      .hero-indicators span { width: 20px; }
     }
   </style>
 </head>
@@ -1032,7 +1076,6 @@
   <div class="nav-inner">
     <a href="../index.html" class="nav-brand">
       <div class="brand-emblem">
-        <!-- logo placeholder (LA logo) -->
         <img src="../logo/LA_logo.png" alt="Lord's ARMY Pathfinder Club Logo" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
       </div>
       <div>
@@ -1063,17 +1106,38 @@
   </ul>
 </div>
 
-<!-- hero -->
+<!-- hero slideshow -->
 <section class="hero">
-  <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1600" alt="Lord's ARMY Members" loading="eager">
+  <div class="hero-slides">
+    <!-- slide 1 -->
+    <div class="hero-slide active" data-index="0">
+      <img src="../images/0/la.jpg" alt="Lord's ARMY Members 1" loading="eager">
+      <div class="hero-overlay"></div>
+    </div>
+    <!-- slide 2 -->
+    <div class="hero-slide" data-index="1">
+      <img src="../images/0/le.jpg" alt="Lord's ARMY Members 2" loading="lazy">
+      <div class="hero-overlay"></div>
+    </div>
+    <!-- slide 3 -->
+    <div class="hero-slide" data-index="2">
+      <img src="../images/0/li.jpg" alt="Lord's ARMY Members 3" loading="lazy">
+      <div class="hero-overlay"></div>
+    </div>
   </div>
-  <div class="hero-overlay"></div>
+
   <div class="hero-content">
     <div class="hero-eyebrow">Who We Are</div>
     <h1 class="hero-title">Lord's <em>ARMY</em><br>Pathfinder Club</h1>
     <p class="hero-subtitle">A movement of young people trained in leadership, faith, and service — reaching communities across Mindanao and beyond since 2021.</p>
     <a href="#whoWeAre" class="hero-scroll">Discover our story <i class="fas fa-arrow-down"></i></a>
+  </div>
+
+  <!-- indicators -->
+  <div class="hero-indicators">
+    <span class="active" data-index="0"></span>
+    <span data-index="1"></span>
+    <span data-index="2"></span>
   </div>
 </section>
 
@@ -1096,7 +1160,7 @@
     </div>
   </div>
   <div class="split-image">
-    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200" alt="Lord's ARMY members in community service" loading="lazy">
+    <img src="../images/0/le.jpg" alt="Lord's ARMY members in community service" loading="lazy">
     <div class="split-image-overlay"></div>
     <div class="split-image-label">
       <blockquote>"Hands to Serve, Hearts to Love"</blockquote>
@@ -1157,14 +1221,13 @@
   </div>
 </section>
 
-<!-- DIRECTOR SECTION with updated name & title -->
+<!-- DIRECTOR SECTION -->
 <section class="director-section">
   <div class="director-inner">
     <div class="director-visual">
       <div class="director-accent"></div>
       <div class="director-accent-br"></div>
       <div class="director-img-frame">
-        <!-- Director image: ../images/a.png -->
         <img src="../images/a.jpg" alt="Arlie Joy Damiles — Club Director" loading="lazy">
         <div class="director-img-overlay"></div>
         <div class="director-badge">
@@ -1218,11 +1281,11 @@
       <div>
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about/about.html">About</a></li>
-          <li><a href="activities/activities.html">Activities</a></li>
-          <li><a href="services/services.html">Services</a></li>
-          <li><a href="contact/contact.html">Contact</a></li>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="../activities/activities.html">Activities</a></li>
+          <li><a href="../services/services.html">Services</a></li>
+          <li><a href="../contact/contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
@@ -1261,6 +1324,39 @@
   document.getElementById('ham').onclick = function() {
     document.getElementById('mobile-menu').classList.toggle('open');
   };
+
+  // ----- hero slideshow -----
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const indicators = document.querySelectorAll('.hero-indicators span');
+  let slideInterval;
+
+  function goToSlide(index) {
+    // remove active from all
+    slides.forEach(s => s.classList.remove('active'));
+    indicators.forEach(i => i.classList.remove('active'));
+    // set active
+    slides[index].classList.add('active');
+    indicators[index].classList.add('active');
+    currentSlide = index;
+  }
+
+  function nextSlide() {
+    const next = (currentSlide + 1) % slides.length;
+    goToSlide(next);
+  }
+
+  // indicator clicks
+  indicators.forEach((ind, i) => {
+    ind.addEventListener('click', () => {
+      clearInterval(slideInterval);
+      goToSlide(i);
+      slideInterval = setInterval(nextSlide, 5000);
+    });
+  });
+
+  // start slideshow
+  slideInterval = setInterval(nextSlide, 5000);
 </script>
 
 </body>

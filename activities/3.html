@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>75th World Pathfinder Day Clean-Up | Lord's ARMY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --crimson: #8B1A1A;
+      --crimson-deep: #5C0F0F;
+      --crimson-glow: #C0362C;
+      --gold: #C9A03D;
+      --gold-light: #EDD98A;
+      --ivory: #FDFAF4;
+      --ink: #1A1208;
+      --muted: #7A6A55;
+      --border: #E8E0D0;
+      --surface: #FFFFFF;
+      --surface-warm: #FDF8F2;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    #progress {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold));
+      z-index: 9999; width: 0%; transition: width 0.1s;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      padding: 0 40px;
+      background: rgba(253,250,244,0.97);
+      box-shadow: 0 1px 0 var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-emblem {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--crimson); overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(201,160,61,0.3);
+      transition: box-shadow 0.3s;
+    }
+    .nav-brand:hover .brand-emblem { box-shadow: 0 0 0 3px var(--gold); }
+    .brand-text-top {
+      font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700;
+      color: var(--crimson); line-height: 1; letter-spacing: 0.5px;
+    }
+    .brand-text-sub {
+      font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; color: var(--muted); position: relative; transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--crimson); transition: width 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--crimson); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--crimson); transition: all 0.3s; }
+    #mobile-menu {
+      display: none; position: fixed; top: 72px; left: 0; right: 0;
+      background: var(--surface-warm); border-bottom: 1px solid var(--border);
+      padding: 16px 24px; z-index: 99;
+    }
+    #mobile-menu.open { display: block; }
+    #mobile-menu ul { list-style: none; }
+    #mobile-menu li a {
+      display: block; padding: 12px 0; font-size: 0.9rem; font-weight: 600;
+      color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.3s;
+    }
+    #mobile-menu li:last-child a { border-bottom: none; }
+    #mobile-menu li a:hover, #mobile-menu li a.active { color: var(--crimson); }
+
+    .article-hero {
+      margin-top: 72px;
+      height: 88vh; min-height: 560px;
+      position: relative; overflow: hidden; background: var(--ink);
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+    }
+    .hero-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.38) saturate(0.7);
+      transform: scale(1.05); transition: transform 10s ease;
+    }
+    .hero-img img.loaded { transform: scale(1); }
+    .hero-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,6,5,0.95) 0%, rgba(10,6,5,0.3) 55%, transparent 100%);
+    }
+    .hero-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 80px 72px;
+      max-width: 1100px;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin-bottom: 22px;
+    }
+    .breadcrumb a { color: var(--gold); text-decoration: none; transition: color 0.3s; }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb i { font-size: 7px; opacity: 0.5; }
+    .category-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--crimson); color: #fff;
+      font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 14px; margin-bottom: 18px; width: fit-content;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900; color: #fff; line-height: 1.06;
+      letter-spacing: -0.5px; margin-bottom: 16px; max-width: 840px;
+    }
+    .hero-tagline {
+      font-family: 'Lora', serif; font-style: italic;
+      font-size: 1.1rem; color: var(--gold-light);
+      margin-bottom: 26px; max-width: 560px;
+    }
+    .hero-meta {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      border: 1px solid rgba(255,255,255,0.1); padding: 5px 12px;
+    }
+    .hero-meta-item i { color: var(--gold); font-size: 9px; }
+
+    .page-wrap {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .article-main {
+      padding: 72px 64px 80px 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .opening-rule {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 40px;
+    }
+    .opening-rule span {
+      font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--crimson); white-space: nowrap;
+    }
+    .opening-rule::before, .opening-rule::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .article-body p {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem; line-height: 1.92; color: #38281A;
+      margin-bottom: 26px;
+    }
+    .article-body .drop-cap::first-letter {
+      font-family: 'Cinzel', serif; font-size: 5.5rem; font-weight: 900;
+      float: left; line-height: 0.75; padding-right: 14px; padding-top: 10px;
+      color: var(--crimson);
+    }
+    .article-body h2 {
+      font-family: 'Cinzel', serif; font-size: 1.45rem; font-weight: 700;
+      color: var(--ink); line-height: 1.2;
+      margin: 56px 0 18px;
+      padding-bottom: 14px; border-bottom: 1px solid var(--border);
+    }
+
+    .pull-quote {
+      border-left: 4px solid var(--gold);
+      margin: 48px 0; padding: 28px 36px;
+      background: var(--surface-warm);
+      position: relative;
+    }
+    .pull-quote::before {
+      content: '\201C'; font-family: 'Cinzel', serif;
+      font-size: 5rem; color: var(--gold); opacity: 0.22;
+      position: absolute; top: -8px; left: 20px; line-height: 1; pointer-events: none;
+    }
+    .pull-quote p {
+      font-family: 'Lora', serif; font-style: italic;
+      font-size: 1.18rem; line-height: 1.72; color: var(--ink);
+      margin: 0; position: relative; z-index: 1;
+    }
+    .pull-quote cite {
+      display: block; margin-top: 14px;
+      font-family: 'Inter', sans-serif; font-style: normal;
+      font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .scripture-block {
+      background: var(--crimson-deep); padding: 36px 44px; margin: 48px 0;
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .scripture-block::before {
+      content: '✝'; position: absolute; right: -8px; top: -16px;
+      font-size: 8rem; color: rgba(255,255,255,0.04); pointer-events: none;
+    }
+    .scripture-block p {
+      font-family: 'Lora', serif; font-style: italic;
+      font-size: 1.12rem; line-height: 1.82; color: rgba(255,255,255,0.85);
+      margin: 0 0 12px; position: relative; z-index: 1;
+    }
+    .scripture-block cite {
+      font-family: 'Inter', sans-serif; font-style: normal;
+      font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .gallery-block { margin: 52px 0; }
+    .gallery-eyebrow {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+      font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .gallery-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+    }
+    .gallery-grid.two-up { grid-template-columns: 2fr 1fr; }
+    .gallery-grid.two-up .g-item:first-child { aspect-ratio: 16/9; }
+    .g-item {
+      position: relative; overflow: hidden; aspect-ratio: 4/3; cursor: zoom-in;
+      background: var(--border);
+    }
+    .g-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s;
+      filter: brightness(0.88) saturate(0.82);
+    }
+    .g-item:hover img { transform: scale(1.07); filter: brightness(1) saturate(1); }
+    .g-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,6,5,0.5) 0%, transparent 55%);
+      opacity: 0; transition: opacity 0.4s;
+      display: flex; align-items: flex-end; padding: 12px;
+    }
+    .g-item:hover .g-overlay { opacity: 1; }
+    .g-overlay-icon { color: #fff; font-size: 0.8rem; opacity: 0.8; }
+    .gallery-caption {
+      margin-top: 10px; font-size: 0.74rem; color: var(--muted);
+      font-style: italic; text-align: center; line-height: 1.5;
+    }
+
+    .lightbox {
+      position: fixed; inset: 0; z-index: 3000;
+      background: rgba(8,4,3,0.97);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: auto; }
+    .lightbox img {
+      max-width: 88vw; max-height: 86vh; object-fit: contain;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .lb-close {
+      position: absolute; top: 24px; right: 28px;
+      background: none; border: none; color: rgba(255,255,255,0.5);
+      font-size: 1.5rem; cursor: pointer; transition: color 0.3s; line-height: 1;
+    }
+    .lb-close:hover { color: #fff; }
+    .lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.07); border: none; color: rgba(255,255,255,0.6);
+      width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s; font-size: 0.85rem;
+    }
+    .lb-nav:hover { background: var(--crimson); color: #fff; }
+    .lb-prev { left: 20px; }
+    .lb-next { right: 20px; }
+    .lb-count {
+      position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.35);
+    }
+
+    .article-tags {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      padding: 30px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      margin-top: 56px;
+    }
+    .tag-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); margin-right: 4px;
+    }
+    .a-tag {
+      font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--crimson); border: 1px solid rgba(139,26,26,0.3);
+      padding: 4px 10px; transition: all 0.3s;
+    }
+    .a-tag:hover { background: var(--crimson); color: #fff; cursor: default; }
+
+    .article-sidebar {
+      padding: 72px 0 80px 44px;
+      position: sticky; top: 80px; align-self: start;
+    }
+    .sb-section { margin-bottom: 44px; }
+    .sb-heading {
+      font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+    .fact-list { list-style: none; }
+    .fact-item {
+      display: flex; gap: 14px; padding: 13px 0;
+      border-bottom: 1px solid var(--border); align-items: flex-start;
+    }
+    .fact-item:last-child { border-bottom: none; }
+    .fact-icon {
+      width: 30px; height: 30px; flex-shrink: 0;
+      background: rgba(139,26,26,0.07); border: 1px solid rgba(139,26,26,0.13);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; color: var(--crimson);
+    }
+    .fact-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 3px;
+    }
+    .fact-value { font-size: 0.82rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+
+    .sb-scripture {
+      background: var(--crimson-deep); padding: 22px 20px;
+    }
+    .sb-scripture p {
+      font-family: 'Lora', serif; font-style: italic;
+      font-size: 0.86rem; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 10px;
+    }
+    .sb-scripture cite {
+      font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); font-style: normal;
+    }
+
+    .related-link {
+      display: flex; gap: 12px; padding: 14px 0;
+      border-bottom: 1px solid var(--border); text-decoration: none; transition: all 0.3s;
+    }
+    .related-link:last-child { border-bottom: none; }
+    .related-link:hover .rl-title { color: var(--crimson); }
+    .rl-img { width: 68px; height: 52px; flex-shrink: 0; overflow: hidden; }
+    .rl-img img { width: 100%; height: 100%; object-fit: cover; }
+    .rl-cat {
+      font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 4px;
+    }
+    .rl-title {
+      font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 700;
+      color: var(--ink); line-height: 1.3; transition: color 0.3s;
+    }
+
+    .back-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--crimson); text-decoration: none;
+      border: 1px solid var(--border); padding: 12px 20px;
+      background: var(--surface); transition: all 0.3s; width: 100%; margin-top: 8px;
+    }
+    .back-btn:hover { background: var(--crimson); color: #fff; border-color: var(--crimson); }
+
+    .marquee-section {
+      background: var(--crimson-deep); padding: 15px 0; overflow: hidden;
+      border-top: 1px solid rgba(201,160,61,0.3);
+      border-bottom: 1px solid rgba(201,160,61,0.3);
+    }
+    .marquee-inner { display: flex; animation: marquee 30s linear infinite; white-space: nowrap; }
+    .marquee-inner:hover { animation-play-state: paused; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .m-item {
+      display: inline-flex; align-items: center; gap: 16px; padding: 0 32px;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .m-item span { color: var(--gold); }
+    .m-item .dot { width: 3px; height: 3px; background: rgba(255,255,255,0.18); border-radius: 50%; }
+
+    .fb-float {
+      position: fixed; bottom: 30px; right: 30px; z-index: 500;
+      background: #1877F2; color: #fff;
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(24,119,242,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .fb-float:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 8px 30px rgba(24,119,242,0.5); }
+    #btt {
+      position: fixed; bottom: 96px; right: 30px; z-index: 500;
+      width: 40px; height: 40px;
+      background: var(--crimson); color: #fff;
+      border: none; cursor: pointer; font-size: 0.8rem;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(16px); transition: all 0.4s; pointer-events: none;
+    }
+    #btt.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #btt:hover { background: var(--crimson-deep); }
+
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.4);
+      padding: 60px 40px 30px;
+      border-top: 1px solid rgba(201,160,61,0.2);
+    }
+    footer .footer-inner { max-width: 1280px; margin: 0 auto; }
+    footer .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
+    footer h3 { font-family: 'Cinzel', serif; color: #fff; font-size: 1.2rem; margin-bottom: 6px; }
+    footer .footer-sub { font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 20px; }
+    footer .footer-desc { font-size: 0.82rem; line-height: 1.8; max-width: 300px; }
+    footer h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 10px; }
+    footer ul li a { font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+    footer ul li a:hover { color: var(--gold); }
+    footer .footer-contact p { font-size: 0.82rem; margin-bottom: 10px; }
+    footer .footer-contact a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.3s; }
+    footer .footer-contact a:hover { color: var(--gold); }
+    footer .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; text-align: center; font-size: 0.75rem; letter-spacing: 0.5px; }
+
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) {
+      .page-wrap { grid-template-columns: 1fr; padding: 0 24px; }
+      .article-main { padding: 52px 0; border-right: none; border-bottom: 1px solid var(--border); }
+      .article-sidebar { padding: 48px 0; position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+      .hero-content { padding: 0 40px 56px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 0 24px 48px; }
+      .hero-title { font-size: 2rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid.two-up { grid-template-columns: 1fr; }
+      .article-sidebar { grid-template-columns: 1fr; }
+      footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 40px 20px 24px; }
+      .article-hero { height: 80vh; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="brand-emblem">
+        <img src="../logo/LA_logo.png" alt="Logo" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+      </div>
+      <div>
+        <div class="brand-text-top">Lord's ARMY</div>
+        <div class="brand-text-sub">Pathfinder Club</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about/about.html">About</a></li>
+      <li><a href="activities.html" class="active">Activities</a></li>
+      <li><a href="../services/services.html">Services</a></li>
+      <li><a href="../contact/contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../about/about.html">About</a></li>
+    <li><a href="activities.html" class="active">Activities</a></li>
+    <li><a href="../services/services.html">Services</a></li>
+    <li><a href="../contact/contact.html">Contact</a></li>
+  </ul>
+</div>
+
+<section class="article-hero">
+  <div class="hero-img">
+    <img src="../images/4/5.jpg" alt="75th World Pathfinder Day Clean-Up" id="heroImg" loading="eager">
+  </div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="breadcrumb">
+      <a href="activities.html"><i class="fas fa-arrow-left"></i>&nbsp; Activities</a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Environmental Stewardship</span>
+    </div>
+    <div class="category-pill"><i class="fas fa-leaf"></i>&nbsp; Environmental Stewardship</div>
+    <h1 class="hero-title">75th World Pathfinder Day Clean-Up at Lagilay Falls</h1>
+    <p class="hero-tagline">Caring for God's Creation</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><i class="fas fa-calendar-alt"></i> 2025</div>
+      <div class="hero-meta-item"><i class="fas fa-map-marker-alt"></i> Lagilay Falls, CDO</div>
+      <div class="hero-meta-item"><i class="fas fa-award"></i> Environmental</div>
+      <div class="hero-meta-item"><i class="fas fa-clock"></i> 3 min read</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-section">
+  <div class="marquee-inner" id="marqueeInner"></div>
+</div>
+
+<div class="page-wrap">
+
+  <main class="article-main">
+
+    <div class="opening-rule reveal"><span>The Story</span></div>
+
+    <div class="article-body">
+
+      <p class="drop-cap reveal">In celebration of the 75th World Pathfinder Day, the Lord's ARMY Pathfinder Club, together with the youth and Pathfinders of Mambatangan SDA Church, conducted a meaningful Clean-Up Drive at Lagilay Falls, Balubal, Cagayan de Oro City. The activity was a powerful reminder of our responsibility to care for the environment and keep it clean for future generations.</p>
+
+      <div class="pull-quote reveal">
+        <p>"It was a wonderful experience trekking from the dam to Lagilay Falls—cleaning the rivers while appreciating the beauty of God's creation. The activity reminded us of our responsibility to care for the environment and keep it clean."</p>
+        <cite>Lord's ARMY Pathfinder Club</cite>
+      </div>
+
+      <p class="reveal">The clean-up drive began with a trek from the dam to Lagilay Falls, a journey that allowed participants to not only clean the rivers but also appreciate the breathtaking beauty of God's creation. The lush greenery, the flowing waters, and the serene atmosphere served as a backdrop for a day of meaningful service and reflection.</p>
+
+      <p class="reveal">As the group moved along the river, they collected trash and debris, ensuring that the natural beauty of the area was preserved. The activity was not just about cleaning—it was about fostering a deeper connection with the environment and understanding the importance of stewardship.</p>
+
+      <div class="gallery-block reveal">
+        <div class="gallery-eyebrow">Clean-Up Highlights</div>
+        <div class="gallery-grid two-up">
+          <div class="g-item" onclick="openLb(0)">
+            <img src="../images/4/1.jpg" alt="Volunteers trekking to Lagilay Falls" loading="lazy">
+            <div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div>
+          </div>
+          <div class="g-item" onclick="openLb(1)">
+            <img src="../images/4/2.jpg" alt="Cleaning the river" loading="lazy">
+            <div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div>
+          </div>
+        </div>
+        <div class="gallery-caption">75th World Pathfinder Day Clean-Up Drive — Lagilay Falls, CDO</div>
+      </div>
+
+      <h2 class="reveal">Advocacy Through Action</h2>
+
+      <p class="reveal">As part of their advocacy, the club installed two poster signages encouraging future nature enthusiasts and visitors to be patient with the environment and responsible with their waste. This effort was requested by the landowner, who had been deeply concerned about irresponsible littering by some visitors.</p>
+
+      <p class="reveal">The signages serve as a constant reminder to all who visit Lagilay Falls to treat the environment with respect and care. They are a testament to the club's commitment to environmental stewardship and its desire to inspire positive change in the community.</p>
+
+      <div class="scripture-block reveal">
+        <p>"The earth is the Lord's, and everything in it, the world, and all who live in it."</p>
+        <cite>Psalm 24:1 (NIV)</cite>
+      </div>
+
+      <h2 class="reveal">Pathfinder on Purpose</h2>
+
+      <p class="reveal">Through this simple yet impactful gesture, the Lord's ARMY Pathfinder Club hopes to inspire not only their community but also everyone who visits Lagilay Falls to preserve the environment. Truly, this reflects their purpose: <strong>"Pathfinder on Purpose."</strong></p>
+
+      <p class="reveal">The clean-up drive was more than just an environmental activity—it was a declaration of faith and commitment. It showed that being a Pathfinder means taking action, leading by example, and making a difference in the world. It demonstrated that small acts of service, when done with love and purpose, can create ripples of change that extend far beyond the immediate moment.</p>
+
+      <div class="gallery-block reveal">
+        <div class="gallery-eyebrow">More Moments</div>
+        <div class="gallery-grid">
+          <div class="g-item" onclick="openLb(2)">
+            <img src="../images/4/3.jpg" alt="Group photo at Lagilay Falls" loading="lazy">
+            <div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div>
+          </div>
+          <div class="g-item" onclick="openLb(3)">
+            <img src="../images/4/4.jpg" alt="Installing signage" loading="lazy">
+            <div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div>
+          </div>
+          <div class="g-item" onclick="openLb(4)">
+            <img src="../images/4/5.jpg" alt="Team photo with the signages" loading="lazy">
+            <div class="g-overlay"><span class="g-overlay-icon"><i class="fas fa-expand"></i></span></div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="reveal">Building a Culture of Care</h2>
+
+      <p class="reveal">The success of the clean-up drive at Lagilay Falls highlights the importance of community involvement in environmental conservation. When people come together with a shared purpose, they can achieve remarkable things. The event served as a powerful example of how faith-based organizations can play a vital role in caring for the planet.</p>
+
+      <p class="reveal">Looking ahead, the Lord's ARMY Pathfinder Club remains committed to environmental stewardship. They plan to continue organizing clean-up drives and other initiatives that promote sustainability and environmental awareness. Their goal is to build a culture of care that extends beyond the Pathfinder community and inspires others to take action.</p>
+
+      <div class="pull-quote reveal">
+        <p>"We hope to inspire not only our community but also everyone who visits Lagilay Falls to preserve the environment. This is what it means to be a Pathfinder on purpose."</p>
+        <cite>Lord's ARMY Pathfinder Club</cite>
+      </div>
+
+      <h2 class="reveal">A Call to Action</h2>
+
+      <p class="reveal">The 75th World Pathfinder Day Clean-Up at Lagilay Falls was a celebration of service, stewardship, and faith. It was a reminder that every action, no matter how small, can make a difference. As Pathfinders, we are called to be stewards of God's creation, to care for the earth and all its inhabitants.</p>
+
+      <p class="reveal">We invite everyone to join us in this mission. Whether it's participating in a clean-up drive, reducing your waste, or simply appreciating the beauty of nature, every effort counts. Together, we can create a cleaner, greener, and more sustainable world for future generations.</p>
+
+      <div class="article-tags reveal">
+        <span class="tag-label">Tags</span>
+        <span class="a-tag">#Environment</span>
+        <span class="a-tag">#Cleanup</span>
+        <span class="a-tag">#Advocacy</span>
+        <span class="a-tag">#Stewardship</span>
+        <span class="a-tag">#PathfinderDay</span>
+        <span class="a-tag">#LagilayFalls</span>
+        <span class="a-tag">#CDO</span>
+      </div>
+
+    </div>
+  </main>
+
+  <aside class="article-sidebar">
+
+    <div class="sb-section">
+      <div class="sb-heading">Fast Facts</div>
+      <ul class="fact-list">
+        <li class="fact-item">
+          <div class="fact-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div><div class="fact-label">Event</div><div class="fact-value">75th World Pathfinder Day</div></div>
+        </li>
+        <li class="fact-item">
+          <div class="fact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div><div class="fact-label">Location</div><div class="fact-value">Lagilay Falls, Balubal, CDO</div></div>
+        </li>
+        <li class="fact-item">
+          <div class="fact-icon"><i class="fas fa-leaf"></i></div>
+          <div><div class="fact-label">Activity</div><div class="fact-value">Clean-Up Drive</div></div>
+        </li>
+        <li class="fact-item">
+          <div class="fact-icon"><i class="fas fa-heart"></i></div>
+          <div><div class="fact-label">Theme</div><div class="fact-value">Caring for God's Creation</div></div>
+        </li>
+        <li class="fact-item">
+          <div class="fact-icon"><i class="fas fa-users"></i></div>
+          <div><div class="fact-label">Organizers</div><div class="fact-value">Lord's ARMY &amp; Mambatangan SDA Church</div></div>
+        </li>
+        <li class="fact-item">
+          <div class="fact-icon"><i class="fas fa-tag"></i></div>
+          <div><div class="fact-label">Category</div><div class="fact-value">Environmental Stewardship</div></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-heading">Scripture</div>
+      <div class="sb-scripture">
+        <p>"The earth is the Lord's, and everything in it, the world, and all who live in it."</p>
+        <cite>Psalm 24:1 (NIV)</cite>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-heading">Related Activities</div>
+      <a href="4.html" class="related-link">
+        <div class="rl-img"><img src="../images/5/7.jpg" alt="Dangcay Outreach" loading="lazy"></div>
+        <div><div class="rl-cat">Outreach</div><div class="rl-title">Dangcay Mission School Outreach 2025</div></div>
+      </a>
+      <a href="21.html" class="related-link">
+        <div class="rl-img"><img src="../images/4/5.jpg" alt="Balulang Cleanup" loading="lazy"></div>
+        <div><div class="rl-cat">Environmental</div><div class="rl-title">Balulang Clean-Up Drive</div></div>
+      </a>
+    </div>
+
+    <a href="activities.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Activities</a>
+
+  </aside>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLb()"><i class="fas fa-times"></i></button>
+  <button class="lb-nav lb-prev" onclick="shiftLb(-1)"><i class="fas fa-arrow-left"></i></button>
+  <img src="" alt="" id="lbImg">
+  <button class="lb-nav lb-next" onclick="shiftLb(1)"><i class="fas fa-arrow-right"></i></button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank" class="fb-float" title="Facebook">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+</a>
+<button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <h3>Lord's ARMY</h3>
+        <p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p>
+        <p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country. Serving Jesus by serving others.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about/about.html">About</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="../services/services.html">Services</a></li>
+          <li><a href="../contact/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <div class="footer-contact">
+          <p><a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p>
+          <p><a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p>
+          <p><a href="tel:09177718251">0917 771 8251</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved. · Hands to Serve, Hearts to Love.</div>
+  </div>
+</footer>
+
+<script>
+  const items = [
+    {e:'🏕️',t:'KSDAES Camp 2025'},{e:'⛺',t:'Lindaban BSP & GSP Encampment'},
+    {e:'🌿',t:'75th World Pathfinder Day'},{e:'📚',t:'Dangcay Mission Outreach'},
+    {e:'📖',t:'Cayaga NHS Outreach'},{e:'🌾',t:'IP School Outreach'},
+    {e:'📰',t:'Guide Magazine Feature'},{e:'⛪',t:'World Adventurer Day'},
+    {e:'🏃',t:'Run4Me 2025'},{e:'🌍',t:'Global Youth Day 2025'},
+    {e:'🎯',t:'AY Progressive Class'},{e:'⛰️',t:'Mt. Kalatungan Climb'}
+  ];
+  const mi = document.getElementById('marqueeInner');
+  const mhtml = items.map(i=>`<div class="m-item"><span>${i.e}</span>${i.t}<div class="dot"></div></div>`).join('');
+  mi.innerHTML = mhtml + mhtml;
+
+  const hi = document.getElementById('heroImg');
+  if (hi.complete) hi.classList.add('loaded');
+  else hi.onload = () => hi.classList.add('loaded');
+
+  const lbImgs = ['../images/4/1.jpg','../images/4/2.jpg','../images/4/3.jpg','../images/4/4.jpg','../images/4/5.jpg'];
+  let lbIdx = 0;
+  function openLb(i){ lbIdx=i; updLb(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeLb(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
+  function shiftLb(d){ lbIdx=(lbIdx+d+lbImgs.length)%lbImgs.length; updLb(); }
+  function updLb(){ document.getElementById('lbImg').src=lbImgs[lbIdx]; document.getElementById('lbCount').textContent=`${lbIdx+1} / ${lbImgs.length}`; }
+  document.getElementById('lightbox').addEventListener('click',function(e){ if(e.target===this) closeLb(); });
+  document.addEventListener('keydown',e=>{
+    if(!document.getElementById('lightbox').classList.contains('open')) return;
+    if(e.key==='ArrowLeft') shiftLb(-1);
+    if(e.key==='ArrowRight') shiftLb(1);
+    if(e.key==='Escape') closeLb();
+  });
+
+  window.addEventListener('scroll',()=>{
+    const st=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight;
+    document.getElementById('progress').style.width=(st/dh*100)+'%';
+    document.getElementById('btt').classList.toggle('show',st>400);
+  });
+  document.getElementById('btt').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('ham').onclick=()=>document.getElementById('mobile-menu').classList.toggle('open');
+
+  const ro=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
