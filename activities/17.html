@@ -53,26 +53,53 @@
     .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .brand-emblem {
       width: 42px; height: 42px; border-radius: 50%;
-      background: var(--crimson); overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
+      background: var(--crimson);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
       box-shadow: 0 0 0 3px rgba(201,160,61,0.3);
     }
+    .brand-emblem img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
     .brand-text-top {
-      font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700;
-      color: var(--crimson); line-height: 1;
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--crimson);
+      line-height: 1;
     }
     .brand-text-sub {
-      font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+      font-size: 10px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
     .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a {
-      font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-      text-decoration: none; color: var(--muted); position: relative; transition: color 0.3s;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      position: relative;
+      transition: color 0.3s;
     }
     .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
-      background: var(--crimson); transition: width 0.3s;
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--crimson);
+      transition: width 0.3s;
     }
     .nav-links a:hover, .nav-links a.active { color: var(--crimson); }
     .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
@@ -80,14 +107,18 @@
     .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--crimson); }
     #mobile-menu {
       display: none; position: fixed; top: 72px; left: 0; right: 0;
-      background: var(--surface-warm); border-bottom: 1px solid var(--border);
-      padding: 16px 24px; z-index: 99;
+      background: var(--surface-warm);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      z-index: 99;
     }
     #mobile-menu.open { display: block; }
     #mobile-menu ul { list-style: none; }
     #mobile-menu li a {
       display: block; padding: 12px 0; font-size: 0.9rem; font-weight: 600;
-      color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--border);
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
     }
     #mobile-menu li a:hover, #mobile-menu li a.active { color: var(--crimson); }
 
@@ -103,6 +134,7 @@
       height: 100%;
       min-height: 400px;
       overflow: hidden;
+      background: #0A3D3D;
     }
     .hero-split .hero-image img {
       width: 100%;
@@ -175,7 +207,13 @@
       line-height: 1.9;
       color: #38281A;
       margin-bottom: 30px;
+      background: var(--surface);
+      padding: 24px 30px;
+      border-left: 4px solid var(--teal);
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
     }
+
     .content-wrap .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -227,6 +265,11 @@
       position: relative;
       overflow: hidden;
       border-radius: 6px;
+      background: #d4e8e0;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .content-wrap .story-section .story-image img {
       width: 100%;
@@ -247,6 +290,13 @@
       font-style: italic;
       font-weight: 400;
     }
+    .content-wrap .story-section .story-image .placeholder-text {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 20px;
+      text-align: center;
+      font-family: 'Lora', serif;
+    }
 
     .content-wrap .gallery-grid {
       display: grid;
@@ -254,15 +304,31 @@
       gap: 8px;
       margin: 45px 0;
     }
-    .content-wrap .gallery-grid img {
+    .content-wrap .gallery-grid .g-item {
+      background: #d4e8e0;
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s;
+      border: 2px dashed var(--border);
+    }
+    .content-wrap .gallery-grid .g-item:hover { transform: scale(1.04); }
+    .content-wrap .gallery-grid .g-item img {
       width: 100%;
       height: 190px;
       object-fit: cover;
-      cursor: pointer;
-      transition: transform 0.3s;
-      border-radius: 3px;
     }
-    .content-wrap .gallery-grid img:hover { transform: scale(1.04); }
+    .content-wrap .gallery-grid .g-item .no-image-text {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 10px;
+      font-family: 'Lora', serif;
+    }
 
     .content-wrap .back-link {
       display: inline-flex;
@@ -280,6 +346,24 @@
       transition: gap 0.3s;
     }
     .content-wrap .back-link:hover { gap: 16px; }
+
+    .marquee-section {
+      background: var(--crimson-deep);
+      padding: 15px 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(201,160,61,0.3);
+      border-bottom: 1px solid rgba(201,160,61,0.3);
+    }
+    .marquee-inner { display: flex; animation: marquee 30s linear infinite; white-space: nowrap; }
+    .marquee-inner:hover { animation-play-state: paused; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .m-item {
+      display: inline-flex; align-items: center; gap: 16px; padding: 0 32px;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .m-item span { color: var(--gold); }
+    .m-item .dot { width: 3px; height: 3px; background: rgba(255,255,255,0.18); border-radius: 50%; }
 
     .fb-float {
       position: fixed; bottom: 30px; right: 30px; z-index: 500;
@@ -302,7 +386,8 @@
     #btt.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
     footer {
-      background: var(--ink); color: rgba(255,255,255,0.4);
+      background: var(--ink);
+      color: rgba(255,255,255,0.4);
       padding: 60px 40px 30px;
       border-top: 1px solid rgba(201,160,61,0.2);
     }
@@ -354,8 +439,13 @@
 <nav id="navbar">
   <div class="nav-inner">
     <a href="../index.html" class="nav-brand">
-      <div class="brand-emblem"><img src="../logo/LA_logo.png" alt="Logo" style="width:100%;height:100%;object-fit:contain;border-radius:50%;"></div>
-      <div><div class="brand-text-top">Lord's ARMY</div><div class="brand-text-sub">Pathfinder Club</div></div>
+      <div class="brand-emblem">
+        <img src="../logo/LA_logo.png" alt="Logo">
+      </div>
+      <div>
+        <div class="brand-text-top">Lord's ARMY</div>
+        <div class="brand-text-sub">Pathfinder Club</div>
+      </div>
     </a>
     <ul class="nav-links">
       <li><a href="../index.html">Home</a></li>
@@ -380,7 +470,8 @@
 
 <section class="hero-split">
   <div class="hero-image">
-    <img src="../images/18/1.jpg" alt="Puntian Technical Institute Outreach" loading="eager">
+    <img src="../images/18/1.jpg" alt="Puntian Technical Institute Outreach" loading="eager"
+         onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:rgba(255,255,255,0.3);font-size:1.2rem;font-family:Lora,serif;font-style:italic;\'>📚 Puntian Technical Institute</span>';">
   </div>
   <div class="hero-text">
     <span class="badge">📚 Education &amp; Literacy</span>
@@ -394,8 +485,16 @@
   </div>
 </section>
 
+<div class="marquee-section">
+  <div class="marquee-inner" id="marqueeInner"></div>
+</div>
+
 <div class="content-wrap">
-  <p class="intro-text reveal">Lord's ARMY Pathfinder Club continuously support the advocacy on education, particularly reading literacy among children and youths. Last 12 October 2024, the club together with our partners conducted the Outreach Program at Puntian Technical Institute Inc.</p>
+
+  <p class="intro-text reveal">
+    <strong>Lord's ARMY Pathfinder Club continuously support the advocacy on education, particularly reading literacy among children and youths.</strong><br><br>
+    Last October 12, 2024, the club together with our partners conducted the Outreach Program at Puntian Technical Institute Inc.
+  </p>
 
   <div class="info-grid reveal">
     <div class="info-item">
@@ -421,22 +520,36 @@
       <div class="highlight">
         <p>"Education is the most powerful weapon which you can use to change the world."</p>
       </div>
-      <p>Special thanks to our partners Bugtaw Philippines and Diamond Civilian Employee Association for their unwavering support in making this outreach program a success.</p>
+      <p>Special thanks to our partners <strong>Bugtaw Philippines</strong> and <strong>Diamond Civilian Employee Association</strong> for their unwavering support in making this outreach program a success.</p>
     </div>
     <div class="story-image">
-      <img src="../images/18/2.jpg" alt="Students at Puntian Technical Institute">
+      <img src="../images/18/2.jpg" alt="Students at Puntian Technical Institute" 
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'placeholder-text\'>📸 Puntian Technical Institute — Empowering the Young Generation</span>';">
       <div class="caption">Puntian Technical Institute — Empowering the Young Generation</div>
     </div>
   </div>
 
   <div class="gallery-grid reveal">
-    <img src="../images/18/1.jpg" alt="Outreach 1" onclick="openLightbox(0)">
-    <img src="../images/18/2.jpg" alt="Outreach 2" onclick="openLightbox(1)">
-    <img src="../images/18/3.jpg" alt="Outreach 3" onclick="openLightbox(2)">
-    <img src="../images/18/4.jpg" alt="Outreach 4" onclick="openLightbox(3)">
+    <div class="g-item" onclick="openLightbox(0)">
+      <img src="../images/18/1.jpg" alt="Outreach 1" 
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'no-image-text\'>📸 Image 1</span>';">
+    </div>
+    <div class="g-item" onclick="openLightbox(1)">
+      <img src="../images/18/2.jpg" alt="Outreach 2" 
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'no-image-text\'>📸 Image 2</span>';">
+    </div>
+    <div class="g-item" onclick="openLightbox(2)">
+      <img src="../images/18/3.jpg" alt="Outreach 3" 
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'no-image-text\'>📸 Image 3</span>';">
+    </div>
+    <div class="g-item" onclick="openLightbox(3)">
+      <img src="../images/18/4.jpg" alt="Outreach 4" 
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'no-image-text\'>📸 Image 4</span>';">
+    </div>
   </div>
 
   <a href="activities.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Activities</a>
+
 </div>
 
 <div class="lightbox" id="lightbox" style="display:none; position:fixed; inset:0; z-index:3000; background:rgba(8,4,3,0.97); align-items:center; justify-content:center; cursor:pointer;">
@@ -452,15 +565,36 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-grid">
-      <div><h3>Lord's ARMY</h3><p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p><p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country.</p></div>
-      <div><h4>Quick Links</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../about/about.html">About</a></li><li><a href="activities.html">Activities</a></li><li><a href="../services/services.html">Services</a></li><li><a href="../contact/contact.html">Contact</a></li></ul></div>
-      <div><h4>Connect</h4><div class="footer-contact"><p><a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p><p><a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p><p><a href="tel:09177718251">0917 771 8251</a></p></div></div>
+      <div>
+        <h3>Lord's ARMY</h3>
+        <p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p>
+        <p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about/about.html">About</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="../services/services.html">Services</a></li>
+          <li><a href="../contact/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <div class="footer-contact">
+          <p><a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p>
+          <p><a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p>
+          <p><a href="tel:09177718251">0917 771 8251</a></p>
+        </div>
+      </div>
     </div>
     <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved. · Hands to Serve, Hearts to Love.</div>
   </div>
 </footer>
 
 <script>
+  // Marquee
   const items = [
     {e:'🏕️',t:'KSDAES Camp 2025'},{e:'⛺',t:'Lindaban BSP & GSP Encampment'},
     {e:'🌿',t:'75th World Pathfinder Day'},{e:'📚',t:'Dangcay Mission Outreach'},
@@ -473,8 +607,10 @@
   const mhtml = items.map(i=>`<div class="m-item"><span>${i.e}</span>${i.t}<div class="dot"></div></div>`).join('');
   mi.innerHTML = mhtml + mhtml;
 
+  // Mobile menu
   document.getElementById('ham').onclick = () => document.getElementById('mobile-menu').classList.toggle('open');
 
+  // Scroll progress
   window.addEventListener('scroll', () => {
     const st = window.scrollY, dh = document.documentElement.scrollHeight - window.innerHeight;
     document.getElementById('progress').style.width = (st / dh * 100) + '%';
@@ -482,11 +618,13 @@
   });
   document.getElementById('btt').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
+  // Reveal animations
   const ro = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
+  // Lightbox
   const lbImgs = ['../images/18/1.jpg','../images/18/2.jpg','../images/18/3.jpg','../images/18/4.jpg'];
   function openLightbox(i) {
     document.getElementById('lbImg').src = lbImgs[i];

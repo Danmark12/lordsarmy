@@ -699,7 +699,7 @@
   </div>
 </section>
 
-<!-- SLIDER - REMAINING ACTIVITIES (10-20) -->
+<!-- SLIDER - REMAINING ACTIVITIES -->
 <section class="slider-section">
   <div class="slider-inner">
     <div class="slider-header">
@@ -757,7 +757,7 @@
 </footer>
 
 <script>
-  // ALL 20 ACTIVITIES DATA - UPDATED WITH NUMBERED PAGES
+  // ALL ACTIVITIES DATA
   const allActivities = [
     {id:1, icon:'🏕️', title:'KSDAES Pathfinder & Adventurer Camp 2025', tagline:'Four Years of Faithful Service in Kadingilan', badge:'Featured', tags:['Camp','Youth','Worship'], category:'Camping & Outdoor', image:'../images/1/3.jpg', description:'The Lord\'s ARMY Pathfinder Club proudly facilitated the KSDAES Pathfinder and Adventurer Camp for the fourth consecutive year, marking a significant milestone in the club\'s ministry. With the theme "Hands to Serve, Hearts to Love," the camp brought together pupils, teachers, and parents who have entrusted the club with facilitating this transformative experience.', page:'1.html' },
     {id:2, icon:'⛺', title:'Lindaban BSP & GSP Encampment 2025', tagline:'Leading Public School Scouts with Excellence', badge:'Leadership', tags:['Scouting','BSP','GSP'], category:'Camping & Outdoor', image:'../images/3/2.jpg', description:'The Lord\'s ARMY Pathfinder Club was honored to facilitate the Boy Scouts of the Philippines and Girl Scouts of the Philippines Encampment 2025. Under the theme "Youth Engagement: Sustaining Relevance & Strengthening Resilience," the encampment showcased the spirit of scouting through challenges including tent pitching, fire building, and team-building activities.', page:'2.html' },
@@ -778,15 +778,24 @@
     {id:17, icon:'📚', title:'Puntian Technical Institute Outreach 2024', tagline:'Supporting Reading Literacy and Education', badge:'Education', tags:['Literacy','Books','Education'], category:'Community Service / Outreach', image:'../images/18/1.jpg', description:'Together with Bugtaw Philippines and Diamond Civilian Employee Association, the club conducted an Outreach Program at Puntian Technical Institute Inc., supporting reading literacy among children and youths.', page:'17.html' },
     {id:18, icon:'🎒', title:'74th World Pathfinder Day Donation Drive', tagline:'Generous Support for Kadingilan SDA Elementary', badge:'Donation', tags:['School Supplies','Books','Donation'], category:'Community Service / Outreach', image:'../images/19/1.jpg', description:'Celebrating the 74th World Pathfinder Day, the event featured a generous donation of school supplies from DCEA along with new uniforms and a bookshelf filled with books provided by Bugtaw Philippines.', page:'18.html' },
     {id:19, icon:'🤝', title:'Dangcay Mission School Humanitarian Mission 2024', tagline:'Extending Outreach to Remote Communities', badge:'Outreach', tags:['Humanitarian','Community','Mission'], category:'Community Service / Outreach', image:'../images/20/2.jpg', description:'The humanitarian mission at Dangcay Mission School was conducted in partnership with Followers of God Society, Bugtaw Philippines, Red Cross Bukidnon, and Diamond Civilian Employee Association, demonstrating the power of unity.', page:'19.html' },
-    {id:20, icon:'🏕️', title:'TSDACC Conquers\' Survival Camp 2024', tagline:'Chosen for a Greater Mission', badge:'Training', tags:['Survival','Camp','Leadership'], category:'Camping & Outdoor', image:'../images/21/2.jpg', description:'The club helped facilitate the TSDACC Conquers\' Pathfinder Survival Camp with the theme "Chosen for a Greater Mission," held at Malitbog, Bukidnon. The camp provided transformative experiences that built character, strengthened faith, and developed leadership skills.', page:'20.html' },
-    // Additional activity - Balulang Clean-Up
+    {id:20, icon:'🏕️', title:'TSDACC Conquers\' Survival Camp 2024', tagline:'Chosen for a Greater Mission', badge:'Training', tags:['Survival','Camp','Leadership'], category:'Camping & Outdoor', image:'../images/21/2.jpg', description:'The club helped facilitate the TSDACC Conquers\' Pathfinder Survival Camp with the theme "Chosen for a Greater Mission," held at Malitbog, Bukidnon. The camp provided transformative experiences that built character, strengthened faith, and developed leadership skills.', page:'20.html' }
   ];
 
   // FIRST 9 ACTIVITIES FOR THE MAIN GRID
   const activities = allActivities.slice(0, 9);
 
-  // REMAINING ACTIVITIES (10-20) FOR THE SLIDER
-  const sliderActivities = allActivities.slice(9);
+  // HIGHLIGHTS - DIFFERENT ACTIVITIES FROM THE GRID (Indices 9, 11, 13 - not in first 9)
+  const highlights = [
+    allActivities[9],  // Global Youth Day 2025 (index 9)
+    allActivities[11], // "Be the Light of the World" Camp (index 11)
+    allActivities[13]  // Master Guide Climb at Mt. Kalatungan (index 13)
+  ];
+
+  // SLIDER ACTIVITIES - REMAINING ACTIVITIES AFTER REMOVING HIGHLIGHTS AND FIRST 9
+  const highlightIds = [10, 12, 14]; // IDs of the highlighted activities
+  const sliderActivities = allActivities.filter(a => 
+    !highlightIds.includes(a.id) && a.id > 9
+  );
 
   const heroSlides = [
     {image:'../images/14/3.jpg', eyebrow:'Ministry in Action', title:'Where Faith\nMeets<br><em>Adventure</em>', subtitle:'21 activities and counting — from mountain climbs to coastal cleanups, from jungle camps to classroom outreaches.'},
@@ -804,8 +813,6 @@
     {id:'Health & Fitness', label:'Health & Fitness'},
     {id:'Media & Recognition', label:'Media & Recognition'}
   ];
-
-  const highlights = [allActivities[0], allActivities[4], allActivities[7]];
 
   let heroIdx = 0, heroTimer;
   let sliderIdx = 0, slidesPerView = 4;
@@ -838,9 +845,6 @@
       <div class="hero-eyebrow">${s.eyebrow}</div>
       <h1 class="hero-title">${s.title}</h1>
       <p class="hero-subtitle">${s.subtitle}</p>
-      <a href="#activitiesSection" class="hero-cta" onclick="document.querySelector('.filter-section').scrollIntoView({behavior:'smooth'});return false;">
-        Explore Activities &nbsp;<i class="fas fa-arrow-down"></i>
-      </a>
     `;
   }
 
@@ -929,7 +933,7 @@
     });
   }
 
-  // --- SLIDER (activities 10-20) ---
+  // --- SLIDER (remaining activities after removing highlights) ---
   function buildSlider() {
     const track = document.getElementById('slTrack');
     sliderActivities.forEach(a => {
