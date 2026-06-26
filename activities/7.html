@@ -251,13 +251,13 @@
 
     .content-wrap .gallery-mag {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin: 40px 0;
     }
     .content-wrap .gallery-mag img {
       width: 100%;
-      height: 200px;
+      height: 280px;
       object-fit: cover;
       cursor: pointer;
       transition: transform 0.3s;
@@ -365,6 +365,7 @@
       .content-wrap .magazine-intro { grid-template-columns: 1fr; }
       .content-wrap .feature-grid { grid-template-columns: 1fr; }
       .content-wrap .gallery-mag { grid-template-columns: repeat(2, 1fr); }
+      .content-wrap .gallery-mag img { height: 200px; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -373,6 +374,7 @@
       .hero-magazine .content { padding: 0 24px; }
       .content-wrap { padding: 40px 20px 60px; }
       .content-wrap .gallery-mag { grid-template-columns: 1fr; }
+      .content-wrap .gallery-mag img { height: 250px; }
       .content-wrap .quote-section { padding: 30px 24px; }
       footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       footer { padding: 40px 20px 24px; }
@@ -413,7 +415,8 @@
 <!-- HERO -->
 <section class="hero-magazine">
   <div class="bg-img">
-    <img src="../images/8/2.jpg" alt="Guide Magazine Feature" loading="eager">
+    <img src="../images/8/2.jpg" alt="Guide Magazine Feature" loading="eager"
+         onerror="this.style.display='none'; this.parentElement.style.background='#001F33';">
   </div>
   <div class="overlay"></div>
   <div class="content">
@@ -440,7 +443,8 @@
       <p>Thank you, Mr. Nolan Ryan, for the incredible feature in the June 2025 issue. This serves as an inspiration for us to keep marching forward in the ministry with hearts filled with purpose and service.</p>
     </div>
     <div class="magazine-cover">
-      <img src="../images/8/1.jpg" alt="Guide Magazine Cover">
+      <img src="../images/8/1.jpg" alt="Guide Magazine Cover" 
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding:40px 20px;color:var(--muted);font-family:Lora,serif;font-style:italic;\'>📰 Guide Magazine Cover</div>';">
       <div class="cover-label">Guide Magazine · June 2025</div>
     </div>
   </div>
@@ -468,10 +472,12 @@
     </div>
   </div>
 
+  <!-- GALLERY - ONLY 2 IMAGES -->
   <div class="gallery-mag reveal">
-    <img src="../images/8/1.jpg" alt="Magazine feature 1" onclick="openLightbox(0)">
-    <img src="../images/8/2.jpg" alt="Magazine feature 2" onclick="openLightbox(1)">
-    <img src="../images/8/3.jpg" alt="Magazine feature 3" onclick="openLightbox(2)">
+    <img src="../images/8/1.jpg" alt="Magazine feature 1" onclick="openLightbox(0)"
+         onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'background:#e8ddd0;min-height:280px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:Lora,serif;border-radius:2px;\'>📸 Image 1</div>';">
+    <img src="../images/8/2.jpg" alt="Magazine feature 2" onclick="openLightbox(1)"
+         onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'background:#e8ddd0;min-height:280px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:Lora,serif;border-radius:2px;\'>📸 Image 2</div>';">
   </div>
 
   <div class="quote-section reveal">
@@ -519,8 +525,11 @@
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-  const lbImgs = ['../images/8/1.jpg','../images/8/2.jpg','../images/8/3.jpg'];
+  // LIGHTBOX - ONLY 2 IMAGES
+  const lbImgs = ['../images/8/1.jpg','../images/8/2.jpg'];
+  let lbIdx = 0;
   function openLightbox(i) {
+    lbIdx = i;
     document.getElementById('lbImg').src = lbImgs[i];
     document.getElementById('lightbox').style.display = 'flex';
     document.body.style.overflow = 'hidden';
