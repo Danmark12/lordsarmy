@@ -115,7 +115,6 @@
     .services-inner { max-width: 1280px; margin: 0 auto; }
     .services-header { margin-bottom: 60px; }
 
-    /* Big numbered list layout */
     .services-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
     .service-row {
       display: grid; grid-template-columns: 120px 1fr 1fr;
@@ -134,6 +133,35 @@
     .service-num { font-family: 'Cinzel', serif; font-size: 3rem; font-weight: 900; color: var(--border); line-height: 1; transition: color 0.3s; }
     .service-main-col { padding: 48px 44px; border-right: 1px solid var(--border); }
     .service-side-col { padding: 48px 36px; display: flex; flex-direction: column; justify-content: space-between; }
+
+    /* service photo */
+    .service-photo {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      background: #0A0605;
+    }
+    .service-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8) saturate(0.9);
+      transition: transform 0.6s ease, filter 0.4s;
+    }
+    .service-row:hover .service-photo img {
+      transform: scale(1.05);
+      filter: brightness(0.95) saturate(1);
+    }
+    .service-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,6,5,0.35) 0%, transparent 60%);
+      pointer-events: none;
+    }
 
     .service-icon-wrap { width: 44px; height: 44px; border: 1px solid rgba(139,26,26,0.2); background: rgba(139,26,26,0.05); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 16px; }
     .service-title { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 6px; }
@@ -206,21 +234,16 @@
     #btt:hover { background: var(--crimson-deep); }
 
     /* ── FOOTER ── */
-    footer { background: var(--ink); color: rgba(255,255,255,0.4); padding: 60px 40px 30px; border-top: 1px solid rgba(201,160,61,0.2); }
-    .footer-inner { max-width: 1280px; margin: 0 auto; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
-    footer h3 { font-family: 'Cinzel', serif; color: #fff; font-size: 1.2rem; margin-bottom: 6px; }
-    .footer-sub { font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 20px; }
-    .footer-desc { font-size: 0.82rem; line-height: 1.8; max-width: 300px; }
-    footer h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
-    footer ul { list-style: none; }
-    footer ul li { margin-bottom: 10px; }
-    footer ul li a { font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
-    footer ul li a:hover { color: var(--gold); }
-    footer .footer-contact p { font-size: 0.82rem; margin-bottom: 10px; }
-    footer .footer-contact a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
-    footer .footer-contact a:hover { color: var(--gold); }
-    footer .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; text-align: center; font-size: 0.75rem; letter-spacing: 0.5px; }
+    footer { background: var(--ink); color: rgba(255,255,255,0.4); padding: 80px 40px 36px; border-top: 1px solid rgba(201,160,61,0.2); position: relative; overflow: hidden; }
+    footer::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse at top, rgba(201,160,61,0.06) 0%, transparent 70%); pointer-events: none; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; position: relative; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .footer-emblem { width: 64px; height: 64px; border-radius: 50%; background: var(--crimson); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 0 3px rgba(201,160,61,0.3), 0 8px 30px rgba(0,0,0,0.3); margin-bottom: 20px; }
+    .footer-emblem img { width: 100%; height: 100%; object-fit: contain; }
+    .footer-title { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 900; color: #fff; letter-spacing: 1px; margin-bottom: 6px; }
+    .footer-subtitle { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .footer-tagline { font-size: 0.95rem; font-style: italic; color: rgba(255,255,255,0.5); max-width: 460px; line-height: 1.8; margin-bottom: 32px; }
+    .footer-divider { width: 48px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin-bottom: 24px; }
+    .footer-bottom { font-size: 0.72rem; letter-spacing: 0.5px; color: rgba(255,255,255,0.3); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
@@ -237,7 +260,6 @@
       .stat-bar-inner { grid-template-columns: repeat(3,1fr); }
       .stat-item:nth-child(2) { border-right: 1px solid rgba(255,255,255,0.07); }
       .stat-item:nth-child(3) { border-right: none; }
-      footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -250,14 +272,14 @@
       .service-num-col { padding: 32px 16px; }
       .service-main-col { padding: 32px 24px; }
       .service-num { font-size: 1.6rem; }
+      .service-photo { height: 160px; }
       .feature-section { padding: 60px 20px; }
       .process-section { padding: 60px 20px; }
       .process-grid { grid-template-columns: 1fr; }
       .process-card { border-right: none; border-bottom: 1px solid var(--border); }
       .process-card:last-child { border-bottom: none; }
       .cta-section { padding: 60px 20px; }
-      footer { padding: 40px 20px 24px; }
-      footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 60px 20px 30px; }
       .tape { display: none; }
       .stat-bar-inner { grid-template-columns: repeat(3,1fr); }
       .stat-item { padding: 20px 12px; }
@@ -286,7 +308,6 @@
       <li><a href="../about/about.html">About</a></li>
       <li><a href="../activities/activities.html">Activities</a></li>
       <li><a href="services.html" class="active">Services</a></li>
-      <li><a href="../contact/contact.html">Contact</a></li>
     </ul>
     <button class="hamburger" id="ham" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -300,14 +321,13 @@
     <li><a href="../about/about.html">About</a></li>
     <li><a href="../activities/activities.html">Activities</a></li>
     <li><a href="services.html" class="active">Services</a></li>
-    <li><a href="../contact/contact.html">Contact</a></li>
   </ul>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600" alt="Lord's ARMY in service" loading="eager">
+    <img src="../images/14/3.jpg" alt="Lord's ARMY in service" loading="eager">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -336,7 +356,7 @@
     </div>
   </div>
   <div class="intro-image">
-    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200" alt="Lord's ARMY serving communities" loading="lazy">
+    <img src="../images/5/1.jpg" alt="Lord's ARMY serving communities" loading="lazy">
     <div class="intro-image-overlay"></div>
     <div class="intro-image-label">
       <blockquote>"Hands to Serve, Hearts to Love"</blockquote>
@@ -360,10 +380,13 @@
       <div class="service-row" data-delay="0">
         <div class="service-num-col"><div class="service-num">01</div></div>
         <div class="service-main-col">
+          <div class="service-photo">
+            <img src="../images/1/3.jpg" alt="Lord's ARMY camp facilitation" loading="lazy">
+          </div>
           <div class="service-icon-wrap">🏕️</div>
-          <div class="service-title"><span>Pathfinder</span> Camp Facilitation</div>
-          <div class="service-tagline">Leading Camps with Excellence</div>
-          <p class="service-desc">Lord's ARMY has been the trusted facilitator of the KSDAES Pathfinder and Adventurer Camp for four consecutive years. Our members plan, organize, and lead every aspect of camp — from devotional programs and investitures to outdoor skills and team-building activities. We bring structure, creativity, and a spirit of service to every camp we handle.</p>
+          <div class="service-title"><span>Camping</span> & Camp Facilitation</div>
+          <div class="service-tagline">Leading All Types of Camps with Excellence</div>
+          <p class="service-desc">Lord's ARMY handles all types of camps — Pathfinder and Adventurer camps, Adventist Youth (AY) camps, survival camps, BSP and GSP encampments, and provincial gatherings. From devotional programs and investitures to outdoor skills and team-building, we plan, organize, and lead every aspect. We have served as trusted facilitators of the KSDAES Pathfinder and Adventurer Camp for four consecutive years, as well as the Pag-asa Youth Camp, NEMM Survival Camp, TSDACC Conquers' Camp, and more.</p>
         </div>
         <div class="service-side-col">
           <div>
@@ -371,13 +394,13 @@
               <span class="service-tag primary">Camping</span>
               <span class="service-tag primary">Leadership</span>
               <span class="service-tag">Youth</span>
-              <span class="service-tag">Annual</span>
+              <span class="service-tag">Survival</span>
             </div>
             <div class="service-details">
               <div class="service-detail-item"><span>Full camp planning and program design</span></div>
-              <div class="service-detail-item"><span>Spiritual and devotional program leadership</span></div>
-              <div class="service-detail-item"><span>Outdoor skills and investiture ceremonies</span></div>
-              <div class="service-detail-item"><span>4th consecutive year facilitating KSDAES</span></div>
+              <div class="service-detail-item"><span>Pathfinder, Adventurer, AY, BSP & GSP camps</span></div>
+              <div class="service-detail-item"><span>Survival camps and outdoor skills training</span></div>
+              <div class="service-detail-item"><span>Devotional programs and investiture ceremonies</span></div>
             </div>
           </div>
         </div>
@@ -387,91 +410,43 @@
       <div class="service-row" data-delay="100">
         <div class="service-num-col"><div class="service-num">02</div></div>
         <div class="service-main-col">
+          <div class="service-photo">
+            <img src="../images/12/6.jpg" alt="Lord's ARMY lectures and training" loading="lazy">
+          </div>
           <div class="service-icon-wrap">🎯</div>
-          <div class="service-title"><span>Pathfinder</span> Class Lectures</div>
-          <div class="service-tagline">Teaching the Next Generation</div>
-          <p class="service-desc">Our Master Guides serve as lecturers and instructors for Pathfinder Progressive Classes across the district. We cover core Pathfinder curriculum — from basic honor requirements and nature study to marching, drilling, and the CATS (Camping, Arts and Crafts, and others). Our goal is to produce well-rounded, disciplined, and spiritually grounded Pathfinders.</p>
+          <div class="service-title"><span>Lectures</span> & Training</div>
+          <div class="service-tagline">Teaching and Equipping the Next Generation</div>
+          <p class="service-desc">Our Master Guides serve as lecturers and instructors across the district. We teach Pathfinder Progressive Classes — from honor requirements and nature study to marching, drilling, and CATS — and serve as resource persons in Citizen Military Training (CMT) programs. We bring discipline, structure, and leadership formation to every session, instilling values of duty, honor, and service in young participants.</p>
         </div>
         <div class="service-side-col">
           <div>
             <div class="service-tags">
               <span class="service-tag primary">Education</span>
               <span class="service-tag primary">Lectures</span>
-              <span class="service-tag">Master Guide</span>
+              <span class="service-tag">CMT</span>
               <span class="service-tag">Training</span>
             </div>
             <div class="service-details">
-              <div class="service-detail-item"><span>Progressive Class curriculum instruction</span></div>
+              <div class="service-detail-item"><span>Pathfinder Progressive Class instruction</span></div>
               <div class="service-detail-item"><span>Marching, drilling, and sign language</span></div>
-              <div class="service-detail-item"><span>CATS and outdoor survival skills</span></div>
-              <div class="service-detail-item"><span>Honor requirements coaching</span></div>
+              <div class="service-detail-item"><span>CATS, honors, and outdoor survival skills</span></div>
+              <div class="service-detail-item"><span>CMT resource speaking and values formation</span></div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- 03 -->
-      <div class="service-row" data-delay="150">
+      <div class="service-row" data-delay="200">
         <div class="service-num-col"><div class="service-num">03</div></div>
         <div class="service-main-col">
-          <div class="service-icon-wrap">🪖</div>
-          <div class="service-title"><span>CMT</span> Training Lectures</div>
-          <div class="service-tagline">Citizen Military Training Support</div>
-          <p class="service-desc">Lord's ARMY members serve as resource persons and lecturers in Citizen Military Training (CMT) programs. We bring discipline, structure, and leadership formation experience to CMT sessions — instilling values of duty, honor, and service in young participants while supporting the educational institutions that host these programs.</p>
-        </div>
-        <div class="service-side-col">
-          <div>
-            <div class="service-tags">
-              <span class="service-tag primary">CMT</span>
-              <span class="service-tag primary">Military Training</span>
-              <span class="service-tag">Discipline</span>
-              <span class="service-tag">Schools</span>
-            </div>
-            <div class="service-details">
-              <div class="service-detail-item"><span>Resource speaking and lecture facilitation</span></div>
-              <div class="service-detail-item"><span>Marching commands and formation drills</span></div>
-              <div class="service-detail-item"><span>Leadership and values formation</span></div>
-              <div class="service-detail-item"><span>Partnership with schools and institutions</span></div>
-            </div>
+          <div class="service-photo">
+            <img src="../images/6/6.jpg" alt="Lord's ARMY outreach programs" loading="lazy">
           </div>
-        </div>
-      </div>
-
-      <!-- 04 -->
-      <div class="service-row" data-delay="200">
-        <div class="service-num-col"><div class="service-num">04</div></div>
-        <div class="service-main-col">
-          <div class="service-icon-wrap">⛺</div>
-          <div class="service-title"><span>Youth</span> Camp Facilitation</div>
-          <div class="service-tagline">Beyond Pathfinders — All Youth Welcome</div>
-          <p class="service-desc">Beyond the Pathfinder program, Lord's ARMY facilitates a wide range of youth camps — including Adventist Youth (AY) camps, survival camps, BSP and GSP encampments, and provincial gatherings. We have served as facilitators for the Pag-asa Youth Camp, NEMM Survival Camp, TSDACC Conquers' Camp, and more — bringing the same commitment to excellence to every event.</p>
-        </div>
-        <div class="service-side-col">
-          <div>
-            <div class="service-tags">
-              <span class="service-tag primary">Youth Camps</span>
-              <span class="service-tag primary">AY</span>
-              <span class="service-tag">BSP / GSP</span>
-              <span class="service-tag">Survival</span>
-            </div>
-            <div class="service-details">
-              <div class="service-detail-item"><span>AY Progressive Class facilitation</span></div>
-              <div class="service-detail-item"><span>Survival camp training and leadership</span></div>
-              <div class="service-detail-item"><span>BSP & GSP Encampment facilitation</span></div>
-              <div class="service-detail-item"><span>Program design and event coordination</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 05 -->
-      <div class="service-row" data-delay="250">
-        <div class="service-num-col"><div class="service-num">05</div></div>
-        <div class="service-main-col">
           <div class="service-icon-wrap">🤝</div>
-          <div class="service-title"><span>Community</span> Outreach Programs</div>
+          <div class="service-title"><span>Outreach</span> Programs</div>
           <div class="service-tagline">Taking the Ministry Beyond the Church</div>
-          <p class="service-desc">Our outreach programs bring tangible expressions of God's love to schools, IP communities, and underserved barangays across Bukidnon and beyond. These programs include feeding programs, book and school supply donations, storytelling sessions, free blood pressure monitoring, and prayer ministry. We have reached the Dangcay Mission School, Cayaga National High School, Nauwanan ta Bawayan IP School, and many more.</p>
+          <p class="service-desc">Our outreach programs bring tangible expressions of God's love to schools, IP communities, and underserved barangays across Bukidnon and beyond. These include feeding programs, book and school supply donations, storytelling sessions, free blood pressure monitoring, and prayer ministry. We have reached the Dangcay Mission School, Cayaga National High School, Nauwanan ta Bawayan IP School, and many more — meeting practical needs while sharing hope.</p>
         </div>
         <div class="service-side-col">
           <div>
@@ -491,55 +466,31 @@
         </div>
       </div>
 
-      <!-- 06 -->
+      <!-- 04 -->
       <div class="service-row" data-delay="300">
-        <div class="service-num-col"><div class="service-num">06</div></div>
+        <div class="service-num-col"><div class="service-num">04</div></div>
         <div class="service-main-col">
+          <div class="service-photo">
+            <img src="../images/4/5.jpg" alt="Lord's ARMY community service" loading="lazy">
+          </div>
           <div class="service-icon-wrap">🌿</div>
-          <div class="service-title"><span>Community</span> Service & Cleanup</div>
-          <div class="service-tagline">Caring for God's Creation</div>
-          <p class="service-desc">Stewardship of the environment is part of our calling. Lord's ARMY has conducted clean-up drives at Lagilay Falls, along rivers and drainage canals in Balulang, and in partnership with local communities to prevent flooding and promote environmental responsibility. We also install signage encouraging proper waste disposal — turning one-day events into lasting advocacy.</p>
+          <div class="service-title"><span>Community</span> Service</div>
+          <div class="service-tagline">Caring for God's Creation and His People</div>
+          <p class="service-desc">Stewardship of the environment and service to the community are part of our calling. Lord's ARMY conducts cleanup drives at Lagilay Falls, along rivers and drainage canals in Balulang, and in partnership with local communities to prevent flooding. We also volunteer for church programs, special Sabbath events, children's ministry, investiture ceremonies, and district gatherings — supporting World Adventurer Day, World Pathfinder Day, and Global Youth Day celebrations.</p>
         </div>
         <div class="service-side-col">
           <div>
             <div class="service-tags">
               <span class="service-tag primary">Environment</span>
               <span class="service-tag primary">Cleanup</span>
-              <span class="service-tag">Advocacy</span>
-              <span class="service-tag">Community</span>
+              <span class="service-tag">Church</span>
+              <span class="service-tag">Volunteer</span>
             </div>
             <div class="service-details">
               <div class="service-detail-item"><span>River, canal, and waterfall cleanup drives</span></div>
-              <div class="service-detail-item"><span>Flood prevention community campaigns</span></div>
-              <div class="service-detail-item"><span>Environmental signage installation</span></div>
-              <div class="service-detail-item"><span>Partnership with LGUs and local orgs</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 07 -->
-      <div class="service-row" data-delay="350">
-        <div class="service-num-col"><div class="service-num">07</div></div>
-        <div class="service-main-col">
-          <div class="service-icon-wrap">⛪</div>
-          <div class="service-title"><span>Church</span> & Ministry Volunteer Work</div>
-          <div class="service-tagline">Serving the Body of Christ</div>
-          <p class="service-desc">We are committed to the local church and to the wider Adventist community. Lord's ARMY members volunteer for church programs, special Sabbath events, children's ministry, investiture ceremonies, and district gatherings. We also support World Adventurer Day, World Pathfinder Day, and Global Youth Day celebrations — bringing energy, creativity, and commitment to every occasion.</p>
-        </div>
-        <div class="service-side-col">
-          <div>
-            <div class="service-tags">
-              <span class="service-tag primary">Church</span>
-              <span class="service-tag primary">Volunteer</span>
-              <span class="service-tag">Sabbath</span>
-              <span class="service-tag">Ministry</span>
-            </div>
-            <div class="service-details">
-              <div class="service-detail-item"><span>Church event planning and volunteering</span></div>
-              <div class="service-detail-item"><span>Children's ministry and Adventurer support</span></div>
+              <div class="service-detail-item"><span>Flood prevention and environmental advocacy</span></div>
+              <div class="service-detail-item"><span>Church events and children's ministry support</span></div>
               <div class="service-detail-item"><span>World Pathfinder Day & Global Youth Day</span></div>
-              <div class="service-detail-item"><span>District and association gatherings</span></div>
             </div>
           </div>
         </div>
@@ -620,9 +571,9 @@
       <div class="section-eyebrow">Get Involved</div>
       <h2 class="section-heading">Partner With <em style="color:var(--gold-light)">Us</em></h2>
       <p class="body-text">Whether you're a school looking for camp facilitators, a church seeking volunteer support, or an organization that wants to co-host a community outreach — Lord's ARMY is ready to serve alongside you.</p>
-      <p class="body-text">Reach out and let's talk about how we can work together to bring hope, training, and service to the communities that need it most.</p>
+      <p class="body-text">Reach out through our Facebook page and let's talk about how we can work together to bring hope, training, and service to the communities that need it most.</p>
       <div class="cta-actions">
-        <a href="../contact/contact.html" class="btn-cta-white">Contact Us <i class="fas fa-arrow-right"></i></a>
+        <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank" class="btn-cta-white">Visit Us on Facebook <i class="fas fa-arrow-right"></i></a>
         <a href="../activities/activities.html" class="btn-cta-outline">See Our Activities</a>
       </div>
     </div>
@@ -642,32 +593,11 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-grid">
-      <div>
-        <h3>Lord's ARMY</h3>
-        <p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p>
-        <p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country. Serving Jesus by serving others.</p>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../about/about.html">About</a></li>
-          <li><a href="../activities/activities.html">Activities</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="../contact/contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <div class="footer-contact">
-          <p> <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p>
-          <p> <a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p>
-          <p> <a href="tel:09177718251">0917 771 8251</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved. · Hands to Serve, Hearts to Love.</div>
+    <div class="footer-title">Lord's ARMY</div>
+    <div class="footer-subtitle">Pathfinder Club · Seventh-day Adventist</div>
+    <p class="footer-tagline">"Hands to Serve, Hearts to Love."<br>A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country.</p>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved.</div>
   </div>
 </footer>
 

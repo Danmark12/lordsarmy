@@ -504,37 +504,43 @@
     #btt.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
     #btt:hover { background: var(--crimson-deep); }
 
-    /* footer */
+    /* footer (centered, clean) */
     footer {
       background: var(--ink); color: rgba(255,255,255,0.4);
-      padding: 60px 40px 30px;
+      padding: 72px 40px 36px;
       border-top: 1px solid rgba(201,160,61,0.2);
+      position: relative; overflow: hidden;
     }
-    footer .footer-inner { max-width: 1280px; margin: 0 auto; }
-    footer .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px;
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at top, rgba(201,160,61,0.06) 0%, transparent 70%);
+      pointer-events: none;
     }
-    footer h3 { font-family: 'Cinzel', serif; color: #fff; font-size: 1.2rem; margin-bottom: 6px; }
-    footer .footer-sub { font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 20px; }
-    footer .footer-desc { font-size: 0.82rem; line-height: 1.8; max-width: 300px; }
-    footer h4 {
-      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-      color: rgba(255,255,255,0.35); margin-bottom: 16px;
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; position: relative;
+      text-align: center; display: flex; flex-direction: column; align-items: center;
     }
-    footer ul { list-style: none; }
-    footer ul li { margin-bottom: 10px; }
-    footer ul li a {
-      font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none;
-      transition: color 0.3s;
+    .footer-title {
+      font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 900;
+      color: #fff; letter-spacing: 1px; margin-bottom: 6px;
     }
-    footer ul li a:hover { color: var(--gold); }
-    footer .footer-contact p { font-size: 0.82rem; margin-bottom: 10px; }
-    footer .footer-contact a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.3s; }
-    footer .footer-contact a:hover { color: var(--gold); }
-    footer .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding-top: 24px; text-align: center;
-      font-size: 0.75rem; letter-spacing: 0.5px;
+    .footer-subtitle {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .footer-tagline {
+      font-size: 0.95rem; font-style: italic; color: rgba(255,255,255,0.5);
+      max-width: 460px; line-height: 1.8; margin-bottom: 32px;
+    }
+    .footer-divider {
+      width: 48px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin-bottom: 24px;
+    }
+    .footer-bottom {
+      font-size: 0.72rem; letter-spacing: 0.5px; color: rgba(255,255,255,0.3);
     }
 
     /* hamburger */
@@ -564,7 +570,6 @@
       .activity-card.featured .card-img-wrap { height: 280px; }
       .highlights-grid { grid-template-columns: repeat(2, 1fr); }
       .slide-card { flex: 0 0 calc(33.333% - 16px); }
-      footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -584,8 +589,7 @@
       .slider-section { padding: 60px 20px; }
       .slide-card { flex: 0 0 calc(100% - 0px); }
       .slider-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-      footer { padding: 40px 20px 24px; }
-      footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 60px 20px 30px; }
       .marquee-section { display: none; }
     }
   </style>
@@ -611,7 +615,6 @@
       <li><a href="../about/about.html">About</a></li>
       <li><a href="activities.html" class="active">Activities</a></li>
       <li><a href="../services/services.html">Services</a></li>
-      <li><a href="../contact/contact.html">Contact</a></li>
     </ul>
     <button class="hamburger" id="ham" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -625,7 +628,6 @@
     <li><a href="../about/about.html">About</a></li>
     <li><a href="activities.html" class="active">Activities</a></li>
     <li><a href="../services/services.html">Services</a></li>
-    <li><a href="../contact/contact.html">Contact</a></li>
   </ul>
 </div>
 
@@ -724,35 +726,14 @@
 </a>
 <button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
-<!-- FOOTER -->
+<!-- FOOTER (centered, clean) -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-grid">
-      <div>
-        <h3>Lord's ARMY</h3>
-        <p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p>
-        <p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country. Serving Jesus by serving others.</p>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about/about.html">About</a></li>
-          <li><a href="activities/activities.html">Activities</a></li>
-          <li><a href="services/services.html">Services</a></li>
-          <li><a href="contact/contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <div class="footer-contact">
-          <p> <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p>
-          <p> <a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p>
-          <p> <a href="tel:09177718251">0917 771 8251</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved. · Hands to Serve, Hearts to Love.</div>
+    <div class="footer-title">Lord's ARMY</div>
+    <div class="footer-subtitle">Pathfinder Club · Seventh-day Adventist</div>
+    <p class="footer-tagline">"Hands to Serve, Hearts to Love."<br>A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country.</p>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved.</div>
   </div>
 </footer>
 
