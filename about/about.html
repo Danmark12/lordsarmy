@@ -726,11 +726,81 @@
     .director-inner {
       max-width: 1280px;
       margin: 0 auto;
-      display: grid;
+    }
+    .director-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .director-header .section-eyebrow {
+      margin-bottom: 12px;
+    }
+    .director-header .section-heading {
+      margin-bottom: 0;
+    }
+
+    /* director switcher tabs */
+    .director-tabs {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      background: var(--surface-warm);
+      padding: 4px;
+      gap: 4px;
+    }
+    .director-tab {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: color 0.3s, background 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .director-tab i {
+      font-size: 9px;
+      opacity: 0.6;
+    }
+    .director-tab:hover {
+      color: var(--crimson);
+    }
+    .director-tab.active {
+      background: var(--crimson);
+      color: #fff;
+    }
+    .director-tab.active i {
+      opacity: 1;
+      color: var(--gold-light);
+    }
+
+    .director-panels {
+      position: relative;
+    }
+    .director-panel {
+      display: none;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: center;
+      animation: fadeInPanel 0.5s ease;
     }
+    .director-panel.active {
+      display: grid;
+    }
+    @keyframes fadeInPanel {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .director-visual {
       position: relative;
     }
@@ -773,6 +843,10 @@
       text-transform: uppercase;
       padding: 6px 16px;
       display: inline-block;
+    }
+    .director-badge-inner.previous {
+      background: var(--crimson);
+      color: #fff;
     }
     .director-badge-name {
       font-family: 'Cinzel', serif;
@@ -947,80 +1021,86 @@
       background: var(--crimson-deep);
     }
 
-    /* footer */
+    /* ---------- FOOTER (centered, clean) ---------- */
     footer {
       background: var(--ink);
       color: rgba(255, 255, 255, 0.4);
-      padding: 60px 40px 30px;
+      padding: 80px 40px 36px;
       border-top: 1px solid rgba(201, 160, 61, 0.2);
+      position: relative;
+      overflow: hidden;
     }
-    footer .footer-inner {
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse at top, rgba(201, 160, 61, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .footer-inner {
       max-width: 1280px;
       margin: 0 auto;
+      position: relative;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    footer .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 60px;
-      margin-bottom: 50px;
-    }
-    footer h3 {
-      font-family: 'Cinzel', serif;
-      color: #fff;
-      font-size: 1.2rem;
-      margin-bottom: 6px;
-    }
-    footer .footer-sub {
-      font-size: 0.75rem;
-      letter-spacing: 1px;
+    .footer-emblem {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--crimson);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 0 0 3px rgba(201, 160, 61, 0.3), 0 8px 30px rgba(0, 0, 0, 0.3);
       margin-bottom: 20px;
     }
-    footer .footer-desc {
-      font-size: 0.82rem;
-      line-height: 1.8;
-      max-width: 300px;
+    .footer-emblem img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
-    footer h4 {
+    .footer-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .footer-subtitle {
       font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
+      font-weight: 600;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.3);
-      margin-bottom: 16px;
-    }
-    footer ul {
-      list-style: none;
-    }
-    footer ul li {
-      margin-bottom: 10px;
-    }
-    footer ul li a {
-      font-size: 0.82rem;
-      color: rgba(255, 255, 255, 0.4);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    footer ul li a:hover {
       color: var(--gold);
+      margin-bottom: 20px;
     }
-    footer .footer-contact p {
-      font-size: 0.82rem;
-      margin-bottom: 10px;
-    }
-    footer .footer-contact a {
+    .footer-tagline {
+      font-size: 0.95rem;
+      font-style: italic;
       color: rgba(255, 255, 255, 0.5);
-      text-decoration: none;
-      transition: color 0.3s;
+      max-width: 460px;
+      line-height: 1.8;
+      margin-bottom: 32px;
     }
-    footer .footer-contact a:hover {
-      color: var(--gold);
+    .footer-divider {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin-bottom: 24px;
     }
-    footer .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding-top: 24px;
-      text-align: center;
-      font-size: 0.75rem;
+    .footer-bottom {
+      font-size: 0.72rem;
       letter-spacing: 0.5px;
+      color: rgba(255, 255, 255, 0.3);
     }
 
     /* responsive */
@@ -1031,10 +1111,9 @@
       .timeline-grid { grid-template-columns: repeat(2, 1fr); }
       .timeline-card:nth-child(2) { border-right: none; }
       .timeline-card:nth-child(3) { border-top: 1px solid var(--border); }
-      .director-inner { grid-template-columns: 1fr; gap: 48px; }
+      .director-panel { grid-template-columns: 1fr; gap: 48px; }
       .director-img-frame img { height: 380px; }
       .legacy-grid { grid-template-columns: repeat(2, 1fr); }
-      footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
       .stat-bar-inner { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
       .hero-indicators { left: 40px; bottom: 120px; }
@@ -1055,15 +1134,16 @@
       .director-section { padding: 60px 20px; }
       .legacy-section { padding: 60px 20px; }
       .legacy-grid { grid-template-columns: 1fr 1fr; }
-      footer { padding: 40px 20px 24px; }
-      footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 60px 20px 30px; }
       .tape { display: none; }
+      .director-header { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 480px) {
       .legacy-grid { grid-template-columns: 1fr; }
       .stat-bar-inner { grid-template-columns: 1fr 1fr; }
       .hero-indicators { left: 20px; bottom: 80px; }
       .hero-indicators span { width: 20px; }
+      .director-tab { padding: 9px 14px; font-size: 9px; }
     }
   </style>
 </head>
@@ -1088,7 +1168,6 @@
       <li><a href="about.html" class="active">About</a></li>
       <li><a href="../activities/activities.html">Activities</a></li>
       <li><a href="../services/services.html">Services</a></li>
-      <li><a href="../contact/contact.html">Contact</a></li>
     </ul>
     <button class="hamburger" id="ham" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1102,7 +1181,6 @@
     <li><a href="about.html" class="active">About</a></li>
     <li><a href="../activities/activities.html">Activities</a></li>
     <li><a href="../services/services.html">Services</a></li>
-    <li><a href="../contact/contact.html">Contact</a></li>
   </ul>
 </div>
 
@@ -1221,30 +1299,77 @@
   </div>
 </section>
 
-<!-- DIRECTOR SECTION -->
+<!-- DIRECTOR SECTION (toggle: current / previous) -->
 <section class="director-section">
   <div class="director-inner">
-    <div class="director-visual">
-      <div class="director-accent"></div>
-      <div class="director-accent-br"></div>
-      <div class="director-img-frame">
-        <img src="../images/a.jpg" alt="Arlie Joy Damiles — Club Director" loading="lazy">
-        <div class="director-img-overlay"></div>
-        <div class="director-badge">
-          <div class="director-badge-inner">Club Director</div>
-          <div class="director-badge-name">Arlie Joy Damiles</div>
-        </div>
+    <div class="director-header">
+      <div>
+        <div class="section-eyebrow">Leadership</div>
+        <h2 class="section-heading">Meet Our <em>Directors</em></h2>
+      </div>
+      <div class="director-tabs" role="tablist" aria-label="Director history">
+        <button class="director-tab active" data-target="current" role="tab" aria-selected="true">
+          <i class="fas fa-star"></i> Current
+        </button>
+        <button class="director-tab" data-target="previous" role="tab" aria-selected="false">
+          <i class="fas fa-clock-rotate-left"></i> Previous
+        </button>
       </div>
     </div>
-    <div class="director-text">
-      <div class="section-eyebrow">Leadership</div>
-      <h2 class="section-heading">Meet Our <em>Director</em></h2>
-      <div class="role">Master Guide &nbsp;|&nbsp; Nutrition-Dietitian</div>
-      <p class="body-text"><strong>Arlie Joy Damiles</strong> is a dedicated Master Guide and a licensed Nutrition-Dietitian who brings a unique blend of professional expertise and spiritual passion to Lord's ARMY. With years of experience in youth ministry and community health, she leads our club with a holistic vision — caring for both the physical and spiritual well-being of every member.</p>
-      <p class="body-text">Her background in nutrition and dietetics has shaped our outreach programs, emphasizing wellness as a key component of service. She is deeply committed to guiding young people toward Christ, while also equipping them with practical skills for leadership and healthy living.</p>
-      <div class="director-quote">
-        <p>"I can do all things through Christ who strengthens me."</p>
-        <cite>— Philippians 4:13</cite>
+
+    <div class="director-panels">
+      <!-- CURRENT DIRECTOR -->
+      <div class="director-panel active" id="panel-current">
+        <div class="director-visual">
+          <div class="director-accent"></div>
+          <div class="director-accent-br"></div>
+          <div class="director-img-frame">
+            <img src="../images/a.jpg" alt="Arlie Joy Damiles — Club Director" loading="lazy">
+            <div class="director-img-overlay"></div>
+            <div class="director-badge">
+              <div class="director-badge-inner">Club Director</div>
+              <div class="director-badge-name">Arlie Joy Damiles</div>
+            </div>
+          </div>
+        </div>
+        <div class="director-text">
+          <div class="section-eyebrow">Current Leadership</div>
+          <h2 class="section-heading">Meet Our <em>Director</em></h2>
+          <div class="role">Master Guide &nbsp;|&nbsp; Nutrition-Dietitian</div>
+          <p class="body-text"><strong>Arlie Joy Damiles</strong> is a dedicated Master Guide and a licensed Nutrition-Dietitian who brings a unique blend of professional expertise and spiritual passion to Lord's ARMY. With years of experience in youth ministry and community health, she leads our club with a holistic vision — caring for both the physical and spiritual well-being of every member.</p>
+          <p class="body-text">Her background in nutrition and dietetics has shaped our outreach programs, emphasizing wellness as a key component of service. She is deeply committed to guiding young people toward Christ, while also equipping them with practical skills for leadership and healthy living.</p>
+          <div class="director-quote">
+            <p>"I can do all things through Christ who strengthens me."</p>
+            <cite>— Philippians 4:13</cite>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREVIOUS DIRECTOR -->
+      <div class="director-panel" id="panel-previous">
+        <div class="director-visual">
+          <div class="director-accent"></div>
+          <div class="director-accent-br"></div>
+          <div class="director-img-frame">
+            <img src="../images/bobet.jpg" alt="Jonnel Fred Galdo — Previous Club Director" loading="lazy">
+            <div class="director-img-overlay"></div>
+            <div class="director-badge">
+              <div class="director-badge-inner previous">Previous Director · 2021–2023</div>
+              <div class="director-badge-name">Jonnel Fred Galdo</div>
+            </div>
+          </div>
+        </div>
+        <div class="director-text">
+          <div class="section-eyebrow">Founding Leadership</div>
+          <h2 class="section-heading">Our <em>Previous</em> Director</h2>
+          <div class="role">Master Guide &nbsp;|&nbsp; Former President, East Jordan Association</div>
+          <p class="body-text"><strong>Jonnel Fred Galdo</strong> served as the club's director from 2021 to 2023, guiding Lord's ARMY through its formative years. A Master Guide and former president of the East Jordan Association, he laid the foundation for the ministry's growth and its culture of service.</p>
+          <p class="body-text">A nutritionist and dietitian at Camp Evangelista Station Hospital, he brought a unique perspective on wellness and community care to the club's outreach programs. His leadership shaped the early vision of Lord's ARMY — a vision that continues to inspire the ministry today.</p>
+          <div class="director-quote">
+            <p>"Unless the Lord builds the house, the builders labor in vain."</p>
+            <cite>— Psalm 127:1</cite>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1269,35 +1394,14 @@
 </a>
 <button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
-<!-- FOOTER -->
+<!-- FOOTER (centered, clean) -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div>
-        <h3>Lord's ARMY</h3>
-        <p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p>
-        <p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country. Serving Jesus by serving others.</p>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="../activities/activities.html">Activities</a></li>
-          <li><a href="../services/services.html">Services</a></li>
-          <li><a href="../contact/contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <div class="footer-contact">
-          <p> <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p>
-          <p> <a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p>
-          <p> <a href="tel:09177718251">0917 771 8251</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved. · Hands to Serve, Hearts to Love.</div>
+  <div class="footer-inner">  
+    <div class="footer-title">Lord's ARMY</div>
+    <div class="footer-subtitle">Pathfinder Club · Seventh-day Adventist</div>
+    <p class="footer-tagline">"Hands to Serve, Hearts to Love."<br>A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country.</p>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved.</div>
   </div>
 </footer>
 
@@ -1325,6 +1429,25 @@
     document.getElementById('mobile-menu').classList.toggle('open');
   };
 
+  // ----- director tabs (current / previous) -----
+  const directorTabs = document.querySelectorAll('.director-tab');
+  const directorPanels = document.querySelectorAll('.director-panel');
+
+  directorTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+
+      directorTabs.forEach(t => {
+        t.classList.toggle('active', t === tab);
+        t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+      });
+
+      directorPanels.forEach(panel => {
+        panel.classList.toggle('active', panel.id === 'panel-' + target);
+      });
+    });
+  });
+
   // ----- hero slideshow -----
   let currentSlide = 0;
   const slides = document.querySelectorAll('.hero-slide');
@@ -1332,10 +1455,8 @@
   let slideInterval;
 
   function goToSlide(index) {
-    // remove active from all
     slides.forEach(s => s.classList.remove('active'));
     indicators.forEach(i => i.classList.remove('active'));
-    // set active
     slides[index].classList.add('active');
     indicators[index].classList.add('active');
     currentSlide = index;
@@ -1346,7 +1467,6 @@
     goToSlide(next);
   }
 
-  // indicator clicks
   indicators.forEach((ind, i) => {
     ind.addEventListener('click', () => {
       clearInterval(slideInterval);
@@ -1355,7 +1475,6 @@
     });
   });
 
-  // start slideshow
   slideInterval = setInterval(nextSlide, 5000);
 </script>
 

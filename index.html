@@ -149,7 +149,6 @@
     }
     .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* Hero bottom strip - REMOVED duplicate stats, kept only scroll cue */
     .scroll-cue {
       position: absolute; right: 48px; bottom: 80px;
       display: flex; align-items: center; gap: 12px;
@@ -164,9 +163,6 @@
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    /* ── TAPE - REMOVED, redundant keywords ── */
-    /* Tape section completely removed */
 
     /* SHARED */
     .section-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--crimson); margin-bottom: 16px; }
@@ -189,7 +185,7 @@
     .scripture-block p { font-size: 0.95rem; color: var(--ink); line-height: 1.75; font-style: italic; margin-bottom: 8px; }
     .scripture-ref { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; }
 
-    /* ── STAT BAR - KEPT ONLY HERE (single source of truth) ── */
+    /* ── STAT BAR ── */
     .stat-bar { background: var(--crimson-deep); display: flex; justify-content: center; }
     .stat-bar-inner { max-width: 1280px; width: 100%; display: grid; grid-template-columns: repeat(4,1fr); }
     .stat-item { padding: 36px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); }
@@ -325,22 +321,44 @@
     #btt.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
     #btt:hover { background: var(--crimson-deep); }
 
-    /* ── FOOTER ── */
-    footer { background: var(--ink); color: rgba(255,255,255,0.4); padding: 60px 40px 30px; border-top: 1px solid rgba(201,160,61,0.2); }
-    .footer-inner { max-width: 1280px; margin: 0 auto; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
-    footer h3 { font-family: 'Cinzel', serif; color: #fff; font-size: 1.2rem; margin-bottom: 6px; }
-    .footer-sub { font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 20px; }
-    .footer-desc { font-size: 0.82rem; line-height: 1.8; max-width: 300px; }
-    footer h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
-    footer ul { list-style: none; }
-    footer ul li { margin-bottom: 10px; }
-    footer ul li a { font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
-    footer ul li a:hover { color: var(--gold); }
-    footer .footer-contact p { font-size: 0.82rem; margin-bottom: 10px; }
-    footer .footer-contact a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
-    footer .footer-contact a:hover { color: var(--gold); }
-    footer .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; text-align: center; font-size: 0.75rem; letter-spacing: 0.5px; }
+    /* ── FOOTER (centered, clean) ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.4);
+      padding: 72px 40px 36px;
+      border-top: 1px solid rgba(201,160,61,0.2);
+      position: relative; overflow: hidden;
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at top, rgba(201,160,61,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; position: relative;
+      text-align: center; display: flex; flex-direction: column; align-items: center;
+    }
+    .footer-title {
+      font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 900;
+      color: #fff; letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .footer-subtitle {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .footer-tagline {
+      font-size: 0.95rem; font-style: italic; color: rgba(255,255,255,0.5);
+      max-width: 460px; line-height: 1.8; margin-bottom: 32px;
+    }
+    .footer-divider {
+      width: 48px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin-bottom: 24px;
+    }
+    .footer-bottom {
+      font-size: 0.72rem; letter-spacing: 0.5px; color: rgba(255,255,255,0.3);
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
@@ -358,7 +376,6 @@
       .legacy-grid { grid-template-columns: repeat(2,1fr); }
       .stat-bar-inner { grid-template-columns: repeat(2,1fr); }
       .stat-item:nth-child(2) { border-right: none; }
-      footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -380,8 +397,7 @@
       .cta-section { padding: 60px 20px; }
       .legacy-section { padding: 60px 20px; }
       .legacy-grid { grid-template-columns: 1fr 1fr; }
-      footer { padding: 40px 20px 24px; }
-      footer .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 60px 20px 30px; }
       .scroll-cue { display: none; }
     }
     @media (max-width: 480px) {
@@ -389,6 +405,24 @@
       .partners-grid { grid-template-columns: 1fr; }
       .stat-bar-inner { grid-template-columns: 1fr 1fr; }
     }
+
+    .partner-icon {
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(139,26,26,0.2);
+  background: rgba(139,26,26,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6px;
+}
+.partner-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
   </style>
 </head>
 <body>
@@ -412,7 +446,6 @@
       <li><a href="about/about.html">About</a></li>
       <li><a href="activities/activities.html">Activities</a></li>
       <li><a href="services/services.html">Services</a></li>
-      <li><a href="contact/contact.html">Contact</a></li>
     </ul>
     <button class="hamburger" id="ham" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -426,7 +459,6 @@
     <li><a href="about/about.html">About</a></li>
     <li><a href="activities/activities.html">Activities</a></li>
     <li><a href="services/services.html">Services</a></li>
-    <li><a href="contact/contact.html">Contact</a></li>
   </ul>
 </div>
 
@@ -448,11 +480,9 @@
     <p class="hero-desc">A movement of young people trained in faith, leadership, and service — reaching communities across Mindanao and beyond since 2021.</p>
     <div class="hero-actions">
       <a href="about/about.html" class="btn-primary">Our Story <i class="fas fa-arrow-right"></i></a>
-      <a href="contact/contact.html" class="btn-ghost">Join Us</a>
-    </div>
+<a href="mailto:danmarkpetalcurin@gmail.com?subject=Inquiry%20from%20Lord's%20ARMY%20Website" class="btn-ghost">Contact Us</a>    </div>
   </div>
 
-  <!-- Scroll cue only (stats moved to stat bar below) -->
   <div class="scroll-cue">Scroll to explore</div>
 </section>
 
@@ -471,8 +501,7 @@
     </div>
   </div>
   <div class="split-image">
-    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200" alt="Lord's ARMY members in service" loading="lazy">
-    <div class="split-image-overlay"></div>
+<img src="images/la.jpg" alt="Lord's ARMY members in service" loading="lazy">    <div class="split-image-overlay"></div>
     <div class="split-image-label">
       <blockquote>"Hands to Serve, Hearts to Love"</blockquote>
       <cite>— Lord's ARMY Theme 2025</cite>
@@ -481,7 +510,7 @@
 </section>
 
 <!-- ══════════════════════════════════════
-     STAT BAR - SINGLE SOURCE OF TRUTH
+     STAT BAR
 ══════════════════════════════════════ -->
 <div class="stat-bar">
   <div class="stat-bar-inner">
@@ -642,22 +671,30 @@
     </div>
     <div class="partners-grid">
       <div class="partner-card">
-        <div class="partner-icon">📚</div>
+        <div class="partner-icon">
+          <img src="logo/bugtaw.jpg" alt="BUGTAW Philippines Logo">
+        </div>
         <div class="partner-name">BUGTAW Philippines</div>
         <p class="partner-desc">Joint outreach for book distributions, feeding programs, and school missions across Mindanao.</p>
       </div>
       <div class="partner-card">
-        <div class="partner-icon">🏥</div>
+        <div class="partner-icon">
+          <img src="logo/redcross.jpg" alt="Red Cross Bukidnon Logo">
+        </div>
         <div class="partner-name">Red Cross Bukidnon</div>
         <p class="partner-desc">Medical missions and health assessments brought into remote schools and IP communities.</p>
       </div>
       <div class="partner-card">
-        <div class="partner-icon">💎</div>
+        <div class="partner-icon">
+          <img src="logo/cea.jpg" alt="Diamond CEA Logo">
+        </div>
         <div class="partner-name">Diamond CEA</div>
         <p class="partner-desc">Community partnership supporting school supply drives and Pathfinder Day celebrations.</p>
       </div>
       <div class="partner-card">
-        <div class="partner-icon">🙏</div>
+        <div class="partner-icon">
+          <img src="logo/FOGS.png" alt="Followers of God Society Logo">
+        </div>
         <div class="partner-name">Followers of God Society</div>
         <p class="partner-desc">Collaborative missions into remote barangays for humanitarian relief and spiritual ministry.</p>
       </div>
@@ -694,7 +731,7 @@
       <h2 class="section-heading">Ready to <em style="color:var(--gold-light)">Serve?</em></h2>
       <p class="body-text">Whether you want to join our ministry, partner with us, or simply learn more about what God is doing through Lord's ARMY — we'd love to hear from you. There is a place for everyone in this mission.</p>
       <div class="cta-actions">
-        <a href="contact/contact.html" class="btn-cta-white">Join Lord's ARMY <i class="fas fa-arrow-right"></i></a>
+        <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank" class="btn-cta-white">Visit us on Facebook <i class="fas fa-arrow-right"></i></a>
         <a href="activities/activities.html" class="btn-cta-outline">See Our Work</a>
       </div>
     </div>
@@ -711,35 +748,14 @@
 </a>
 <button id="btt" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
-<!-- FOOTER -->
+<!-- FOOTER (centered, clean) -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-grid">
-      <div>
-        <h3>Lord's ARMY</h3>
-        <p class="footer-sub">Pathfinder Club · Seventh-day Adventist</p>
-        <p class="footer-desc">A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country. Serving Jesus by serving others.</p>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about/about.html">About</a></li>
-          <li><a href="activities/activities.html">Activities</a></li>
-          <li><a href="services/services.html">Services</a></li>
-          <li><a href="contact/contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <div class="footer-contact">
-          <p> <a href="https://web.facebook.com/profile.php?id=100083046924852" target="_blank">Facebook Page</a></p>
-          <p> <a href="mailto:danmarkpetalcurin@gmail.com">danmarkpetalcurin@gmail.com</a></p>
-          <p> <a href="tel:09177718251">0917 771 8251</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved. · Hands to Serve, Hearts to Love.</div>
+    <div class="footer-title">Lord's ARMY</div>
+    <div class="footer-subtitle">Pathfinder Club · Seventh-day Adventist</div>
+    <p class="footer-tagline">"Hands to Serve, Hearts to Love."<br>A community of Master Guides and Pathfinders committed to ministry, leadership, and love for God and country.</p>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">&copy; 2026 Lord's ARMY Pathfinder Club. All rights reserved.</div>
   </div>
 </footer>
 
